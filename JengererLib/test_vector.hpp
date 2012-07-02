@@ -1,0 +1,4 @@
+#ifndef TEST_VECTOR_HPP
+#define TEST_VECTOR_HPP
+
+#endif // TEST_VECTOR_HPP
