@@ -11,31 +11,31 @@ int main( void )
 
 	// Add values.
 	AVLTree<int> tree;
+    QueryPerformanceCounter( &start );j
 	for (int i = 0; i < 20000; ++i) {
 		tree.insert( i );
 	}
 
 	// Check all values.
-	QueryPerformanceCounter( &start );
 	for (int i = 0; i < 20000; ++i) {
 		tree.remove( i );
 	}
-	QueryPerformanceCounter( &end );
+    QueryPerformanceCounter( &end );
+
 	printf( "%d\n", end.QuadPart - start.QuadPart );
 
 	// Try set.
 	// Add values.
+    QueryPerformanceCounter( &start );
 	std::set<int> vals;
 	for (int i = 0; i < 20000; ++i) {
 		vals.insert( i );
 	}
-
 	// Check all values.
-	QueryPerformanceCounter( &start );
 	for (int i = 0; i < 20000; ++i) {
 		vals.erase( i );
 	}
-	QueryPerformanceCounter( &end );
+    QueryPerformanceCounter( &end );
 	printf( "%d\n", end.QuadPart - start.QuadPart );
 
 	system( "pause" );

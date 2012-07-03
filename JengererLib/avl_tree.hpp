@@ -158,46 +158,35 @@ void AVLTree<Type, Comparator>::remove( const Type& element )
 		return;
 	}
 
-	// Find node to replace.
+	// If we have both children, get successor.
 	AVLNode<Type>* replacement = nullptr;
-	if (node->left != nullptr) {
+	if (node->left != nullptr && node->right != nullptr) {
 		// Try take in-order predecessor.
-		replacement = get_maximum( node->left );
-
-		// Replacement has at most a left child (by definition of max).
-		*get_node_link( replacement ) = replacement->left;
-	}
-	else if (node->right != nullptr) {
-		// Take in-order successor.
 		replacement = get_minimum( node->right );
 
-		// Replacement has at most a right child (by definition of min).
-		*get_node_link( replacement ) = replacement->right;
+        // Move their element here and now replace them.
+        node->element = replacement->element;
+        node = replacement;
+        replacement = nullptr;
 	}
+    
+    // If only left child, move them here.
+    if (node->left != nullptr) {
+        replacement = node->left;
+    }
+    else if (node->right != nullptr) {
+        // Only right child, move them here.
+        replacement = node->right;
+    }
 
-	// Track where to start balancing.
-	AVLNode<Type>* balance_start = nullptr;
-
-	// Update parent.
-	AVLNode<Type>** link = get_node_link( node );
-	if (replacement != nullptr) {
-		// Update parent.
-		replacement->parent = node->parent;
-		balance_start = replacement->parent;
-
-		// Update replacement's children.
-		set_left( replacement, node->left );
-		set_right( replacement, node->right );
-	}
-	else {
-		balance_start = node->parent;
-	}
-
-	// Update link.
-	*link = replacement;
+    // Enact replacment.
+    *get_node_link( node ) = replacement;
+    if (replacement != nullptr) {
+        replacement->parent = node->parent;
+    }
 
 	// Balance the tree.
-	balance_tree( balance_start );
+	balance_tree( node->parent );
 
 	// Delete node.
 	free( node );
