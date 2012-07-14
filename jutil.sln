@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C++ Express 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JengererLib", "JengererLib\JengererLib.vcxproj", "{16103E26-1F60-4126-A913-82056B453398}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jutil", "jutil\jutil.vcxproj", "{16103E26-1F60-4126-A913-82056B453398}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
