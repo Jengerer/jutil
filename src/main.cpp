@@ -1,4 +1,4 @@
-#include "avl_tree.hpp"
+#include "containers/avl_tree.hpp"
 #include <map>
 #include <windows.h>
 #include <stdio.h>
@@ -11,7 +11,7 @@ int main( void )
 
 	// Add values.
 	AVLTree<int> tree;
-    QueryPerformanceCounter( &start );j
+    QueryPerformanceCounter( &start );
 	for (int i = 0; i < 20000; ++i) {
 		tree.insert( i );
 	}
