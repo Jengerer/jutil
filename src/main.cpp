@@ -20,11 +20,6 @@ int main( void )
     for (int i = 0; i < 100000; i++) {
         map.remove( i );
     }
-    for (int i = 0; i < 100000; i++) {
-        if (map.contains( i )) {
-            printf("found %d\n", i );
-        }
-    }
     QueryPerformanceCounter( &end );
     printf( "%u\n", end.QuadPart - start.QuadPart );
     

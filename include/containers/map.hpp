@@ -8,25 +8,6 @@ namespace JUTIL
 {
 
     /*
-     * Comparator for key value pairs in a table.
-     */
-    template <class Key, class Value, class KeyComparator>
-    class KeyValueComparator
-    {
-
-    public:
-
-        static inline int compare(
-            const KeyValuePair<Key, Value>& a,
-            const KeyValuePair<Key, Value>& b )
-        {
-            return KeyComparator::compare( a.get_key(), b.get_key() );
-        }
-
-    };
-
-
-    /*
      * AVL tree with key-value pairs.
      */
     template < class Key, class Value, class KeyComparator = DefaultComparator<Key> >
@@ -34,6 +15,10 @@ namespace JUTIL
         KeyValuePair< Key, Value >,
         KeyValueComparator< Key, Value, KeyComparator > >
     {
+    
+    typedef AvlTree< 
+        KeyValuePair< Key, Value >,
+        KeyValueComparator< Key, Value, KeyComparator > > BaseClass;
 
     public:
 
@@ -82,7 +67,7 @@ namespace JUTIL
     {
         // Insert key-value pair.
         KeyValuePair<Key, Value> pair( key, value );
-        return AvlTree<KeyValuePair<Key, Value>, KeyValueComparator<Key, Value, KeyComparator> >::insert( pair );
+        return BaseClass::insert( pair );
     }
 
 
@@ -99,7 +84,7 @@ namespace JUTIL
         }
 
         // Remove pair.
-        AvlTree< KeyValuePair< Key, Value>, KeyValueComparator<Key, Value, KeyComparator> >::remove( *pair ); 
+        BaseClass::remove( *pair ); 
     }
 
 
