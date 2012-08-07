@@ -17,15 +17,15 @@ const int BALANCE_TWO_RIGHT = 2;
  * Generic AVL node struct.
  */
 template < class Type >
-struct AVLNode
+struct AvlNode
 {
 	// Data member.
 	Type element;
 
 	// Tree members.
-	AVLNode<Type>* parent;
-	AVLNode<Type>* left;
-	AVLNode<Type>* right;
+	AvlNode<Type>* parent;
+	AvlNode<Type>* left;
+	AvlNode<Type>* right;
 
 	// AVL specific member.
 	short height;
@@ -36,13 +36,13 @@ struct AVLNode
  * AVL tree data structure class.
  */
 template < class Type, class Comparator = DefaultComparator<Type> >
-class AVLTree
+class AvlTree
 {
 
 public:
 
-	AVLTree( void );
-	~AVLTree( void );
+	AvlTree( void );
+	~AvlTree( void );
 
 	// Binary tree operations.
 	bool insert( const Type& element );
@@ -53,30 +53,30 @@ public:
 private:
 
 	// Node getting.
-	AVLNode<Type>* find_node( const Type& element ) const;
-	static AVLNode<Type>* get_minimum( AVLNode<Type>* node );
-	static AVLNode<Type>* get_maximum( AVLNode<Type>* node );
+	AvlNode<Type>* find_node( const Type& element ) const;
+	static AvlNode<Type>* get_minimum( AvlNode<Type>* node );
+	static AvlNode<Type>* get_maximum( AvlNode<Type>* node );
 
 	// Node balancing.
-	static int get_height( AVLNode<Type>* node );
-	static bool update_height( AVLNode<Type>* node );
-	static int get_balance_factor( AVLNode<Type>* node );
-	void rotate_left( AVLNode<Type>** root_link );
-	void rotate_right( AVLNode<Type>** root_link );
+	static int get_height( AvlNode<Type>* node );
+	static bool update_height( AvlNode<Type>* node );
+	static int get_balance_factor( AvlNode<Type>* node );
+	void rotate_left( AvlNode<Type>** root_link );
+	void rotate_right( AvlNode<Type>** root_link );
 
 	// Node link handling.
-	AVLNode<Type>** get_node_link( AVLNode<Type>* node );
-	static AVLNode<Type>* create_node( const Type& element );
-	static void set_left( AVLNode<Type>* parent, AVLNode<Type>* child );
-	static void set_right( AVLNode<Type>* parent, AVLNode<Type>* child );
+	AvlNode<Type>** get_node_link( AvlNode<Type>* node );
+	static AvlNode<Type>* create_node( const Type& element );
+	static void set_left( AvlNode<Type>* parent, AvlNode<Type>* child );
+	static void set_right( AvlNode<Type>* parent, AvlNode<Type>* child );
 
 	// Tree balancing functions.
-	void balance_tree( AVLNode<Type>* node );
-	bool balance_node( AVLNode<Type>* node );
+	void balance_tree( AvlNode<Type>* node );
+	bool balance_node( AvlNode<Type>* node );
 
-private:
+protected:
 
-	AVLNode<Type>* root_;
+	AvlNode<Type>* root_;
 
 };
 
@@ -85,7 +85,7 @@ private:
  * AVL tree constructor.
  */
 template <class Type, class Comparator>
-AVLTree<Type, Comparator>::AVLTree( void )
+AvlTree<Type, Comparator>::AvlTree( void )
 {
 	root_ = nullptr;
 }
@@ -95,7 +95,7 @@ AVLTree<Type, Comparator>::AVLTree( void )
  * AVL tree destructor.
  */
 template <class Type, class Comparator>
-AVLTree<Type, Comparator>::~AVLTree( void )
+AvlTree<Type, Comparator>::~AvlTree( void )
 {
 	clear();
 }
@@ -105,10 +105,10 @@ AVLTree<Type, Comparator>::~AVLTree( void )
  * Insert an element into the tree.
  */
 template <class Type, class Comparator>
-bool AVLTree<Type, Comparator>::insert( const Type& element )
+bool AvlTree<Type, Comparator>::insert( const Type& element )
 {
 	// Create node.
-	AVLNode<Type>* node = create_node( element );
+	AvlNode<Type>* node = create_node( element );
 	if (node == nullptr) {
 		return false;
 	}
@@ -118,7 +118,7 @@ bool AVLTree<Type, Comparator>::insert( const Type& element )
 		root_ = node;
 	}
 	else {
-		AVLNode<Type>* current = root_;
+		AvlNode<Type>* current = root_;
 
 		// Loop until we've been inserted.
 		while (current != node) {
@@ -150,16 +150,16 @@ bool AVLTree<Type, Comparator>::insert( const Type& element )
  * Remove an element from the tree.
  */
 template <class Type, class Comparator>
-void AVLTree<Type, Comparator>::remove( const Type& element )
+void AvlTree<Type, Comparator>::remove( const Type& element )
 {
 	// Find the node.
-	AVLNode<Type>* node = find_node( element );
+	AvlNode<Type>* node = find_node( element );
 	if (node == nullptr) {
 		return;
 	}
 
 	// If we have both children, get successor.
-	AVLNode<Type>* replacement = nullptr;
+	AvlNode<Type>* replacement = nullptr;
 	if (node->left != nullptr && node->right != nullptr) {
 		// Try take in-order predecessor.
 		replacement = get_minimum( node->right );
@@ -197,7 +197,7 @@ void AVLTree<Type, Comparator>::remove( const Type& element )
  * Check if a node exists in the tree.
  */
 template <class Type, class Comparator>
-bool AVLTree<Type, Comparator>::contains( const Type& element ) const
+bool AvlTree<Type, Comparator>::contains( const Type& element ) const
 {
 	return find_node( element ) != nullptr;
 }
@@ -207,9 +207,31 @@ bool AVLTree<Type, Comparator>::contains( const Type& element ) const
  * Clear all elements from the tree.
  */
 template <class Type, class Comparator>
-void AVLTree<Type, Comparator>::clear( void )
+void AvlTree<Type, Comparator>::clear( void )
 {
-	// Not implemented yet. Just keep removing root?
+    // Can probably optimize this.
+    // Put tree into a straight line.
+    AvlNode<Type>* node = root_;
+    while (node != nullptr) {
+        // Rotate right until no left.
+        while (node->left != nullptr) {
+            rotate_right( get_node_link( node ) );
+        }
+
+        // Move to next child.
+        node = node->right;
+    }
+
+    // Now just remove all.
+    node = root_;
+    while (node != nullptr) {
+        AvlNode<Type>* temp = node->right;
+        free( node );
+        node = temp;
+    }
+
+    // No root.
+    root_ = nullptr;
 }
 
 
@@ -217,10 +239,10 @@ void AVLTree<Type, Comparator>::clear( void )
  * Find a node by its element.
  */
 template <class Type, class Comparator>
-AVLNode<Type>* AVLTree<Type, Comparator>::find_node( const Type& element ) const
+AvlNode<Type>* AvlTree<Type, Comparator>::find_node( const Type& element ) const
 {
 	// Start at root.
-	AVLNode<Type>* node = root_;
+	AvlNode<Type>* node = root_;
 	while (node != nullptr) {
 		int compare = Comparator::compare( element, node->element );
 		if (compare == 0) {
@@ -243,7 +265,7 @@ AVLNode<Type>* AVLTree<Type, Comparator>::find_node( const Type& element ) const
  * Get left-most subchild from a starting node.
  */
 template <class Type, class Comparator>
-AVLNode<Type>* AVLTree<Type, Comparator>::get_minimum( AVLNode<Type>* node )
+AvlNode<Type>* AvlTree<Type, Comparator>::get_minimum( AvlNode<Type>* node )
 {
 	// Keep going left!
 	while (node->left != nullptr) {
@@ -258,7 +280,7 @@ AVLNode<Type>* AVLTree<Type, Comparator>::get_minimum( AVLNode<Type>* node )
  * Get right-most subchild from starting node.
  */
 template <class Type, class Comparator>
-AVLNode<Type>* AVLTree<Type, Comparator>::get_maximum( AVLNode<Type>* node )
+AvlNode<Type>* AvlTree<Type, Comparator>::get_maximum( AvlNode<Type>* node )
 {
 	// Keep going right!
 	while (node->right != nullptr) {
@@ -273,10 +295,10 @@ AVLNode<Type>* AVLTree<Type, Comparator>::get_maximum( AVLNode<Type>* node )
  * Create an AVL node.
  */
 template <class Type, class Comparator>
-AVLNode<Type>* AVLTree<Type, Comparator>::create_node( const Type& element )
+AvlNode<Type>* AvlTree<Type, Comparator>::create_node( const Type& element )
 {
 	// Allocate node.
-	AVLNode<Type>* node = (AVLNode<Type>*)malloc( sizeof(AVLNode<Type>) );
+	AvlNode<Type>* node = (AvlNode<Type>*)malloc( sizeof(AvlNode<Type>) );
 	if (node == nullptr) {
 		return nullptr;
 	}
@@ -295,7 +317,7 @@ AVLNode<Type>* AVLTree<Type, Comparator>::create_node( const Type& element )
  * Set a node's left child and update its parent.
  */
 template <class Type, class Comparator>
-void AVLTree<Type, Comparator>::set_left( AVLNode<Type>* parent, AVLNode<Type>* child )
+void AvlTree<Type, Comparator>::set_left( AvlNode<Type>* parent, AvlNode<Type>* child )
 {
 	// Update dependencies.
 	parent->left = child;
@@ -309,7 +331,7 @@ void AVLTree<Type, Comparator>::set_left( AVLNode<Type>* parent, AVLNode<Type>* 
  * Set a node's right child and update its parent.
  */
 template <class Type, class Comparator>
-void AVLTree<Type, Comparator>::set_right( AVLNode<Type>* parent, AVLNode<Type>* child )
+void AvlTree<Type, Comparator>::set_right( AvlNode<Type>* parent, AvlNode<Type>* child )
 {
 	// Update dependencies.
 	parent->right = child;
@@ -323,7 +345,7 @@ void AVLTree<Type, Comparator>::set_right( AVLNode<Type>* parent, AVLNode<Type>*
  * Get node height.
  */
 template <class Type, class Comparator>
-int AVLTree<Type, Comparator>::get_height( AVLNode<Type>* node )
+int AvlTree<Type, Comparator>::get_height( AvlNode<Type>* node )
 {
 	// Node exists?
 	if (node == nullptr) {
@@ -338,7 +360,7 @@ int AVLTree<Type, Comparator>::get_height( AVLNode<Type>* node )
  * Update height of node and return whether it changed.
  */
 template <class Type, class Comparator>
-bool AVLTree<Type, Comparator>::update_height( AVLNode<Type>* node )
+bool AvlTree<Type, Comparator>::update_height( AvlNode<Type>* node )
 {
 	// Get height of children.
 	int old_height = node->height;
@@ -355,7 +377,7 @@ bool AVLTree<Type, Comparator>::update_height( AVLNode<Type>* node )
  * Get node balance factor.
  */
 template <class Type, class Comparator>
-int AVLTree<Type, Comparator>::get_balance_factor( AVLNode<Type>* node )
+int AvlTree<Type, Comparator>::get_balance_factor( AvlNode<Type>* node )
 {
 	return get_height( node->right ) - get_height( node->left );
 }
@@ -365,7 +387,7 @@ int AVLTree<Type, Comparator>::get_balance_factor( AVLNode<Type>* node )
  * Get highest pointer reference to a node in the tree.
  */
 template <class Type, class Comparator>
-AVLNode<Type>** AVLTree<Type, Comparator>::get_node_link( AVLNode<Type>* node )
+AvlNode<Type>** AvlTree<Type, Comparator>::get_node_link( AvlNode<Type>* node )
 {
 	// Highest reference is root if no parent.
 	if (node->parent == nullptr) {
@@ -385,11 +407,11 @@ AVLNode<Type>** AVLTree<Type, Comparator>::get_node_link( AVLNode<Type>* node )
  * Node must at least have a right child on call.
  */
 template <class Type, class Comparator>
-void AVLTree<Type, Comparator>::rotate_left( AVLNode<Type>** root_link )
+void AvlTree<Type, Comparator>::rotate_left( AvlNode<Type>** root_link )
 {
 	// Track two main elements.
-	AVLNode<Type>* original = *root_link;
-	AVLNode<Type>* new_root = original->right;
+	AvlNode<Type>* original = *root_link;
+	AvlNode<Type>* new_root = original->right;
 
 	// Update parent of new root.
 	new_root->parent = original->parent;
@@ -410,11 +432,15 @@ void AVLTree<Type, Comparator>::rotate_left( AVLNode<Type>** root_link )
  * Node must at least have a left child on call.
  */
 template <class Type, class Comparator>
-void AVLTree<Type, Comparator>::rotate_right( AVLNode<Type>** root_link )
+void AvlTree<Type, Comparator>::rotate_right( AvlNode<Type>** root_link )
 {
 	// Track two main elements.
-	AVLNode<Type>* original = *root_link;
-	AVLNode<Type>* new_root = original->right;
+	AvlNode<Type>* original = *root_link;
+	AvlNode<Type>* new_root = original->left;
+
+    // Update link of new root.
+    new_root->parent = original->parent;
+    *root_link = new_root;
 
 	// Shift them.
 	set_left( original, new_root->right );
@@ -430,7 +456,7 @@ void AVLTree<Type, Comparator>::rotate_right( AVLNode<Type>** root_link )
  * Balance a tree starting at a node.
  */
 template <class Type, class Comparator>
-void AVLTree<Type, Comparator>::balance_tree( AVLNode<Type>* node )
+void AvlTree<Type, Comparator>::balance_tree( AvlNode<Type>* node )
 {
 	// Keep going until balancing doesn't need to happen.
 	while (node != nullptr) {
@@ -453,7 +479,7 @@ void AVLTree<Type, Comparator>::balance_tree( AVLNode<Type>* node )
  * Balance a node.
  */
 template <class Type, class Comparator>
-bool AVLTree<Type, Comparator>::balance_node( AVLNode<Type>* node )
+bool AvlTree<Type, Comparator>::balance_node( AvlNode<Type>* node )
 {
 	// Get balance factor.
 	int balance = get_balance_factor( node );

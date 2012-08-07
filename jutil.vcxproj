@@ -13,11 +13,11 @@
   <ItemGroup>
     <ClInclude Include=".\include\containers\avl_tree.hpp" />
     <ClInclude Include=".\include\containers\container_common.h" />
-    <ClInclude Include=".\include\containers\data_structure_shared.hpp" />
     <ClInclude Include=".\include\containers\hash_map.hpp" />
     <ClInclude Include=".\include\containers\key_value_pair.hpp" />
     <ClInclude Include=".\include\containers\vector.hpp" />
     <ClInclude Include=".\include\string.hpp" />
+    <ClInclude Include="include\containers\map.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include=".\src\main.cpp" />

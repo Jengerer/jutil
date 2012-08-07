@@ -4,31 +4,32 @@
 /*
  * Key value pair object.
  */
-template <class K, class V>
+template <class Key, class Value>
 class KeyValuePair
 {
 
 public:
 
-	KeyValuePair( K& key, V& value );
+	KeyValuePair( const Key& key, const Value& value );
 
 	// Resource functions.
-	void operator=( const V& value );
-	const K& get_key( void ) const;
-	V& get_value( void );
-	const V& get_value( void ) const;
+	void operator=( const Value& value );
+	const Key& get_key( void ) const;
+	Value& get_value( void );
+	const Value& get_value( void ) const;
 
 private:
 
-	K key_;
-	V value_;
+	Key key_;
+	Value value_;
 
 };
 
 /*
  * Key value pair constructor.
  */
-KeyValuePair::KeyValuePair( K& key, V& value )
+template <class Key, class Value>
+KeyValuePair<Key, Value>::KeyValuePair( const Key& key, const Value& value )
 {
 	key_ = key;
 	value_ = value;
@@ -37,7 +38,8 @@ KeyValuePair::KeyValuePair( K& key, V& value )
 /*
  * Assignment operator.
  */
-void KeyValuePair::operator=( const V& value )
+template <class Key, class Value>
+void KeyValuePair<Key, Value>::operator=( const Value& value )
 {
 	value_ = value;
 }
@@ -45,7 +47,8 @@ void KeyValuePair::operator=( const V& value )
 /*
  * Constant key reference getter.
  */
-const K& KeyValuePair::get_key( void ) const
+template <class Key, class Value>
+const Key& KeyValuePair<Key, Value>::get_key( void ) const
 {
 	return key_;
 }
@@ -53,7 +56,8 @@ const K& KeyValuePair::get_key( void ) const
 /*
  * Value reference getter.
  */
-V& KeyValuePair::get_value( void )
+template <class Key, class Value>
+Value& KeyValuePair<Key, Value>::get_value( void )
 {
 	return value_;
 }
@@ -61,7 +65,8 @@ V& KeyValuePair::get_value( void )
 /*
  * Constant value reference getter.
  */
-const V& KeyValuePair::get_value( void ) const
+template <class Key, class Value>
+const Value& KeyValuePair<Key, Value>::get_value( void ) const
 {
 	return value_;
 }

@@ -6,7 +6,7 @@
 /*
  * Hash map class for containing key-value pairs.
  */
-template <class K, class V, class H>
+template <class Hash, class Key, class Value, class Hasher>
 class HashMap
 {
 
@@ -16,15 +16,15 @@ public:
 	~HashMap( void );
 
 	// Hash map resource functions.
-	V& operator[]( const K& key );
-	const V& operator[]( const Key& key ) const;
-	bool has_key( const K& key ) const;
+	Value& operator[]( const Key& key );
+	const Value& operator[]( const Key& key ) const;
+	bool has_key( const Key& key ) const;
 
 	// Iteration functions.
 
 	// Key-value management.
-	bool insert( const K& key, const V& value );
-	void remove( const K& key );
+	bool insert( const Key& key, const Value& value );
+	void remove( const Key& key );
 
 private:
 
