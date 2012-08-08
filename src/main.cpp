@@ -1,4 +1,4 @@
-#include "containers/avl_tree.hpp"
+#include "containers/set.hpp"
 #include "containers/map.hpp"
 #include "containers/hash_map.hpp"
 #include "memory/allocation_manager.hpp"
@@ -20,12 +20,9 @@ public:
 
 int main( void )
 {
-    JUTIL::HeapAllocator allocator;
-    int* test = (int*)allocator.allocate( 4 );
-    if (test != nullptr) {
-        *test = 7;
-    }
-    allocator.free( test );
+    JUTIL::BaseClass::initialize();
+    JUTIL::Set<int>* set = new JUTIL::Set<int>();
+    JUTIL::BaseClass::shut_down();
     JUTIL::AllocationManager::dump( "memory_leaks.txt" );
 	/*LARGE_INTEGER start;
 	LARGE_INTEGER end;

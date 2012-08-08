@@ -30,6 +30,7 @@ namespace JUTIL
         root_ = node;
     }
 
+
     /*
      * Mark address as freed.
      */
@@ -57,6 +58,7 @@ namespace JUTIL
             }
         }
     }
+
 
     /*
      * Dump allocation information.

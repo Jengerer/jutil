@@ -11,12 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include=".\include\containers\avl_tree.hpp" />
-    <ClInclude Include=".\include\containers\container_common.h" />
     <ClInclude Include=".\include\containers\hash_map.hpp" />
     <ClInclude Include=".\include\containers\key_value_pair.hpp" />
     <ClInclude Include=".\include\containers\vector.hpp" />
     <ClInclude Include="base_class.hpp" />
+    <ClInclude Include="include\containers\container_common.hpp" />
+    <ClInclude Include="include\containers\set.hpp" />
     <ClInclude Include="include\memory\allocation_manager.hpp" />
     <ClInclude Include="include\memory\allocator_interface.hpp" />
     <ClInclude Include="include\memory\base_allocator.hpp" />
@@ -29,6 +29,7 @@
     <ClCompile Include=".\src\string_builder.cpp" />
     <ClCompile Include="include\memory\allocation_manager.cpp" />
     <ClCompile Include="include\memory\base_allocator.cpp" />
+    <ClCompile Include="src\base_class.cpp" />
     <ClCompile Include="src\memory\heap_allocator.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

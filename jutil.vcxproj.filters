@@ -12,14 +12,11 @@
     <ClCompile Include="src\memory\heap_allocator.cpp">
       <Filter>src\memory</Filter>
     </ClCompile>
+    <ClCompile Include="src\base_class.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include=".\include\containers\avl_tree.hpp">
-      <Filter>include\containers</Filter>
-    </ClInclude>
-    <ClInclude Include=".\include\containers\container_common.h">
-      <Filter>include\containers</Filter>
-    </ClInclude>
     <ClInclude Include=".\include\containers\hash_map.hpp">
       <Filter>include\containers</Filter>
     </ClInclude>
@@ -49,6 +46,12 @@
     </ClInclude>
     <ClInclude Include="base_class.hpp">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\containers\container_common.hpp">
+      <Filter>include\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\containers\set.hpp">
+      <Filter>include\containers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

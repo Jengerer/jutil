@@ -1,22 +1,22 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
-#include "avl_tree.hpp"
-#include "key_value_pair.hpp"
+#include "containers/set.hpp"
+#include "containers/key_value_pair.hpp"
 
 namespace JUTIL
 {
 
     /*
-     * AVL tree with key-value pairs.
+     * Set of key-value pairs.
      */
     template < class Key, class Value, class KeyComparator = DefaultComparator<Key> >
-    class Map : public AvlTree< 
+    class Map : public Set< 
         KeyValuePair< Key, Value >,
         KeyValueComparator< Key, Value, KeyComparator > >
     {
     
-    typedef AvlTree< 
+    typedef Set< 
         KeyValuePair< Key, Value >,
         KeyValueComparator< Key, Value, KeyComparator > > BaseClass;
 
