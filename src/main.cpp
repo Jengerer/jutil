@@ -1,14 +1,33 @@
 #include "containers/avl_tree.hpp"
 #include "containers/map.hpp"
+#include "containers/hash_map.hpp"
+#include "memory/allocation_manager.hpp"
+#include "memory/heap_allocator.hpp"
 #include <map>
 #include <hash_map>
 #include <windows.h>
 #include <stdio.h>
 #include <set>
 
+class StringHasher
+{
+public:
+    static int hash( char* str )
+    {
+        return (int)*str;
+    }
+};
+
 int main( void )
 {
-	LARGE_INTEGER start;
+    JUTIL::HeapAllocator allocator;
+    int* test = (int*)allocator.allocate( 4 );
+    if (test != nullptr) {
+        *test = 7;
+    }
+    allocator.free( test );
+    JUTIL::AllocationManager::dump( "memory_leaks.txt" );
+	/*LARGE_INTEGER start;
 	LARGE_INTEGER end;
 
 	// Add values.
@@ -33,8 +52,7 @@ int main( void )
         stl.erase( i );
     }
     QueryPerformanceCounter( &end );
-    printf( "%u\n", end.QuadPart - start.QuadPart );
-    
+    printf( "%u\n", end.QuadPart - start.QuadPart );*/    
 
 	system( "pause" );
 	return 0;

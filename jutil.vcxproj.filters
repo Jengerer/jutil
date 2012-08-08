@@ -1,10 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include=".\src\string.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include=".\src\main.cpp" />
+    <ClCompile Include=".\src\string_builder.cpp" />
+    <ClCompile Include="include\memory\allocation_manager.cpp">
+      <Filter>include\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="include\memory\base_allocator.cpp">
+      <Filter>include\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\memory\heap_allocator.cpp">
+      <Filter>src\memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include=".\include\containers\avl_tree.hpp">
@@ -28,6 +35,21 @@
     <ClInclude Include="include\string_builder.hpp">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\memory\heap_allocator.hpp">
+      <Filter>include\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\memory\allocation_manager.hpp">
+      <Filter>include\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\memory\allocator_interface.hpp">
+      <Filter>include\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\memory\base_allocator.hpp">
+      <Filter>include\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="base_class.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">
@@ -38,6 +60,12 @@
     </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{d854beed-6391-4858-b7a0-f51a8ac16c87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\memory">
+      <UniqueIdentifier>{7fceae86-8f01-43e8-aa90-95b7b117d337}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\memory">
+      <UniqueIdentifier>{d2376168-6413-4de3-b68c-7edc5525face}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

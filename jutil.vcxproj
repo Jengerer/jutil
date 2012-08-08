@@ -16,12 +16,20 @@
     <ClInclude Include=".\include\containers\hash_map.hpp" />
     <ClInclude Include=".\include\containers\key_value_pair.hpp" />
     <ClInclude Include=".\include\containers\vector.hpp" />
+    <ClInclude Include="base_class.hpp" />
+    <ClInclude Include="include\memory\allocation_manager.hpp" />
+    <ClInclude Include="include\memory\allocator_interface.hpp" />
+    <ClInclude Include="include\memory\base_allocator.hpp" />
+    <ClInclude Include="include\memory\heap_allocator.hpp" />
     <ClInclude Include="include\string_builder.hpp" />
     <ClInclude Include="include\containers\map.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include=".\src\main.cpp" />
-    <ClCompile Include=".\src\string.cpp" />
+    <ClCompile Include=".\src\string_builder.cpp" />
+    <ClCompile Include="include\memory\allocation_manager.cpp" />
+    <ClCompile Include="include\memory\base_allocator.cpp" />
+    <ClCompile Include="src\memory\heap_allocator.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{16103E26-1F60-4126-A913-82056B453398}</ProjectGuid>
