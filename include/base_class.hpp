@@ -19,14 +19,8 @@ namespace JUTIL
         static void shut_down( void );
 
         // Allocation operators.
-        void* operator new( size_t size );
-        void* operator new[]( size_t size );
-        void operator delete( void* address );
-        void operator delete[]( void* address );
-
-    private:
-
-        static AllocatorInterface* allocator_;
+        void* operator new( size_t size, AllocatorInterface* allocator );
+        void operator delete( void* address, AllocatorInterface* allocator );
 
     };
 

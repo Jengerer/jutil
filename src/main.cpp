@@ -20,9 +20,8 @@ public:
 
 int main( void )
 {
-    JUTIL::BaseClass::initialize();
-    JUTIL::Set<int>* set = new JUTIL::Set<int>();
-    JUTIL::BaseClass::shut_down();
+	JUTIL::HeapAllocator allocator;
+    JUTIL::Set<int>* set = new (&allocator) JUTIL::Set<int>();
     JUTIL::AllocationManager::dump( "memory_leaks.txt" );
 	/*LARGE_INTEGER start;
 	LARGE_INTEGER end;

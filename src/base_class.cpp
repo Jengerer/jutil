@@ -1,25 +1,15 @@
 #include "base_class.hpp"
-#include "memory/heap_allocator.hpp"
-#include <new.h>
 
 namespace JUTIL
 {
-
-    // Default allocation interface.
-    AllocatorInterface* BaseClass::allocator_ = nullptr;
 
     /*
      * Base class initialization.
      */
     bool BaseClass::initialize( void )
     {
-        HeapAllocator* allocator = new HeapAllocator();
-        if (allocator == nullptr) {
-            return false;
-        }
-        
-        allocator_ = allocator;
-        return allocator_->initialize();
+		// Nothing yet, maybe be able to remove.
+		return true;
     }
 
     /*
@@ -27,23 +17,23 @@ namespace JUTIL
      */
     void BaseClass::shut_down()
     {
-        allocator_->shut_down();
+        // Nothing yet, may be able to remove.
     }
 
     /* 
      * Over-written new single-allocation operator.
      */
-    void* BaseClass::operator new( size_t size )
+    void* BaseClass::operator new( size_t size, AllocatorInterface* allocator )
     {
-        return allocator_->allocate( size );
+        return allocator->allocate( size );
     }
 
     /*
      * Over-written single de-allocation operator.
      */
-    void BaseClass::operator delete( void* address )
+    void BaseClass::operator delete( void* address, AllocatorInterface* allocator )
     {
-        return allocator_->free( address );
+        return allocator->free( address );
     }
 
 }

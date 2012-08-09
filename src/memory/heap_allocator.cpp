@@ -21,6 +21,7 @@ namespace JUTIL
         return memory;
     }
 
+
     /*
      * Heap free function.
      */

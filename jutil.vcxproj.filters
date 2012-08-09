@@ -1,31 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include=".\src\main.cpp" />
-    <ClCompile Include=".\src\string_builder.cpp" />
-    <ClCompile Include="include\memory\allocation_manager.cpp">
-      <Filter>include\memory</Filter>
-    </ClCompile>
-    <ClCompile Include="include\memory\base_allocator.cpp">
-      <Filter>include\memory</Filter>
-    </ClCompile>
     <ClCompile Include="src\memory\heap_allocator.cpp">
       <Filter>src\memory</Filter>
     </ClCompile>
     <ClCompile Include="src\base_class.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\string_builder.cpp" />
+    <ClCompile Include="src\memory\allocation_manager.cpp">
+      <Filter>src\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\memory\base_allocator.cpp">
+      <Filter>src\memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include=".\include\containers\hash_map.hpp">
-      <Filter>include\containers</Filter>
-    </ClInclude>
-    <ClInclude Include=".\include\containers\key_value_pair.hpp">
-      <Filter>include\containers</Filter>
-    </ClInclude>
-    <ClInclude Include=".\include\containers\vector.hpp">
-      <Filter>include\containers</Filter>
-    </ClInclude>
     <ClInclude Include="include\containers\map.hpp">
       <Filter>include\containers</Filter>
     </ClInclude>
@@ -44,15 +35,18 @@
     <ClInclude Include="include\memory\base_allocator.hpp">
       <Filter>include\memory</Filter>
     </ClInclude>
-    <ClInclude Include="base_class.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\containers\container_common.hpp">
       <Filter>include\containers</Filter>
     </ClInclude>
     <ClInclude Include="include\containers\set.hpp">
       <Filter>include\containers</Filter>
     </ClInclude>
+    <ClInclude Include="include\base_class.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\containers\hash_map.hpp" />
+    <ClInclude Include="include\containers\key_value_pair.hpp" />
+    <ClInclude Include="include\containers\vector.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">
