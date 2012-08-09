@@ -1,5 +1,5 @@
-#ifndef ALLOCATOR_INTERFACE_H
-#define ALLOCATOR_INTERFACE_H
+#ifndef ALLOCATOR_INTERFACE_HPP
+#define ALLOCATOR_INTERFACE_HPP
 
 namespace JUTIL
 {
@@ -18,11 +18,11 @@ namespace JUTIL
 
         // Memory management.
         virtual void* allocate( size_t size ) = 0;
+        virtual void* reallocate( void* address, size_t size ) = 0;
         virtual void free( void* address ) = 0;
         
     };
 
 }
 
-#endif // ALLOCATOR_INTERFACE_H
-
+#endif // ALLOCATOR_INTERFACE_HPP

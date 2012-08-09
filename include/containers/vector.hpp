@@ -1,14 +1,16 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
-#include <stdlib.h>
+#include "containers/base_container.hpp"
 
 /*
  * Vector class that acts as a resizable array.
  */
-template <class T>
-class Vector
+template <class Type, class Allocator>
+class Vector : public BaseContainer<Type, Allocator>
 {
+
+    typedef BaseContainer<Type, Allocator> BaseClass;
 
 public:
 
@@ -16,19 +18,19 @@ public:
 	~Vector( void );
 
 	// Array retrieval.
-	T& operator[]( size_t i );
-	const T& operator[]( size_t i ) const;
+	Type& operator[]( size_t i );
+	const Type& operator[]( size_t i ) const;
 
 	// Array operations/getters.
-	bool has_element( const T& element ) const;
-	bool remove( const T& element );
+	bool has_element( const Type& element ) const;
+	bool remove( const Type& element );
 	void clear( void );
 	size_t get_size( void ) const;
 	bool set_size( size_t size );
 
 private:
 
-	T* array_;
+	Type* array_;
 	size_t size_;
 
 };
@@ -36,8 +38,8 @@ private:
 /*
  * Vector constructor.
  */
-template <class T>
-Vector<T>::Vector( void )
+template <class Type>
+Vector<Type>::Vector( void )
 {
 	array_ = nullptr;
 	size_ = 0;
@@ -46,8 +48,8 @@ Vector<T>::Vector( void )
 /*
  * Vector destructor.
  */
-template <class T>
-Vector<T>::~Vector( void )
+template <class Type>
+Vector<Type>::~Vector( void )
 {
 	clear();
 }
@@ -55,8 +57,8 @@ Vector<T>::~Vector( void )
 /*
  * Non-const array operator.
  */
-template <class T>
-T& Vector<T>::operator[]( size_t i )
+template <class Type>
+Type& Vector<Type>::operator[]( size_t i )
 {
 	return array_[i];
 }
@@ -64,8 +66,8 @@ T& Vector<T>::operator[]( size_t i )
 /*
  * Const array operator.
  */
-template <class T>
-const T& Vector<T>::operator[]( size_t i ) const
+template <class Type>
+const Type& Vector<Type>::operator[]( size_t i ) const
 {
 	return array_[i];
 }
@@ -73,8 +75,8 @@ const T& Vector<T>::operator[]( size_t i ) const
 /*
  * Checks whether an element exists in the array.
  */
-template <class T>
-bool Vector<T>::has_element( const T& element ) const
+template <class Type>
+bool Vector<Type>::has_element( const Type& element ) const
 {
 	size_t i;
 	for (i = 0; i < size_; ++i) {
@@ -90,8 +92,8 @@ bool Vector<T>::has_element( const T& element ) const
  * Remove an element from the array.
  * Returns true if the element was found, false otherwise.
  */
-template <class T>
-bool Vector<T>::remove( const T& element )
+template <class Type>
+bool Vector<Type>::remove( const Type& element )
 {
 	// Skip empty.
 	if (size_ == 0) {
@@ -109,7 +111,7 @@ bool Vector<T>::remove( const T& element )
 	// Check if found.
 	if (i != size_) {
 		// Shift left
-		memmove( array_ + i, array_ + i + 1, (size_ - i - 1) * sizeof(T) ); 
+		memmove( array_ + i, array_ + i + 1, (size_ - i - 1) * sizeof(Type) ); 
 		set_size( size_ - 1 );
 		return true;
 	}
@@ -120,8 +122,8 @@ bool Vector<T>::remove( const T& element )
 /*
  * Clear array elements.
  */
-template <class T>
-void Vector<T>::clear( void )
+template <class Type>
+void Vector<Type>::clear( void )
 {
 	free( array_ );
 }
@@ -129,8 +131,8 @@ void Vector<T>::clear( void )
 /*
  * Get number of element cells in array.
  */
-template <class T>
-size_t Vector<T>::get_size( void ) const
+template <class Type>
+size_t Vector<Type>::get_size( void ) const
 {
 	return size_;
 }
@@ -139,8 +141,8 @@ size_t Vector<T>::get_size( void ) const
  * Set number of elements in array.
  * Returns true if reallocation succeeded, false otherwise.
  */
-template <class T>
-bool Vector<T>::set_size( size_t size )
+template <class Type>
+bool Vector<Type>::set_size( size_t size )
 {
 	// Check if emptying.
 	if (size == 0) {
@@ -150,13 +152,13 @@ bool Vector<T>::set_size( size_t size )
 	}
 
 	// Attempt sizing.
-	T* new_array;
-	unsigned int new_size = sizeof(T) * size;
+	Type* new_array;
+	unsigned int new_size = sizeof(Type) * size;
 	if (size_ == 0) {
-		new_array = (T*)malloc( sizeof(T) * size );
+		new_array = (Type*)malloc( sizeof(Type) * size );
 	}
 	else {
-		new_array = (T*)realloc( array_, new_size );
+		new_array = (Type*)realloc( array_, new_size );
 	}
 
 	// Check successful resize.

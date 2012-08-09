@@ -15,6 +15,9 @@
     <ClCompile Include="src\memory\base_allocator.cpp">
       <Filter>src\memory</Filter>
     </ClCompile>
+    <ClCompile Include="src\base_class_services.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\containers\map.hpp">
@@ -47,6 +50,12 @@
     <ClInclude Include="include\containers\hash_map.hpp" />
     <ClInclude Include="include\containers\key_value_pair.hpp" />
     <ClInclude Include="include\containers\vector.hpp" />
+    <ClInclude Include="include\base_class_services.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\containers\base_container.hpp">
+      <Filter>include\containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">

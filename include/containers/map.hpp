@@ -122,7 +122,7 @@ namespace JUTIL
     KeyValuePair<Key, Value>* Map<Key, Value, KeyComparator>::find_pair( const Key& key ) const
     {
         // Start at root.
-        AvlNode< KeyValuePair<Key, Value> >* node = root_;
+        SetNode< KeyValuePair<Key, Value> >* node = root_;
         while (node != nullptr) {
             int compare = KeyComparator::compare( key, node->element.get_key() );
             if (compare == 0) {

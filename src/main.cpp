@@ -20,37 +20,39 @@ public:
 
 int main( void )
 {
-	JUTIL::HeapAllocator allocator;
-    JUTIL::Set<int>* set = new (&allocator) JUTIL::Set<int>();
-    JUTIL::AllocationManager::dump( "memory_leaks.txt" );
-	/*LARGE_INTEGER start;
+    JUTIL::BaseClassServices::initialize();
+
+	LARGE_INTEGER start;
 	LARGE_INTEGER end;
 
 	// Add values.
     QueryPerformanceCounter( &start );
-	JUTIL::Map<int, int> map;
+	JUTIL::Set<int> set;
     for (int i = 0; i < 100000; i++) {
-        map.insert( i, i+1 );
+        set.insert( i );
     }
     for (int i = 0; i < 100000; i++) {
-        map.remove( i );
+        set.remove( i );
     }
     QueryPerformanceCounter( &end );
     printf( "%u\n", end.QuadPart - start.QuadPart );
     
     // Add values.
     QueryPerformanceCounter( &start );
-	std::map<int, int> stl;
+	std::set<int> stl;
     for (int i = 0; i < 100000; i++) {
-        stl[i] = i+1;
+        stl.insert( i );
     }
     for (int i = 0; i < 100000; i++) {
         stl.erase( i );
     }
+    stl.
     QueryPerformanceCounter( &end );
-    printf( "%u\n", end.QuadPart - start.QuadPart );*/    
+    printf( "%u\n", end.QuadPart - start.QuadPart );  
 
 	system( "pause" );
+    JUTIL::AllocationManager::dump( "memory_leaks.txt" );
+    JUTIL::BaseClassServices::shut_down();
 	return 0;
 }
 

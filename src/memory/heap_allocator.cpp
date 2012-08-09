@@ -21,6 +21,22 @@ namespace JUTIL
         return memory;
     }
 
+    /*
+     * Heap reallocation function.
+     */
+    void* HeapAllocator::reallocate( void* address, size_t size )
+    {
+        void* memory = realloc( address, size );
+        
+#if defined( _DEBUG )
+        if (memory != nullptr) {
+            AllocationManager::update_allocated( address, memory, size );
+        }
+#endif
+ 
+        return memory;
+    }
+
 
     /*
      * Heap free function.
@@ -29,7 +45,10 @@ namespace JUTIL
     {
         // Free from heap.
         ::free( memory );
+
+#if defined( _DEBUG )
         AllocationManager::set_freed( memory );
+#endif
     }
 
 }

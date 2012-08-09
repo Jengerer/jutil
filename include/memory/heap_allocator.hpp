@@ -16,6 +16,7 @@ namespace JUTIL
 
         virtual void* allocate( size_t size );
         virtual void free( void* address );
+        virtual void* reallocate( void* address, size_t size );
 
     };
 

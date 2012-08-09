@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\base_class_services.hpp" />
+    <ClInclude Include="include\containers\base_container.hpp" />
     <ClInclude Include="include\containers\hash_map.hpp" />
     <ClInclude Include="include\containers\key_value_pair.hpp" />
     <ClInclude Include="include\containers\vector.hpp" />
@@ -25,6 +27,7 @@
     <ClInclude Include="include\containers\map.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\base_class_services.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\memory\allocation_manager.cpp" />
     <ClCompile Include="src\memory\base_allocator.cpp" />

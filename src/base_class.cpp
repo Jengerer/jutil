@@ -21,6 +21,22 @@ namespace JUTIL
     }
 
     /* 
+     * Default allocator new.
+     */
+    void* BaseClass::operator new( size_t size )
+    {
+        return BaseClass::operator new( size, BaseClassServices::get_default_allocator() );
+    }
+
+    /* 
+     * Default allocator delete.
+     */
+    void BaseClass::operator delete( void* address )
+    {
+        return BaseClass::operator delete( address, BaseClassServices::get_default_allocator() );
+    }
+
+    /* 
      * Over-written new single-allocation operator.
      */
     void* BaseClass::operator new( size_t size, AllocatorInterface* allocator )
