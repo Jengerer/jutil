@@ -1,7 +1,8 @@
 #ifndef BASE_CLASS_SERVICES_HPP
 #define BASE_CLASS_SERVICES_HPP
 
-#include "memory/allocator_interface.hpp"
+#include "base_services_interface.hpp"
+#include "memory/heap_allocator.hpp"
 
 namespace JUTIL
 {
@@ -9,21 +10,17 @@ namespace JUTIL
     /*
      * Services for objects of base class.
      */
-    class BaseClassServices
+    class BaseClassServices : public BaseServicesInterface
     {
 
         public:
-
-            // Static initialization.
-            static bool initialize( void );
-            static void shut_down( void );
 
             // Default allocator getter.
             static AllocatorInterface* get_default_allocator( void );
 
         private:
 
-            static AllocatorInterface* allocator_;
+            static HeapAllocator allocator_;
             
     };
 

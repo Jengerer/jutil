@@ -28,27 +28,14 @@ int main( void )
 	// Add values.
     QueryPerformanceCounter( &start );
 	JUTIL::Set<int> set;
-    for (int i = 0; i < 100000; i++) {
+    for (int i = 0; i < 100; i++) {
         set.insert( i );
     }
-    for (int i = 0; i < 100000; i++) {
+    for (int i = 0; i < 100; i++) {
         set.remove( i );
     }
     QueryPerformanceCounter( &end );
     printf( "%u\n", end.QuadPart - start.QuadPart );
-    
-    // Add values.
-    QueryPerformanceCounter( &start );
-	std::set<int> stl;
-    for (int i = 0; i < 100000; i++) {
-        stl.insert( i );
-    }
-    for (int i = 0; i < 100000; i++) {
-        stl.erase( i );
-    }
-    stl.
-    QueryPerformanceCounter( &end );
-    printf( "%u\n", end.QuadPart - start.QuadPart );  
 
 	system( "pause" );
     JUTIL::AllocationManager::dump( "memory_leaks.txt" );

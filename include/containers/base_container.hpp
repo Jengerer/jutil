@@ -15,8 +15,17 @@ namespace JUTIL
 
     public:
 
+        BaseContainer( AllocatorInterface* allocator = BaseClassServices::get_default_allocator() );
+        virtual ~BaseContainer( void );
+
     protected:
 
+        void set_allocator( AllocatorInterface* allocator );
+        AllocatorInterface* get_allocator( void ) const;
+
+    private:
+
+        
         AllocatorInterface* allocator_;
 
     };

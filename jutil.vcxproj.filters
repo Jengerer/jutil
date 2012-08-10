@@ -18,6 +18,9 @@
     <ClCompile Include="src\base_class_services.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\containers\base_container.cpp">
+      <Filter>src\containers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\containers\map.hpp">
@@ -72,6 +75,9 @@
     </Filter>
     <Filter Include="src\memory">
       <UniqueIdentifier>{d2376168-6413-4de3-b68c-7edc5525face}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\containers">
+      <UniqueIdentifier>{617a97c8-054c-4363-8d6a-0e5534e62520}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

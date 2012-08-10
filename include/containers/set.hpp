@@ -1,7 +1,7 @@
 #ifndef SET_HPP
 #define SET_HPP
 
-#include "base_class.hpp"
+#include "containers/base_container.hpp"
 #include "containers/container_common.hpp"
 #include <stdlib.h>
 
@@ -39,13 +39,13 @@ namespace JUTIL
      * AVL tree implementation of set.
      */
     template < class Type, class Comparator = DefaultComparator<Type> >
-    class Set : public BaseClass
+    class Set : public BaseContainer
     {
 
         public:
 
             Set( void );
-            ~Set( void );
+            virtual ~Set( void );
 
             // Set operations.
             bool insert( const Type& element );
@@ -69,7 +69,7 @@ namespace JUTIL
 
             // Node link handling.
             SetNode<Type>** get_node_link( SetNode<Type>* node );
-            static SetNode<Type>* create_node( const Type& element );
+            SetNode<Type>* create_node( const Type& element );
             static void set_left( SetNode<Type>* parent, SetNode<Type>* child );
             static void set_right( SetNode<Type>* parent, SetNode<Type>* child );
 
@@ -192,7 +192,7 @@ namespace JUTIL
         balance_tree( node->parent );
 
         // Delete node.
-        free( node );
+        get_allocator()->free( node );
     }
 
 
@@ -301,19 +301,20 @@ namespace JUTIL
     SetNode<Type>* Set<Type, Comparator>::create_node( const Type& element )
     {
         // Allocate node.
-        SetNode<Type>* node = (SetNode<Type>*)malloc( sizeof(SetNode<Type>) );
+        AllocatorInterface* allocator = get_allocator();
+        SetNode<Type>* node = (SetNode<Type>*)allocator->allocate( sizeof(SetNode<Type>) );
         if (node == nullptr) {
             return nullptr;
         }
 
         // Instantiate node.
-            node->element = element;
-            node->parent = nullptr;
-            node->left = nullptr;
-            node->right = nullptr;
-            node->height = 1;
-            return node;
-        };
+        node->element = element;
+        node->parent = nullptr;
+        node->left = nullptr;
+        node->right = nullptr;
+        node->height = 1;
+        return node;
+    }
 
 
     /*

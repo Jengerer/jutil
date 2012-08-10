@@ -121,6 +121,7 @@ namespace JUTIL
             if (node->allocation.address == address) {
                 return node;
             }
+            node = node->next;
         }
         
         // Not found.
