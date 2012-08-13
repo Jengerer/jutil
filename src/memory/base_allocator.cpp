@@ -20,20 +20,11 @@ namespace JUTIL
     }
 
     /*
-     * Base initialization.
-     */
-    bool BaseAllocator::initialize( void )
-    {
-        // So much nothing.
-        return true;
-    }
-
-    /*
      * Base allocator clean-up.
      */
     void BaseAllocator::shut_down( void )
     {
-        delete this;
+        // Ain't even a thang.
     }
 
 }

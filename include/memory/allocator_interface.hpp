@@ -12,8 +12,7 @@ namespace JUTIL
 
     public:
 
-        // Start and clean-up.
-        virtual bool initialize( void ) = 0;
+        // Cleaning up.
         virtual void shut_down( void ) = 0;    
 
         // Memory management.

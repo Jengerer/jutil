@@ -22,16 +22,23 @@ namespace JUTIL
         BaseContainer( void );
         ~BaseContainer( void );
 
-        // Memory management.
-        bool reserve( size_t elements );
+        // Memory allocation management.
+        inline size_t get_length( void ) const { return length_; };
 
     protected:
 
-        void set_allocator( AllocatorInterface* allocator );
+        // Setting number of valid elements in container.
+        inline void set_length( size_t length ) { length_ = length; };
+
+        // Get interface for allocating elements.
         AllocatorInterface* get_allocator( void ) const;
 
     private:
 
+        // Number of valid slots in container.
+        size_t length_;
+
+        // Allocator interface.
         Allocator allocator_;
 
     };
@@ -40,9 +47,8 @@ namespace JUTIL
      * Base container constructor.
      */
     template <class Type, class Allocator>
-    BaseContainer<Type, Allocator>::BaseContainer( AllocatorInterface* allocator )
+    BaseContainer<Type, Allocator>::BaseContainer( void )
     {
-        set_allocator( allocator );
     }
 
     /*
@@ -51,18 +57,8 @@ namespace JUTIL
     template <class Type, class Allocator>
     BaseContainer<Type, Allocator>::~BaseContainer( void )
     {
+        allocator_.shut_down();
     }
-
-    /*
-     * Setting new container object allocator.
-     * Allocator must have been initialized before setting; no error
-     * checking is done here.
-     */
-    template <class Type, class Allocator>
-    void BaseContainer<Type, Allocator>::set_allocator( AllocatorInterface* allocator )
-    {
-        allocator_ = allocator;
-    } 
 
     /*
      * Get current allocator.
@@ -70,7 +66,7 @@ namespace JUTIL
     template <class Type, class Allocator>
     AllocatorInterface* BaseContainer<Type, Allocator>::get_allocator( void ) const
     {
-        return allocator_;
+        return static_cast<AllocatorInterface*>(&allocator_);
     }
 
 }
