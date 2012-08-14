@@ -1,6 +1,7 @@
 #ifndef BASE_CLASS_HPP
 #define BASE_CLASS_HPP
 
+#include "jutil_base.hpp"
 #include "base_class_services.hpp"
 #include "memory/allocator_interface.hpp"
 

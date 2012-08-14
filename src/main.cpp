@@ -20,26 +20,35 @@ public:
 
 int main( void )
 {
-    JUTIL::BaseClassServices::initialize();
-
 	LARGE_INTEGER start;
 	LARGE_INTEGER end;
 
 	// Add values.
     QueryPerformanceCounter( &start );
 	JUTIL::Set<int> set;
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 500; i++) {
         set.insert( i );
     }
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 500; i++) {
         set.remove( i );
+    }
+    QueryPerformanceCounter( &end );
+    printf( "%u\n", end.QuadPart - start.QuadPart );
+
+    // Add values.
+    QueryPerformanceCounter( &start );
+	std::set<int> set2;
+    for (int i = 0; i < 500; i++) {
+        set2.insert( i );
+    }
+    for (int i = 0; i < 500; i++) {
+        set2.erase( i );
     }
     QueryPerformanceCounter( &end );
     printf( "%u\n", end.QuadPart - start.QuadPart );
 
 	system( "pause" );
     JUTIL::AllocationManager::dump( "memory_leaks.txt" );
-    JUTIL::BaseClassServices::shut_down();
 	return 0;
 }
 

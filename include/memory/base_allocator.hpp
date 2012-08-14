@@ -16,8 +16,7 @@ namespace JUTIL
 
         BaseAllocator( void );
 
-        // Allocator initialize and shut down.
-        virtual bool initialize( void );
+        // Allocator clean up.
         virtual void shut_down( void );
 
     protected:

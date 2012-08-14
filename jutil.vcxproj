@@ -19,16 +19,18 @@
     <ClInclude Include="include\base_class.hpp" />
     <ClInclude Include="include\containers\container_common.hpp" />
     <ClInclude Include="include\containers\set.hpp" />
+    <ClInclude Include="include\jutil_base.hpp" />
     <ClInclude Include="include\memory\allocation_manager.hpp" />
     <ClInclude Include="include\memory\allocator_interface.hpp" />
     <ClInclude Include="include\memory\base_allocator.hpp" />
     <ClInclude Include="include\memory\heap_allocator.hpp" />
+    <ClInclude Include="include\memory\pool_allocator.hpp" />
     <ClInclude Include="include\string_builder.hpp" />
     <ClInclude Include="include\containers\map.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\base_class_services.cpp" />
-    <ClCompile Include="src\containers\base_container.cpp" />
+    <ClCompile Include="src\jutil_base.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\memory\allocation_manager.cpp" />
     <ClCompile Include="src\memory\base_allocator.cpp" />

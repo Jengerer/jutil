@@ -31,7 +31,7 @@ namespace JUTIL
         inline void set_length( size_t length ) { length_ = length; };
 
         // Get interface for allocating elements.
-        AllocatorInterface* get_allocator( void ) const;
+        AllocatorInterface* get_allocator( void );
 
     private:
 
@@ -64,7 +64,7 @@ namespace JUTIL
      * Get current allocator.
      */
     template <class Type, class Allocator>
-    AllocatorInterface* BaseContainer<Type, Allocator>::get_allocator( void ) const
+    AllocatorInterface* BaseContainer<Type, Allocator>::get_allocator( void )
     {
         return static_cast<AllocatorInterface*>(&allocator_);
     }

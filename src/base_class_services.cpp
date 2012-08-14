@@ -12,7 +12,7 @@ namespace JUTIL
      */
     AllocatorInterface* BaseClassServices::get_default_allocator( void )
     {
-        return static_cast<AllocatorInterface>(&allocator_);
+        return static_cast<AllocatorInterface*>(&allocator_);
     }
 
 }

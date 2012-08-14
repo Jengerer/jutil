@@ -1,7 +1,7 @@
 #ifndef BASE_SERVICES_INTERFACE_HPP
 #define BASE_SERVICES_INTERFACE_HPP
 
-#include "allocator_interface.hpp"
+#include "memory/allocator_interface.hpp"
 
 namespace JUTIL
 {

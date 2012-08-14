@@ -149,11 +149,12 @@ namespace JUTIL
 
         // Attempt sizing.
         Type* new_array;
+        size_t real_size = length * sizeof(Type);
         if (size_ == 0) {
-            new_array = (Type*)allocator->allocate( size );
+            new_array = (Type*)allocator->allocate( real_size );
         }
         else {
-            new_array = (Type*)allocator->reallocate( size );
+            new_array = (Type*)allocator->reallocate( real_size );
         }
 
         // Check successful resize.

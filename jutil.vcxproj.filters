@@ -18,8 +18,8 @@
     <ClCompile Include="src\base_class_services.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\containers\base_container.cpp">
-      <Filter>src\containers</Filter>
+    <ClCompile Include="src\jutil_base.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +58,12 @@
     </ClInclude>
     <ClInclude Include="include\containers\base_container.hpp">
       <Filter>include\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\memory\pool_allocator.hpp">
+      <Filter>include\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\jutil_base.hpp">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
