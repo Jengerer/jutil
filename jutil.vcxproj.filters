@@ -59,9 +59,6 @@
     <ClInclude Include="include\containers\base_container.hpp">
       <Filter>include\containers</Filter>
     </ClInclude>
-    <ClInclude Include="include\memory\pool_allocator.hpp">
-      <Filter>include\memory</Filter>
-    </ClInclude>
     <ClInclude Include="include\jutil_base.hpp">
       <Filter>include</Filter>
     </ClInclude>

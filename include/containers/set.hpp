@@ -3,7 +3,6 @@
 
 #include "containers/base_container.hpp"
 #include "containers/container_common.hpp"
-#include "memory/pool_allocator.hpp"
 #include <stdlib.h>
 
 namespace JUTIL
@@ -39,7 +38,7 @@ namespace JUTIL
     /*
      * AVL tree implementation of set.
      */
-    template < class Type, class Comparator = DefaultComparator<Type>, class Allocator = PoolAllocator< SetNode<Type> > >
+    template < class Type, class Comparator = DefaultComparator<Type>, class Allocator = HeapAllocator >
     class Set : public BaseContainer<Type, Allocator>
     {
 

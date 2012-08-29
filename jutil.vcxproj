@@ -24,7 +24,6 @@
     <ClInclude Include="include\memory\allocator_interface.hpp" />
     <ClInclude Include="include\memory\base_allocator.hpp" />
     <ClInclude Include="include\memory\heap_allocator.hpp" />
-    <ClInclude Include="include\memory\pool_allocator.hpp" />
     <ClInclude Include="include\string_builder.hpp" />
     <ClInclude Include="include\containers\map.hpp" />
   </ItemGroup>
