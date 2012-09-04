@@ -34,11 +34,47 @@ namespace JUTIL
     };
 
     /*
+     * Class for iterating through a set.
+     */
+    template <class Type>
+    class SetIterator
+    {
+
+        // Iteration state for set.
+        enum IterationState
+        {
+            FinishedLeft,
+            FinishedRight
+        };
+
+    public:
+
+        // Iterator constructor.
+        SetIterator( SetNode<Type>* start_node, bool from_left );
+
+        // Iteration variable getter.
+        const Type& here( void );
+
+        // Iteration continuation.
+        void next( void );
+
+    private:
+
+        SetNode<Type>* current_;
+        IterationState state_;
+
+    };
+
+    /*
      * AVL tree implementation of set.
      */
     template < class Type, class Comparator = DefaultComparator<Type> >
     class Set : public BaseContainer<Type>
     {
+
+    public:
+
+        typedef SetIterator<Type> Iterator;
 
     public:
 
@@ -50,6 +86,10 @@ namespace JUTIL
         void remove( const Type& element );
         bool contains( const Type& element ) const;
         void clear( void );
+
+        // Iteration functions.
+        Iterator begin( void );
+        Iterator end( void );
 
     private:
 
@@ -82,7 +122,41 @@ namespace JUTIL
     };
 
     /*
-     * AVL tree constructor.
+     * Set iterator constructor.
+     */
+    template <class Type>
+    SetIterator<Type>::SetIterator( SetNode<Type>* start_node, IterationState state )
+        : current_(start_node), state_(state)
+    {
+        // Do nothing.
+    }
+
+    /*
+     * Set getter for current state.
+     */
+    template <class Type>
+    const Type& SetIterator<Type>::here( void )
+    {
+        return current_->element;
+    }
+
+    /*
+     * Move to next point in iteration.
+     */
+    template <class Type>
+    void SetIterator<Type>::next( void )
+    {
+        // Check if we have a parent.
+        if (current_->parent != nullptr) {
+            // If we are the left child a
+            if (current_->parent->left == current_) {
+        if (is_on_left_) {
+            current_ = current_->parent;
+        }
+    }
+
+    /*
+     * Set constructor.
      */
     template <class Type, class Comparator>
     Set<Type, Comparator>::Set( void )
@@ -91,7 +165,7 @@ namespace JUTIL
     }
 
     /*
-     * AVL tree destructor.
+     * Set destructor.
      */
     template <class Type, class Comparator>
     Set<Type, Comparator>::~Set( void )
@@ -230,6 +304,29 @@ namespace JUTIL
         // No root.
         root_ = nullptr;
         set_length( 0 );
+    }
+
+    /*
+     * Return iterator for beginning element.
+     */
+    template <class Type, class Comparator>
+    SetIterator<Type> Set<Type, Comparator>::begin( void )
+    {
+        // Get left-most of root.
+        SetNode<Type>* start = root_;
+        while (start->left != nullptr) {
+            start = start->left;
+        }
+        return Iterator(start, FinishedLeft);
+    }
+
+    /*
+     * Return iterator for final element.
+     */
+    template <class Type, class Comparator>
+    SetIterator<Type> Set<Type, Comparator>::end( void )
+    {
+        return Iterator(root_, FinishedRight);
     }
 
     /*

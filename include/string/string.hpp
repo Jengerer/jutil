@@ -1,32 +1,29 @@
 #ifndef STRING_HPP
 #define STRING_HPP
 
+#include "string_builder.hpp"
+
 namespace JUTIL
 {
 
     /*
-     * String container class that just tracks the string.
-     * Base class that does not make assumption about usage of buffer;
-     * does NOT delete string on removal.
+     * String container class that wraps a C-string representation.
+     * Assumes string is writable; frees memory on destruction.
      */
-    class String
+    class __declspec(dllexport) String
     {
 
     public:
 
-        String( void );
-        String( char* str );
+        String( StringBuilder* string_builder );
         String( char* str, size_t length );
         ~String( void );
-
-        // String management.
-        bool copy( const char* other, size_t length );
 
         // Attribute functions.
         const char* get_string( void ) const;
         size_t get_length( void ) const;
 
-    protected:
+    private:
 
         char* str_;
         size_t length_;

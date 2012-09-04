@@ -3,37 +3,42 @@
 
 #include <string.h>
 
-/*
- * Class for handling a C-style string buffer.
- */
-class StringBuilder
+namespace JUTIL
 {
 
-public:
+    /*
+     * Class for handling a C-style string buffer.
+     */
+    class __declspec(dllexport) StringBuilder
+    {
 
-	StringBuilder( void );
-	~StringBuilder( void );
+    public:
 
-	// Buffer managing functions.
-	const char* write( const char* format, ... );
-    char* release( void );
-	void clear( void );
-	
-	// Buffer reading functions.
-	const char* get_string( void ) const;
-	size_t get_length( void ) const;
+        StringBuilder( void );
+        ~StringBuilder( void );
 
-private:
+        // Buffer managing functions.
+        const char* write( const char* format, ... );
+        char* release( void );
+        void clear( void );
+        
+        // Buffer reading functions.
+        const char* get_string( void ) const;
+        size_t get_length( void ) const;
 
-	// Buffer handling.
-	const char* set_string( const char* string );
-	bool set_length( size_t length );
+    private:
 
-private:
+        // Buffer handling.
+        const char* set_string( const char* string );
+        bool set_length( size_t length );
 
-	char* string_;
-	size_t length_;
+    private:
 
-};
+        char* string_;
+        size_t length_;
+
+    };
+
+}
 
 #endif // STRING_BUILDER_HPP

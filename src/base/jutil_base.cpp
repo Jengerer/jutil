@@ -1,4 +1,5 @@
 #include "base/jutil_base.hpp"
+#include <assert.h>
 
 namespace JUTIL
 {

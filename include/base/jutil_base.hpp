@@ -7,11 +7,12 @@ namespace JUTIL
     /*
      * Base class for general utilities.
      */
-    class JUTILBase
+    class __declspec(dllexport) JUTILBase
     {
 
     public:
 
+        // Debugging functions.
         static void debug_assert( bool condition );
 
     };
