@@ -1,4 +1,4 @@
-#include "string_builder.hpp"
+#include "string/string_builder.hpp"
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
@@ -46,6 +46,21 @@ const char* StringBuilder::write( const char* format, ... )
 	}
 	va_end( args );
 	return string_;
+}
+
+/*
+ * Release handle to memory for outer source to manage.
+ */
+char* StringBuilder::release( void )
+{
+    if (length_ != 0) {
+        char* temp = string_;
+        string_ = nullptr;
+        length_ = 0;
+        return string_;
+    }
+
+    return nullptr;
 }
 
 /*

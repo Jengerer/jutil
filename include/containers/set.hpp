@@ -9,12 +9,11 @@ namespace JUTIL
 {
 
     // Balance constants.
-    const int BALANCE_TWO_LEFT    = -2;
-    const int BALANCE_ONE_LEFT    = -1;
-    const int BALANCE_EVEN        = 0;
-    const int BALANCE_ONE_RIGHT    = 1;
+    const int BALANCE_TWO_LEFT  = -2;
+    const int BALANCE_ONE_LEFT  = -1;
+    const int BALANCE_EVEN      = 0;
+    const int BALANCE_ONE_RIGHT = 1;
     const int BALANCE_TWO_RIGHT = 2;
-
 
     /*
      * AVL node struct for set.
@@ -34,81 +33,78 @@ namespace JUTIL
         short height;
     };
 
-
     /*
      * AVL tree implementation of set.
      */
-    template < class Type, class Comparator = DefaultComparator<Type>, class Allocator = HeapAllocator >
-    class Set : public BaseContainer<Type, Allocator>
+    template < class Type, class Comparator = DefaultComparator<Type> >
+    class Set : public BaseContainer<Type>
     {
 
-        public:
+    public:
 
-            Set( void );
-            virtual ~Set( void );
+        Set( void );
+        virtual ~Set( void );
 
-            // Set operations.
-            bool insert( const Type& element );
-            void remove( const Type& element );
-            bool contains( const Type& element ) const;
-            void clear( void );
+        // Set operations.
+        bool insert( const Type& element );
+        void remove( const Type& element );
+        bool contains( const Type& element ) const;
+        void clear( void );
 
-        private:
+    private:
 
-            // Node getting.
-            SetNode<Type>* find_node( const Type& element ) const;
-            static SetNode<Type>* get_minimum( SetNode<Type>* node );
-            static SetNode<Type>* get_maximum( SetNode<Type>* node );
+        // Node getting.
+        SetNode<Type>* find_node( const Type& element ) const;
+        static SetNode<Type>* get_minimum( SetNode<Type>* node );
+        static SetNode<Type>* get_maximum( SetNode<Type>* node );
 
-            // Node balancing.
-            static int get_height( SetNode<Type>* node );
-            static bool update_height( SetNode<Type>* node );
-            static int get_balance_factor( SetNode<Type>* node );
-            void rotate_left( SetNode<Type>** root_link );
-            void rotate_right( SetNode<Type>** root_link );
+        // Node balancing.
+        static int get_height( SetNode<Type>* node );
+        static bool update_height( SetNode<Type>* node );
+        static int get_balance_factor( SetNode<Type>* node );
+        void rotate_left( SetNode<Type>** root_link );
+        void rotate_right( SetNode<Type>** root_link );
 
-            // Node link handling.
-            SetNode<Type>** get_node_link( SetNode<Type>* node );
-            SetNode<Type>* create_node( const Type& element );
-            static void set_left( SetNode<Type>* parent, SetNode<Type>* child );
-            static void set_right( SetNode<Type>* parent, SetNode<Type>* child );
+        // Node link handling.
+        SetNode<Type>** get_node_link( SetNode<Type>* node );
+        SetNode<Type>* create_node( const Type& element );
+        static void set_left( SetNode<Type>* parent, SetNode<Type>* child );
+        static void set_right( SetNode<Type>* parent, SetNode<Type>* child );
 
-            // Tree balancing functions.
-            void balance_tree( SetNode<Type>* node );
-            bool balance_node( SetNode<Type>* node );
+        // Tree balancing functions.
+        void balance_tree( SetNode<Type>* node );
+        bool balance_node( SetNode<Type>* node );
 
-        protected:
+    protected:
 
-            SetNode<Type>* root_;
+        SetNode<Type>* root_;
 
     };
-
 
     /*
      * AVL tree constructor.
      */
-    template <class Type, class Comparator, class Allocator>
-    Set<Type, Comparator, Allocator>::Set( void )
+    template <class Type, class Comparator>
+    Set<Type, Comparator>::Set( void )
     {
         root_ = nullptr;
     }
 
-
     /*
      * AVL tree destructor.
      */
-    template <class Type, class Comparator, class Allocator>
-    Set<Type, Comparator, Allocator>::~Set( void )
+    template <class Type, class Comparator>
+    Set<Type, Comparator>::~Set( void )
     {
         clear();
     }
 
-
     /*
      * Insert an element into the tree.
+     * Assumes element does NOT already exist in tree.
      */
-    template <class Type, class Comparator, class Allocator>
-    bool Set<Type, Comparator, Allocator>::insert( const Type& element )
+    template <class Type, class Comparator>
+    bool Set<Type, Comparator>::insert( const Type& element )
     {
         // Create node.
         SetNode<Type>* node = create_node( element );
@@ -148,12 +144,11 @@ namespace JUTIL
         return true;
     }
 
-
     /*
      * Remove an element from the tree.
      */
-    template <class Type, class Comparator, class Allocator>
-    void Set<Type, Comparator, Allocator>::remove( const Type& element )
+    template <class Type, class Comparator>
+    void Set<Type, Comparator>::remove( const Type& element )
     {
         // Find the node.
         SetNode<Type>* node = find_node( element );
@@ -192,25 +187,24 @@ namespace JUTIL
         balance_tree( node->parent );
 
         // Delete node.
-        get_allocator()->free( node );
+        free( node );
+        set_length( get_length() - 1 );
     }
-
 
     /*
      * Check if a node exists in the tree.
      */
-    template <class Type, class Comparator, class Allocator>
-    bool Set<Type, Comparator, Allocator>::contains( const Type& element ) const
+    template <class Type, class Comparator>
+    bool Set<Type, Comparator>::contains( const Type& element ) const
     {
         return find_node( element ) != nullptr;
     }
 
-
     /*
      * Clear all elements from the tree.
      */
-    template <class Type, class Comparator, class Allocator>
-    void Set<Type, Comparator, Allocator>::clear( void )
+    template <class Type, class Comparator>
+    void Set<Type, Comparator>::clear( void )
     {
         // Can probably optimize this.
         // Put tree into a straight line.
@@ -235,14 +229,14 @@ namespace JUTIL
 
         // No root.
         root_ = nullptr;
+        set_length( 0 );
     }
-
 
     /*
      * Find a node by its element.
      */
-    template <class Type, class Comparator, class Allocator>
-    SetNode<Type>* Set<Type, Comparator, Allocator>::find_node( const Type& element ) const
+    template <class Type, class Comparator>
+    SetNode<Type>* Set<Type, Comparator>::find_node( const Type& element ) const
     {
         // Start at root.
         SetNode<Type>* node = root_;
@@ -263,12 +257,11 @@ namespace JUTIL
         return nullptr;
     }
 
-
     /*
      * Get left-most subchild from a starting node.
      */
-    template <class Type, class Comparator, class Allocator>
-    SetNode<Type>* Set<Type, Comparator, Allocator>::get_minimum( SetNode<Type>* node )
+    template <class Type, class Comparator>
+    SetNode<Type>* Set<Type, Comparator>::get_minimum( SetNode<Type>* node )
     {
         // Keep going left!
         while (node->left != nullptr) {
@@ -282,8 +275,8 @@ namespace JUTIL
     /*
      * Get right-most subchild from starting node.
      */
-    template <class Type, class Comparator, class Allocator>
-    SetNode<Type>* Set<Type, Comparator, Allocator>::get_maximum( SetNode<Type>* node )
+    template <class Type, class Comparator>
+    SetNode<Type>* Set<Type, Comparator>::get_maximum( SetNode<Type>* node )
     {
         // Keep going right!
         while (node->right != nullptr) {
@@ -293,16 +286,14 @@ namespace JUTIL
         return node;
     }
 
-
     /*
      * Create an AVL node.
      */
-    template <class Type, class Comparator, class Allocator>
-    SetNode<Type>* Set<Type, Comparator, Allocator>::create_node( const Type& element )
+    template <class Type, class Comparator>
+    SetNode<Type>* Set<Type, Comparator>::create_node( const Type& element )
     {
         // Allocate node.
-        AllocatorInterface* allocator = get_allocator();
-        SetNode<Type>* node = (SetNode<Type>*)allocator->allocate( sizeof(SetNode<Type>) );
+        SetNode<Type>* node = (SetNode<Type>*)malloc( sizeof(SetNode<Type>) );
         if (node == nullptr) {
             return nullptr;
         }
@@ -316,12 +307,11 @@ namespace JUTIL
         return node;
     }
 
-
     /*
      * Set a node's left child and update its parent.
      */
-    template <class Type, class Comparator, class Allocator>
-    void Set<Type, Comparator, Allocator>::set_left( SetNode<Type>* parent, SetNode<Type>* child )
+    template <class Type, class Comparator>
+    void Set<Type, Comparator>::set_left( SetNode<Type>* parent, SetNode<Type>* child )
     {
         // Update dependencies.
         parent->left = child;
@@ -330,12 +320,11 @@ namespace JUTIL
         }
     }
 
-
     /*
      * Set a node's right child and update its parent.
      */
-    template <class Type, class Comparator, class Allocator>
-    void Set<Type, Comparator, Allocator>::set_right( SetNode<Type>* parent, SetNode<Type>* child )
+    template <class Type, class Comparator>
+    void Set<Type, Comparator>::set_right( SetNode<Type>* parent, SetNode<Type>* child )
     {
         // Update dependencies.
         parent->right = child;
@@ -344,12 +333,11 @@ namespace JUTIL
         }
     }
 
-
     /*
      * Get node height.
      */
-    template <class Type, class Comparator, class Allocator>
-    int Set<Type, Comparator, Allocator>::get_height( SetNode<Type>* node )
+    template <class Type, class Comparator>
+    int Set<Type, Comparator>::get_height( SetNode<Type>* node )
     {
         // Node exists?
         if (node == nullptr) {
@@ -359,12 +347,11 @@ namespace JUTIL
         return node->height;
     }
 
-
     /*
      * Update height of node and return whether it changed.
      */
-    template <class Type, class Comparator, class Allocator>
-    bool Set<Type, Comparator, Allocator>::update_height( SetNode<Type>* node )
+    template <class Type, class Comparator>
+    bool Set<Type, Comparator>::update_height( SetNode<Type>* node )
     {
         // Get height of children.
         int old_height = node->height;
@@ -376,22 +363,20 @@ namespace JUTIL
         return (old_height != node->height);
     }
 
-
     /*
      * Get node balance factor.
      */
-    template <class Type, class Comparator, class Allocator>
-    int Set<Type, Comparator, Allocator>::get_balance_factor( SetNode<Type>* node )
+    template <class Type, class Comparator>
+    int Set<Type, Comparator>::get_balance_factor( SetNode<Type>* node )
     {
         return get_height( node->right ) - get_height( node->left );
     }
 
-
     /*
      * Get highest pointer reference to a node in the tree.
      */
-    template <class Type, class Comparator, class Allocator>
-    SetNode<Type>** Set<Type, Comparator, Allocator>::get_node_link( SetNode<Type>* node )
+    template <class Type, class Comparator>
+    SetNode<Type>** Set<Type, Comparator>::get_node_link( SetNode<Type>* node )
     {
         // Highest reference is root if no parent.
         if (node->parent == nullptr) {
@@ -405,13 +390,12 @@ namespace JUTIL
         }
     }
 
-
     /*
      * Rotate a node left starting with its highest reference link.
      * Node must at least have a right child on call.
      */
-    template <class Type, class Comparator, class Allocator>
-    void Set<Type, Comparator, Allocator>::rotate_left( SetNode<Type>** root_link )
+    template <class Type, class Comparator>
+    void Set<Type, Comparator>::rotate_left( SetNode<Type>** root_link )
     {
         // Track two main elements.
         SetNode<Type>* original = *root_link;
@@ -430,13 +414,12 @@ namespace JUTIL
         update_height( new_root );
     }
 
-
     /*
      * Rotate a node right starting with its highest reference link.
      * Node must at least have a left child on call.
      */
-    template <class Type, class Comparator, class Allocator>
-    void Set<Type, Comparator, Allocator>::rotate_right( SetNode<Type>** root_link )
+    template <class Type, class Comparator>
+    void Set<Type, Comparator>::rotate_right( SetNode<Type>** root_link )
     {
         // Track two main elements.
         SetNode<Type>* original = *root_link;
@@ -455,12 +438,11 @@ namespace JUTIL
         update_height( new_root );
     }
 
-
     /*
      * Balance a tree starting at a node.
      */
-    template <class Type, class Comparator, class Allocator>
-    void Set<Type, Comparator, Allocator>::balance_tree( SetNode<Type>* node )
+    template <class Type, class Comparator>
+    void Set<Type, Comparator>::balance_tree( SetNode<Type>* node )
     {
         // Keep going until balancing doesn't need to happen.
         while (node != nullptr) {
@@ -478,12 +460,11 @@ namespace JUTIL
         }
     }
 
-
     /*
      * Balance a node.
      */
-    template <class Type, class Comparator, class Allocator>
-    bool Set<Type, Comparator, Allocator>::balance_node( SetNode<Type>* node )
+    template <class Type, class Comparator>
+    bool Set<Type, Comparator>::balance_node( SetNode<Type>* node )
     {
         // Get balance factor.
         int balance = get_balance_factor( node );

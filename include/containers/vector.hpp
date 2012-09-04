@@ -9,11 +9,11 @@ namespace JUTIL
     /*
      * Vector class that acts as a resizable array.
      */
-    template <class Type, class Allocator>
-    class Vector : public BaseContainer<Type, Allocator>
+    template <class Type>
+    class Vector : public BaseContainer<Type>
     {
 
-        typedef BaseContainer<Type, Allocator> BaseClass;
+        typedef BaseContainer<Type> BaseClass;
 
     public:
 
@@ -39,8 +39,8 @@ namespace JUTIL
     /*
      * Vector constructor.
      */
-    template <class Type, class Allocator>
-    Vector<Type, Allocator>::Vector( void )
+    template <class Type>
+    Vector<Type>::Vector( void )
     {
         array_ = nullptr;
         buffer_size_ = 0;
@@ -49,8 +49,8 @@ namespace JUTIL
     /*
      * Vector destructor.
      */
-    template <class Type, class Allocator>
-    Vector<Type, Allocator>::~Vector( void )
+    template <class Type>
+    Vector<Type>::~Vector( void )
     {
         clear();
     }
@@ -59,8 +59,8 @@ namespace JUTIL
      * Non-const array operator.
      * Assumes valid index and array not nullptr.
      */
-    template <class Type, class Allocator>
-    Type& Vector<Type, Allocator>::operator[]( size_t i )
+    template <class Type>
+    Type& Vector<Type>::operator[]( size_t i )
     {
         return array_[i];
     }
@@ -69,8 +69,8 @@ namespace JUTIL
      * Const array operator.
      * Assumes valid index and array not nullptr.
      */
-    template <class Type, class Allocator>
-    const Type& Vector<Type, Allocator>::operator[]( size_t i ) const
+    template <class Type>
+    const Type& Vector<Type>::operator[]( size_t i ) const
     {
         return array_[i];
     }
@@ -78,8 +78,8 @@ namespace JUTIL
     /*
      * Checks whether an element exists in the array.
      */
-    template <class Type, class Allocator>
-    bool Vector<Type, Allocator>::has_element( const Type& element ) const
+    template <class Type>
+    bool Vector<Type>::has_element( const Type& element ) const
     {
         size_t i;
         for (i = 0; i < get_length(); ++i) {
@@ -95,8 +95,8 @@ namespace JUTIL
      * Remove an element from the array.
      * Returns true if the element was found, false otherwise.
      */
-    template <class Type, class Allocator>
-    bool Vector<Type, Allocator>::remove( const Type& element )
+    template <class Type>
+    bool Vector<Type>::remove( const Type& element )
     {
         // Skip empty.
         if (size_ == 0) {
@@ -125,24 +125,22 @@ namespace JUTIL
     /*
      * Clear array elements.
      */
-    template <class Type, class Allocator>
-    void Vector<Type, Allocator>::clear( void )
+    template <class Type>
+    void Vector<Type>::clear( void )
     {
-        AllocatorInterface* allocator = get_allocator();
-        allocator->free( array_ );
+        free( array_ );
     }
 
     /*
      * Set number of elements in array.
      * Returns true if reallocation succeeded, false otherwise.
      */
-    template <class Type, class Allocator>
-    bool Vector<Type, Allocator>::reserve( size_t length )
+    template <class Type>
+    bool Vector<Type>::reserve( size_t length )
     {
         // Check if emptying.
-        AllocatorInterface* allocator = get_interface();
         if (size == 0) {
-            allocator->free( array_ );
+            free( array_ );
             size_ = 0;
             return true;
         }
@@ -151,10 +149,10 @@ namespace JUTIL
         Type* new_array;
         size_t real_size = length * sizeof(Type);
         if (size_ == 0) {
-            new_array = (Type*)allocator->allocate( real_size );
+            new_array = (Type*)malloc( real_size );
         }
         else {
-            new_array = (Type*)allocator->reallocate( real_size );
+            new_array = (Type*)realloc( array_, real_size );
         }
 
         // Check successful resize.

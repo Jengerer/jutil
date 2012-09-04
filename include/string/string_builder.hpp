@@ -16,6 +16,7 @@ public:
 
 	// Buffer managing functions.
 	const char* write( const char* format, ... );
+    char* release( void );
 	void clear( void );
 	
 	// Buffer reading functions.

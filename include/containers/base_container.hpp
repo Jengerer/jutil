@@ -1,8 +1,7 @@
 #ifndef BASE_CONTAINER_HPP
 #define BASE_CONTAINER_HPP
 
-#include "base_class.hpp"
-#include "memory/allocator_interface.hpp"
+#include "base/jutil_base.hpp"
 
 namespace JUTIL
 {
@@ -13,8 +12,8 @@ namespace JUTIL
      * class should NOT be referred to or deleted by a BaseContainer* pointer,
      * since there is no virtual destructor.
      */
-    template <class Type, class Allocator>
-    class BaseContainer : public BaseClass
+    template <class Type>
+    class BaseContainer
     {
 
     public:
@@ -30,43 +29,30 @@ namespace JUTIL
         // Setting number of valid elements in container.
         inline void set_length( size_t length ) { length_ = length; };
 
-        // Get interface for allocating elements.
-        AllocatorInterface* get_allocator( void );
-
     private:
 
         // Number of valid slots in container.
         size_t length_;
-
-        // Allocator interface.
-        Allocator allocator_;
 
     };
 
     /*
      * Base container constructor.
      */
-    template <class Type, class Allocator>
-    BaseContainer<Type, Allocator>::BaseContainer( void )
+    template <class Type>
+    BaseContainer<Type>::BaseContainer( void )
     {
+        set_length( 0 );
     }
 
     /*
      * Base container destructor.
      */
-    template <class Type, class Allocator>
-    BaseContainer<Type, Allocator>::~BaseContainer( void )
+    template <class Type>
+    BaseContainer<Type>::~BaseContainer( void )
     {
-        allocator_.shut_down();
-    }
-
-    /*
-     * Get current allocator.
-     */
-    template <class Type, class Allocator>
-    AllocatorInterface* BaseContainer<Type, Allocator>::get_allocator( void )
-    {
-        return static_cast<AllocatorInterface*>(&allocator_);
+        // Should be empty on removal.
+        JUTILBase::debug_assert( length_ == 0 );
     }
 
 }

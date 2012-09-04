@@ -1,5 +1,5 @@
-#ifndef BASE_CLASS_SERVICES_HPP
-#define BASE_CLASS_SERVICES_HPP
+#ifndef BASE_SERVICES_HPP
+#define BASE_SERVICES_HPP
 
 #include "memory/heap_allocator.hpp"
 
@@ -9,7 +9,7 @@ namespace JUTIL
     /*
      * Services for objects of base class.
      */
-    class BaseClassServices
+    class BaseServices
     {
 
         public:
@@ -25,4 +25,4 @@ namespace JUTIL
 
 }
 
-#endif // BASE_CLASS_SERVICES_HPP
+#endif // BASE_SERVICES_HPP

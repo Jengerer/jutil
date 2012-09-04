@@ -11,31 +11,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\base_class_services.hpp" />
+    <ClInclude Include="include\base\logger.hpp" />
     <ClInclude Include="include\containers\base_container.hpp" />
     <ClInclude Include="include\containers\hash_map.hpp" />
     <ClInclude Include="include\containers\key_value_pair.hpp" />
     <ClInclude Include="include\containers\vector.hpp" />
-    <ClInclude Include="include\base_class.hpp" />
     <ClInclude Include="include\containers\container_common.hpp" />
     <ClInclude Include="include\containers\set.hpp" />
-    <ClInclude Include="include\jutil_base.hpp" />
-    <ClInclude Include="include\memory\allocation_manager.hpp" />
-    <ClInclude Include="include\memory\allocator_interface.hpp" />
-    <ClInclude Include="include\memory\base_allocator.hpp" />
-    <ClInclude Include="include\memory\heap_allocator.hpp" />
-    <ClInclude Include="include\string_builder.hpp" />
+    <ClInclude Include="include\base\jutil_base.hpp" />
+    <ClInclude Include="include\string\string.hpp" />
+    <ClInclude Include="include\string\string_builder.hpp" />
     <ClInclude Include="include\containers\map.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\base_class_services.cpp" />
-    <ClCompile Include="src\jutil_base.cpp" />
+    <ClCompile Include="src\base\jutil_base.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\memory\allocation_manager.cpp" />
-    <ClCompile Include="src\memory\base_allocator.cpp" />
-    <ClCompile Include="src\string_builder.cpp" />
-    <ClCompile Include="src\base_class.cpp" />
-    <ClCompile Include="src\memory\heap_allocator.cpp" />
+    <ClCompile Include="src\string\string.cpp" />
+    <ClCompile Include="src\string\string_builder.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{16103E26-1F60-4126-A913-82056B453398}</ProjectGuid>

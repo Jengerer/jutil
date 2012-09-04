@@ -1,8 +1,6 @@
 #include "containers/set.hpp"
 #include "containers/map.hpp"
 #include "containers/hash_map.hpp"
-#include "memory/allocation_manager.hpp"
-#include "memory/heap_allocator.hpp"
 #include <map>
 #include <hash_map>
 #include <windows.h>
@@ -26,10 +24,10 @@ int main( void )
 	// Add values.
     QueryPerformanceCounter( &start );
 	JUTIL::Set<int> set;
-    for (int i = 0; i < 500; i++) {
+    for (int i = 0; i < 50000; i++) {
         set.insert( i );
     }
-    for (int i = 0; i < 500; i++) {
+    for (int i = 0; i < 50000; i++) {
         set.remove( i );
     }
     QueryPerformanceCounter( &end );
@@ -38,17 +36,16 @@ int main( void )
     // Add values.
     QueryPerformanceCounter( &start );
 	std::set<int> set2;
-    for (int i = 0; i < 500; i++) {
+    for (int i = 0; i < 50000; i++) {
         set2.insert( i );
     }
-    for (int i = 0; i < 500; i++) {
+    for (int i = 0; i < 50000; i++) {
         set2.erase( i );
     }
     QueryPerformanceCounter( &end );
     printf( "%u\n", end.QuadPart - start.QuadPart );
 
 	system( "pause" );
-    JUTIL::AllocationManager::dump( "memory_leaks.txt" );
 	return 0;
 }
 
