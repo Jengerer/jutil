@@ -2,7 +2,7 @@
 #define MAP_HPP
 
 #include "containers/set.hpp"
-#include "containers/key_value_pair.hpp"
+#include "containers/map_base.hpp"
 
 namespace JUTIL
 {
@@ -19,6 +19,10 @@ namespace JUTIL
     typedef Set< 
         KeyValuePair< Key, Value >,
         KeyValueComparator< Key, Value, KeyComparator > > BaseClass;
+
+    public:
+
+        typedef MapIterator<Key, Value> Iterator;
 
     public:
 

@@ -46,6 +46,12 @@
     <ClInclude Include="include\base\logger.hpp">
       <Filter>include\base</Filter>
     </ClInclude>
+    <ClInclude Include="include\containers\set_base.hpp">
+      <Filter>include\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\containers\map_base.hpp">
+      <Filter>include\containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">
