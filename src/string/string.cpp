@@ -1,6 +1,7 @@
 #include "string/string.hpp"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 namespace JUTIL
 {
@@ -11,18 +12,18 @@ namespace JUTIL
      */
     String::String( StringBuilder* string_builder )
     {
-        length_ = string_builder->get_length();
-        str_ = string_builder->release();
+        set_length( string_builder->get_length() );
+        string_ = string_builder->release();
     }
 
     /*
      * String constructor from string and length.
      * Does not assume string is null-terminated; does not terminate it itself.
      */
-    String::String( char* str, size_t length )
+    String::String( char* string, size_t length )
     {
-        str_ = str;
-        length_ = length;
+        set_length( length );
+        string_ = string;
     }
 
     /*
@@ -30,8 +31,8 @@ namespace JUTIL
      */
     String::~String( void )
     {
-        if (length_ != 0) {
-            free( str_ );
+        if (get_length() != 0) {
+            free( string_ );
         }
     }
 
@@ -40,15 +41,7 @@ namespace JUTIL
      */
     const char* String::get_string( void ) const
     {
-        return str_;
-    }
-
-    /*
-     * Get length of the string.
-     */
-    size_t String::get_length( void ) const
-    {
-        return length_;
+        return string_;
     }
 
 }

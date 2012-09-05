@@ -11,6 +11,12 @@
       <Filter>src\string</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\string\base_string.cpp">
+      <Filter>src\string</Filter>
+    </ClCompile>
+    <ClCompile Include="src\string\constant_string.cpp">
+      <Filter>src\string</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\containers\map.hpp">
@@ -56,6 +62,12 @@
       <Filter>include\containers</Filter>
     </ClInclude>
     <ClInclude Include="include\string\string_hasher.hpp">
+      <Filter>include\string</Filter>
+    </ClInclude>
+    <ClInclude Include="include\string\base_string.hpp">
+      <Filter>include\string</Filter>
+    </ClInclude>
+    <ClInclude Include="include\string\constant_string.hpp">
       <Filter>include\string</Filter>
     </ClInclude>
   </ItemGroup>

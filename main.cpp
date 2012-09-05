@@ -1,20 +1,23 @@
 #include <containers/hash_map.hpp>
+#include <string/base_string.hpp>
 #include <string/string.hpp>
+#include <string/constant_string.hpp>
 #include <string/string_hasher.hpp>
 #include <stdio.h>
 
 int main( void )
 {
-    JUTIL::HashMap<unsigned int, i, const char*, JUTIL::StringHasher> map;
-    JUTIL::HashMap<unsigned int, i, const char*, JUTIL::StringHasher>::Iterator iterator;
+    JUTIL::HashMap<unsigned int, JUTIL::BaseString, int, JUTIL::StringHasher> map;
+    JUTIL::HashMap<unsigned int, JUTIL::BaseString, int, JUTIL::StringHasher>::Iterator iterator;
     for (int i = 0; i < 10; i++) {
         JUTIL::StringBuilder builder;
-        builder.write("So goes the number %d...", i);
-        map.insert( &builder, "And there it is...\n" );
+        builder.write("Number %d", i);
+        map.insert( JUTIL::String(&builder), i );
     }
 
-    for (iterator = map.begin(); iterator.has_next(); iterator.next()) {
-        printf("%s.\n", iterator.get_value());
+    int x;
+    if (map.get( JUTIL::ConstantString("Number 9"), &x )) {
+        printf( "%d\n", x );
     }
     system("pause");
     return 0;

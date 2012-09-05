@@ -22,6 +22,8 @@
     <ClInclude Include="include\containers\container_common.hpp" />
     <ClInclude Include="include\containers\set.hpp" />
     <ClInclude Include="include\base\jutil_base.hpp" />
+    <ClInclude Include="include\string\base_string.hpp" />
+    <ClInclude Include="include\string\constant_string.hpp" />
     <ClInclude Include="include\string\string.hpp" />
     <ClInclude Include="include\string\string_builder.hpp" />
     <ClInclude Include="include\containers\map.hpp" />
@@ -30,6 +32,8 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\base\jutil_base.cpp" />
+    <ClCompile Include="src\string\base_string.cpp" />
+    <ClCompile Include="src\string\constant_string.cpp" />
     <ClCompile Include="src\string\string.cpp" />
     <ClCompile Include="src\string\string_builder.cpp" />
   </ItemGroup>
