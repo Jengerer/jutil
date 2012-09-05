@@ -3,7 +3,7 @@
 #include <string/string.hpp>
 #include <string/constant_string.hpp>
 #include <string/string_hasher.hpp>
-#include <base/logger.hpp>
+#include <utils/logger.hpp>
 #include <stdio.h>
 
 #define _CRTDBG_MAP_ALLOC

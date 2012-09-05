@@ -41,6 +41,7 @@ namespace JUTIL
 	    // Key-value management.
 	    bool insert( const Key& key, const Value& value );
 	    void remove( const Key& key );
+        void clear( void );
 
         // Iteration functions.
         Iterator begin( void );
@@ -116,6 +117,15 @@ namespace JUTIL
         // Remove from map by hash.
         Hash hash = Hasher::hash( key );
         map_.remove( hash );
+    }
+
+    /*
+     * Clear all key-value pairs.
+     */
+    template <class Hash, class Key, class Value, class Hasher, class HashComparator>
+    void HashMap<Hash, Key, Value, Hasher, HashComparator>::clear( void )
+    {
+        map_.clear();
     }
 
     /*
