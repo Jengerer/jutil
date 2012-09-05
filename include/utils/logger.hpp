@@ -1,11 +1,15 @@
 #ifndef LOGGER_HPP
 #define LOGGER_HPP
 
-#include "string_builder.hpp"
+#include <stdio.h>
+#include "string/constant_string.hpp"
 
 namespace JUTIL
 {
 
+    /*
+     * Class to log text to a file.
+     */
     class Logger
     {
 
@@ -15,11 +19,15 @@ namespace JUTIL
         ~Logger( void );
 
         // File handling.
-        bool open( const char* filename );
+        bool open( const ConstantString& filename );
         void close( void );
 
         // Logging functions.
-        
+        bool write( const char* format, ... );
+
+    private:
+
+        FILE* file_;
 
     };
 

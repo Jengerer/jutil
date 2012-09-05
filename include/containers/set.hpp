@@ -204,6 +204,9 @@ namespace JUTIL
             // Rotate right until no left.
             while (node->left != nullptr) {
                 rotate_right( get_node_link( node ) );
+
+                // Move back up (root node just got moved to right).
+                node = node->parent;
             }
 
             // Move to next child.

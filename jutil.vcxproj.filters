@@ -17,6 +17,9 @@
     <ClCompile Include="src\string\constant_string.cpp">
       <Filter>src\string</Filter>
     </ClCompile>
+    <ClCompile Include="src\utils\logger.cpp">
+      <Filter>src\base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\containers\map.hpp">
@@ -49,7 +52,7 @@
     <ClInclude Include="include\string\string.hpp">
       <Filter>include\string</Filter>
     </ClInclude>
-    <ClInclude Include="include\base\logger.hpp">
+    <ClInclude Include="include\utils\logger.hpp">
       <Filter>include\base</Filter>
     </ClInclude>
     <ClInclude Include="include\containers\set_base.hpp">

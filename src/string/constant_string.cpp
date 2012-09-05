@@ -15,6 +15,16 @@ namespace JUTIL
     }
 
     /*
+     * Constant string constructor from managed string.
+     * Assumes managed string will out-live constant string usage.
+     */
+    ConstantString::ConstantString( const String& string )
+    {
+        string_ = string.get_string();
+        set_length( string.get_length() );
+    }
+
+    /*
      * Constant string constructor from string with length.
      */
     ConstantString::ConstantString( const char* string, unsigned int length )

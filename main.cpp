@@ -3,22 +3,16 @@
 #include <string/string.hpp>
 #include <string/constant_string.hpp>
 #include <string/string_hasher.hpp>
+#include <base/logger.hpp>
 #include <stdio.h>
+
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 
 int main( void )
 {
-    JUTIL::HashMap<unsigned int, JUTIL::BaseString, int, JUTIL::StringHasher> map;
-    JUTIL::HashMap<unsigned int, JUTIL::BaseString, int, JUTIL::StringHasher>::Iterator iterator;
-    for (int i = 0; i < 10; i++) {
-        JUTIL::StringBuilder builder;
-        builder.write("Number %d", i);
-        map.insert( JUTIL::String(&builder), i );
-    }
-
-    int x;
-    if (map.get( JUTIL::ConstantString("Number 9"), &x )) {
-        printf( "%d\n", x );
-    }
     system("pause");
+    _CrtDumpMemoryLeaks();
     return 0;
 }

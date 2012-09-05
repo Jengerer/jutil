@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\base\logger.hpp" />
+    <ClInclude Include="include\base\jutil_base.hpp" />
     <ClInclude Include="include\containers\base_container.hpp" />
     <ClInclude Include="include\containers\hash_map.hpp" />
     <ClInclude Include="include\containers\hash_map_base.hpp" />
@@ -21,13 +21,13 @@
     <ClInclude Include="include\containers\vector.hpp" />
     <ClInclude Include="include\containers\container_common.hpp" />
     <ClInclude Include="include\containers\set.hpp" />
-    <ClInclude Include="include\base\jutil_base.hpp" />
+    <ClInclude Include="include\containers\map.hpp" />
     <ClInclude Include="include\string\base_string.hpp" />
     <ClInclude Include="include\string\constant_string.hpp" />
     <ClInclude Include="include\string\string.hpp" />
     <ClInclude Include="include\string\string_builder.hpp" />
-    <ClInclude Include="include\containers\map.hpp" />
     <ClInclude Include="include\string\string_hasher.hpp" />
+    <ClInclude Include="include\utils\logger.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -36,6 +36,7 @@
     <ClCompile Include="src\string\constant_string.cpp" />
     <ClCompile Include="src\string\string.cpp" />
     <ClCompile Include="src\string\string_builder.cpp" />
+    <ClCompile Include="src\utils\logger.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{16103E26-1F60-4126-A913-82056B453398}</ProjectGuid>

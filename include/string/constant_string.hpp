@@ -2,6 +2,7 @@
 #define CONSTANT_STRING_HPP
 
 #include "string/base_string.hpp"
+#include "string/string.hpp"
 
 namespace JUTIL
 {
@@ -15,7 +16,9 @@ namespace JUTIL
 
     public:
 
+        // Constructors from string types.
         ConstantString( const char* string );
+        ConstantString( const String& string );
         ConstantString( const char* string, size_t length );
         virtual ~ConstantString( void );
 
