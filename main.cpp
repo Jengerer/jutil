@@ -1,16 +1,20 @@
-#include <containers/map.hpp>
+#include <containers/hash_map.hpp>
+#include <string/string.hpp>
+#include <string/string_hasher.hpp>
 #include <stdio.h>
 
 int main( void )
 {
-    JUTIL::Map<int, int> map;
-    JUTIL::Map<int, int>::Iterator iterator;
+    JUTIL::HashMap<unsigned int, i, const char*, JUTIL::StringHasher> map;
+    JUTIL::HashMap<unsigned int, i, const char*, JUTIL::StringHasher>::Iterator iterator;
     for (int i = 0; i < 10; i++) {
-        map.insert(i, i+1);
+        JUTIL::StringBuilder builder;
+        builder.write("So goes the number %d...", i);
+        map.insert( &builder, "And there it is...\n" );
     }
 
     for (iterator = map.begin(); iterator.has_next(); iterator.next()) {
-        printf("%d maps to %d.\n", iterator.get_key(), iterator.get_value());
+        printf("%s.\n", iterator.get_value());
     }
     system("pause");
     return 0;

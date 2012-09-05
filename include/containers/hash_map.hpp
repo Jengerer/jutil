@@ -1,7 +1,8 @@
 #ifndef HASH_MAP_HPP
 #define HASH_MAP_HPP
 
-#include "map.hpp"
+#include "containers/map.hpp"
+#include "containers/hash_map_base.hpp"
 
 namespace JUTIL
 {
@@ -26,6 +27,10 @@ namespace JUTIL
 
     public:
 
+        typedef HashMapIterator<Hash, Value> Iterator;
+
+    public:
+
 	    HashMap( void );
 	    ~HashMap( void );
 
@@ -36,6 +41,9 @@ namespace JUTIL
 	    // Key-value management.
 	    bool insert( const Key& key, const Value& value );
 	    void remove( const Key& key );
+
+        // Iteration functions.
+        Iterator begin( void );
 
     private:
 
@@ -109,6 +117,15 @@ namespace JUTIL
         // Remove from map by hash.
         Hash hash = Hasher::hash( key );
         map_.remove( hash );
+    }
+
+    /*
+     * Get starting iterator.
+     */ 
+    template <class Hash, class Key, class Value, class Hasher, class HashComparator>
+    HashMapIterator<Hash, Value> HashMap<Hash, Key, Value, Hasher, HashComparator>::begin( void )
+    {
+        return Iterator( map_.begin() );
     }
 
 }

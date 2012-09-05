@@ -14,6 +14,7 @@
     <ClInclude Include="include\base\logger.hpp" />
     <ClInclude Include="include\containers\base_container.hpp" />
     <ClInclude Include="include\containers\hash_map.hpp" />
+    <ClInclude Include="include\containers\hash_map_base.hpp" />
     <ClInclude Include="include\containers\key_value_pair.hpp" />
     <ClInclude Include="include\containers\map_base.hpp" />
     <ClInclude Include="include\containers\set_base.hpp" />
@@ -24,6 +25,7 @@
     <ClInclude Include="include\string\string.hpp" />
     <ClInclude Include="include\string\string_builder.hpp" />
     <ClInclude Include="include\containers\map.hpp" />
+    <ClInclude Include="include\string\string_hasher.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

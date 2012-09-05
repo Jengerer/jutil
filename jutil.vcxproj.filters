@@ -52,6 +52,12 @@
     <ClInclude Include="include\containers\map_base.hpp">
       <Filter>include\containers</Filter>
     </ClInclude>
+    <ClInclude Include="include\containers\hash_map_base.hpp">
+      <Filter>include\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\string\string_hasher.hpp">
+      <Filter>include\string</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">
