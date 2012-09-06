@@ -5,6 +5,15 @@ namespace JUTIL
 {
 
     /*
+     * Constant string default constructor.
+     */
+    ConstantString::ConstantString( void )
+    {
+        string_ = nullptr;
+        set_length( 0 );
+    }
+
+    /*
      * Constant string constructor from null-terminated string.
      */
     ConstantString::ConstantString( const char* string )
@@ -18,7 +27,7 @@ namespace JUTIL
      * Constant string constructor from managed string.
      * Assumes managed string will out-live constant string usage.
      */
-    ConstantString::ConstantString( const String& string )
+    ConstantString::ConstantString( const BaseString& string )
     {
         string_ = string.get_string();
         set_length( string.get_length() );
@@ -39,6 +48,16 @@ namespace JUTIL
     ConstantString::~ConstantString( void )
     {
         // We're not managing string, so don't delete.
+    }
+
+    /*
+     * Assignment operator.
+     */
+    ConstantString& ConstantString::operator=( const BaseString& other )
+    {
+        string_ = other.get_string();
+        set_length( other.get_length() );
+        return *this;
     }
 
     /*

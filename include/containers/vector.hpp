@@ -28,6 +28,8 @@ namespace JUTIL
         bool has_element( const Type& element ) const;
         bool remove( const Type& element );
         void clear( void );
+        bool set_buffer_size( size_t length );
+        bool push( const Type& element );
 
     private:
 
@@ -136,7 +138,7 @@ namespace JUTIL
      * Returns true if reallocation succeeded, false otherwise.
      */
     template <class Type>
-    bool Vector<Type>::reserve( size_t length )
+    bool Vector<Type>::set_buffer_size( size_t length )
     {
         // Check if emptying.
         if (size == 0) {
@@ -161,7 +163,7 @@ namespace JUTIL
         }
 
         array_ = new_array;
-        size_ = size;
+        buffer_size_ = size;
         return true;
     }
 
