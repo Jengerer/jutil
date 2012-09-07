@@ -10,7 +10,6 @@
     <ClCompile Include="src\string\string.cpp">
       <Filter>src\string</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="src\string\base_string.cpp">
       <Filter>src\string</Filter>
     </ClCompile>
@@ -73,6 +72,9 @@
     <ClInclude Include="include\string\constant_string.hpp">
       <Filter>include\string</Filter>
     </ClInclude>
+    <ClInclude Include="include\memory\base_allocator.hpp">
+      <Filter>include\memory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">
@@ -98,6 +100,12 @@
     </Filter>
     <Filter Include="src\string">
       <UniqueIdentifier>{66e36805-0982-4559-a1b7-f7959a0035ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\memory">
+      <UniqueIdentifier>{5f225dd9-0035-4421-a6f3-6102ecbb4fca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\memory">
+      <UniqueIdentifier>{5e28c091-f204-46dd-8561-52776964354f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

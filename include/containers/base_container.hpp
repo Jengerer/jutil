@@ -23,6 +23,7 @@ namespace JUTIL
 
         // Memory allocation management.
         inline size_t get_length( void ) const { return length_; };
+        bool is_empty( void ) const { return get_length() == 0; }
 
     protected:
 

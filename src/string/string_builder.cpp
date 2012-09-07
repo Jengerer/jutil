@@ -1,7 +1,7 @@
 #include "string/string_builder.hpp"
+#include "memory/base_allocator.hpp"
 #include <stdio.h>
 #include <stdarg.h>
-#include <stdlib.h>
 
 namespace JUTIL
 {
@@ -72,7 +72,7 @@ namespace JUTIL
     void StringBuilder::clear( void )
     {
         if (length_ != 0) {
-            free( string_ );
+            BaseAllocator::release( string_ );
             string_ = nullptr;
             length_ = 0;
         }
@@ -121,22 +121,21 @@ namespace JUTIL
     bool StringBuilder::set_length( size_t length )
     {
         // Attempt allocation/resize.
-        char* new_string;
         size_t new_size = length + 1;
+        bool result;
         if (length_ == 0) {
-            new_string = (char*)malloc( new_size );
+            result = BaseAllocator::allocate_array( &string_, new_size );
         }
         else {
-            new_string = (char*)realloc( string_, new_size );
+            result = BaseAllocator::reallocate_array( &string_, new_size );
         }
 
         // Return false if failed to size.
-        if (new_string == nullptr) {
+        if (!result) {
             return false;
         }
 
         // Update and finish.
-        string_ = new_string;
         length_ = length;
         return true;
     }

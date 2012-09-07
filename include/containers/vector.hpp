@@ -2,15 +2,20 @@
 #define VECTOR_HPP
 
 #include "containers/base_container.hpp"
+#include "memory/base_allocator.hpp"
 
 namespace JUTIL
 {
+
+    // Vector push expansion factors.
+    const unsigned int PUSH_EXPAND_NUMERATOR = 3;
+    const unsigned int PUSH_EXPAND_DENOMINATOR = 2;
 
     /*
      * Vector class that acts as a resizable array.
      */
     template <class Type>
-    class Vector : public BaseContainer<Type>
+    class __declspec(dllexport) Vector : public BaseContainer<Type>
     {
 
         typedef BaseContainer<Type> BaseClass;
@@ -20,16 +25,24 @@ namespace JUTIL
         Vector( void );
         ~Vector( void );
 
-        // Array retrieval.
-        Type& operator[]( size_t i );
-        const Type& operator[]( size_t i ) const;
-
-        // Array operations/getters.
-        bool has_element( const Type& element ) const;
+        // Element management.
+        Type& get( size_t i );
+        const Type& get( size_t i ) const;
+        void set( size_t i, const Type& element );
+        bool contains( const Type& element ) const;
         bool remove( const Type& element );
-        void clear( void );
-        bool set_buffer_size( size_t length );
         bool push( const Type& element );
+
+        // Buffer management.
+        bool set_length( size_t length );
+        void clear( void );
+        Type* get_buffer( void );
+        const Type* get_buffer( void ) const;
+
+    private:
+
+        // Local buffer management.
+        bool set_buffer_size( size_t length );
 
     private:
 
@@ -58,30 +71,39 @@ namespace JUTIL
     }
 
     /*
-     * Non-const array operator.
+     * Non-constant reference getter for index.
      * Assumes valid index and array not nullptr.
      */
     template <class Type>
-    Type& Vector<Type>::operator[]( size_t i )
+    Type& Vector<Type>::get( size_t i )
     {
         return array_[i];
     }
 
     /*
-     * Const array operator.
+     * Gets element at index (constant reference).
      * Assumes valid index and array not nullptr.
      */
     template <class Type>
-    const Type& Vector<Type>::operator[]( size_t i ) const
+    const Type& Vector<Type>::get( size_t i ) const
     {
         return array_[i];
+    }
+
+    /*
+     * Set element in array.
+     */
+    template <class Type>
+    void Vector<Type>::set( size_t i, const Type& element )
+    {
+        array_[i] = element;
     }
 
     /*
      * Checks whether an element exists in the array.
      */
     template <class Type>
-    bool Vector<Type>::has_element( const Type& element ) const
+    bool Vector<Type>::contains( const Type& element ) const
     {
         size_t i;
         for (i = 0; i < get_length(); ++i) {
@@ -101,27 +123,66 @@ namespace JUTIL
     bool Vector<Type>::remove( const Type& element )
     {
         // Skip empty.
-        if (size_ == 0) {
+        if (get_length() == 0) {
             return false;
         }
 
         // Find element index.
         size_t i;
-        for (i = 0; i < size_; ++i) {
+        size_t length = get_length();
+        for (i = 0; i < length; ++i) {
             if (element == array_[i]) {
                 break;
             }
         }
 
         // Check if found.
-        if (i != size_) {
+        if (i != length) {
             // Shift left
-            memmove( array_ + i, array_ + i + 1, (size_ - i - 1) * sizeof(Type) ); 
-            set_size( size_ - 1 );
+            memmove( array_ + i, array_ + i + 1, (length - i - 1) * sizeof(Type) ); 
+            set_length( length - 1 );
             return true;
         }
 
         return false;
+    }
+
+    /*
+     * Add an element to the end of the vector.
+     */
+    template <class Type>
+    bool Vector<Type>::push( const Type& element )
+    {
+        // Check if array needs to be expanded.
+        size_t length = get_length();
+        if (buffer_size_ == length) {
+            unsigned int new_length = (length + 1) * PUSH_EXPAND_NUMERATOR / PUSH_EXPAND_DENOMINATOR;
+            if (!set_buffer_size( new_length )) {
+                return false;
+            }
+        }
+
+        // Add to end.
+        set( length, element );
+        set_length( length + 1 );
+        return true;
+    }
+
+    /*
+     * Set new array size.
+     * Always matches buffer to length, so is destructive.
+     */
+    template <class Type>
+    bool Vector<Type>::set_length( size_t length )
+    {
+        // Allocate if needed.
+        if (!set_buffer_size( length )) {
+            return false;
+        }
+
+        // Set base length.
+        BaseClass::set_length( length );
+        return true;
     }
 
     /*
@@ -130,7 +191,25 @@ namespace JUTIL
     template <class Type>
     void Vector<Type>::clear( void )
     {
-        free( array_ );
+        set_length( 0 );
+    }
+
+    /*
+     * Get reference to buffer to pass as C-style array.
+     */
+    template <class Type>
+    Type* Vector<Type>::get_buffer( void )
+    {
+        return array_;
+    }
+
+    /*
+     * Get reference to constant buffer to pass as C-style array.
+     */
+    template <class Type>
+    const Type* Vector<Type>::get_buffer( void ) const
+    {
+        return array_;
     }
 
     /*
@@ -141,29 +220,31 @@ namespace JUTIL
     bool Vector<Type>::set_buffer_size( size_t length )
     {
         // Check if emptying.
-        if (size == 0) {
-            free( array_ );
-            size_ = 0;
+        if (length == 0) {
+            // Check if already emptied.
+            if (buffer_size_ != 0) {
+                free( array_ );
+                buffer_size_ = 0;
+            }
+
             return true;
         }
 
         // Attempt sizing.
-        Type* new_array;
-        size_t real_size = length * sizeof(Type);
-        if (size_ == 0) {
-            new_array = (Type*)malloc( real_size );
+        bool result;
+        if (buffer_size_ == 0) {
+            result = BaseAllocator::allocate_array( &array_, length );
         }
         else {
-            new_array = (Type*)realloc( array_, real_size );
+            result = BaseAllocator::reallocate_array( &array_, length );
         }
 
         // Check successful resize.
-        if (new_array == nullptr) {
+        if (!result) {
             return false;
         }
 
-        array_ = new_array;
-        buffer_size_ = size;
+        buffer_size_ = length;
         return true;
     }
 

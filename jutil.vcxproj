@@ -22,6 +22,7 @@
     <ClInclude Include="include\containers\container_common.hpp" />
     <ClInclude Include="include\containers\set.hpp" />
     <ClInclude Include="include\containers\map.hpp" />
+    <ClInclude Include="include\memory\base_allocator.hpp" />
     <ClInclude Include="include\string\base_string.hpp" />
     <ClInclude Include="include\string\constant_string.hpp" />
     <ClInclude Include="include\string\string.hpp" />
@@ -30,7 +31,6 @@
     <ClInclude Include="include\utils\logger.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="src\base\jutil_base.cpp" />
     <ClCompile Include="src\string\base_string.cpp" />
     <ClCompile Include="src\string\constant_string.cpp" />

@@ -4,7 +4,7 @@
 #include "containers/base_container.hpp"
 #include "containers/container_common.hpp"
 #include "containers/set_base.hpp"
-#include <stdlib.h>
+#include "memory/base_allocator.hpp"
 
 namespace JUTIL
 {
@@ -301,8 +301,8 @@ namespace JUTIL
     SetNode<Type>* Set<Type, Comparator>::create_node( const Type& element )
     {
         // Allocate node.
-        SetNode<Type>* node = (SetNode<Type>*)malloc( sizeof(SetNode<Type>) );
-        if (node == nullptr) {
+        SetNode<Type>* node = nullptr;
+        if (!BaseAllocator::allocate( &node )) {
             return nullptr;
         }
 

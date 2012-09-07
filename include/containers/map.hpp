@@ -11,7 +11,7 @@ namespace JUTIL
      * Set of key-value pairs.
      */
     template < class Key, class Value, class KeyComparator = DefaultComparator<Key> >
-    class Map : public Set< 
+    class __declspec(dllexport) Map : public Set< 
         KeyValuePair< Key, Value >,
         KeyValueComparator< Key, Value, KeyComparator > >
     {

@@ -1,5 +1,5 @@
 #include "string/string.hpp"
-#include <stdlib.h>
+#include "memory/base_allocator.hpp"
 #include <string.h>
 #include <stdio.h>
 
@@ -32,7 +32,7 @@ namespace JUTIL
     String::~String( void )
     {
         if (get_length() != 0) {
-            free( string_ );
+            BaseAllocator::release( string_ );
         }
     }
 

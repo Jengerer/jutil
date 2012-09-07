@@ -1,6 +1,8 @@
 #ifndef JUTIL_BASE_HPP
 #define JUTIL_BASE_HPP
 
+#include <new.h>
+
 namespace JUTIL
 {
 
