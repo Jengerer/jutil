@@ -24,6 +24,9 @@ namespace JUTIL
         char* get_string( void );
         virtual const char* get_string( void ) const;
 
+        // Character functions.
+        size_t find( char* location );
+
     private:
 
         char* string_;

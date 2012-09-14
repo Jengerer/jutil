@@ -1,7 +1,7 @@
 #ifndef STRING_BUILDER_HPP
 #define STRING_BUILDER_HPP
 
-#include <string.h>
+#include "string/base_string_builder.hpp"
 
 namespace JUTIL
 {
@@ -9,7 +9,7 @@ namespace JUTIL
     /*
      * Class for handling a C-style string buffer.
      */
-    class __declspec(dllexport) StringBuilder
+    class __declspec(dllexport) StringBuilder : public BaseStringBuilder<char>
     {
 
     public:
@@ -19,23 +19,12 @@ namespace JUTIL
 
         // Buffer managing functions.
         const char* write( const char* format, ... );
-        char* release( void );
-        void clear( void );
-        
-        // Buffer reading functions.
-        const char* get_string( void ) const;
-        size_t get_length( void ) const;
+        const char* write( const char* format, va_list args );
 
     private:
 
-        // Buffer handling.
-        const char* set_string( const char* string );
-        bool set_length( size_t length );
-
-    private:
-
-        char* string_;
-        size_t length_;
+        // Base class typedef for inner functions.
+        typedef BaseStringBuilder<char> BaseClass;
 
     };
 

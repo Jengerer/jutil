@@ -1,6 +1,7 @@
 #ifndef BASE_ALLOCATOR_HPP
 #define BASE_ALLOCATOR_HPP
 
+#include "base/jutil_base.hpp"
 #include <stdlib.h>
 
 namespace JUTIL

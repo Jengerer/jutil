@@ -10,7 +10,7 @@ namespace JUTIL
     /*
      * Class to log text to a file.
      */
-    class Logger
+    class __declspec(dllexport) Logger
     {
 
     public:

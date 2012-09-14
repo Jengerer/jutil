@@ -19,6 +19,9 @@
     <ClCompile Include="src\utils\logger.cpp">
       <Filter>src\base</Filter>
     </ClCompile>
+    <ClCompile Include="src\string\base_string_builder.cpp">
+      <Filter>src\string</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\containers\map.hpp">
@@ -73,6 +76,12 @@
       <Filter>include\string</Filter>
     </ClInclude>
     <ClInclude Include="include\memory\base_allocator.hpp">
+      <Filter>include\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="include\string\base_string_builder.hpp">
+      <Filter>include\string</Filter>
+    </ClInclude>
+    <ClInclude Include="include\memory\array_builder.hpp">
       <Filter>include\memory</Filter>
     </ClInclude>
   </ItemGroup>
