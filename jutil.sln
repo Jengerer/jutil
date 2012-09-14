@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C++ Express 2010
+# Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jutil", "jutil.vcxproj", "{16103E26-1F60-4126-A913-82056B453398}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jutil_test", "jutil_test\jutil_test.vcxproj", "{AB217AA3-D55E-4408-AEBF-81295B35858A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{16103E26-1F60-4126-A913-82056B453398}.Debug|Win32.Build.0 = Debug|Win32
 		{16103E26-1F60-4126-A913-82056B453398}.Release|Win32.ActiveCfg = Release|Win32
 		{16103E26-1F60-4126-A913-82056B453398}.Release|Win32.Build.0 = Release|Win32
+		{AB217AA3-D55E-4408-AEBF-81295B35858A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AB217AA3-D55E-4408-AEBF-81295B35858A}.Debug|Win32.Build.0 = Debug|Win32
+		{AB217AA3-D55E-4408-AEBF-81295B35858A}.Release|Win32.ActiveCfg = Release|Win32
+		{AB217AA3-D55E-4408-AEBF-81295B35858A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

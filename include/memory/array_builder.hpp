@@ -1,11 +1,13 @@
 #ifndef ARRAY_BUILDER_HPP
 #define ARRAY_BUILDER_HPP
 
+#include "memory/base_allocator.hpp"
+
 namespace JUTIL
 {
 
     template <class Type>
-    class ArrayBuilder
+    class __declspec(dllexport) ArrayBuilder
     {
 
     public:
@@ -21,6 +23,7 @@ namespace JUTIL
 
         // Array buffer management.
         bool set_size( size_t size );
+        Type* release( void );
         void clear( void );
 
     private:
@@ -102,8 +105,20 @@ namespace JUTIL
         else if (!BaseAllocator::reallocate_array( &new_array, size )) {
             return false;
         }
+        printf("Array allocated %u.\n", size);
         set_array( new_array, size );
         return true;
+    }
+
+    /*
+     * Release handle to buffer.
+     */
+    template <class Type>
+    Type* ArrayBuilder<Type>::release( void )
+    {
+        Type* temp = array_;
+        set_array( nullptr, 0 );
+        return temp;
     }
 
     /*

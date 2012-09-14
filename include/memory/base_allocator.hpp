@@ -70,6 +70,7 @@ namespace JUTIL
         // Allocate chunk for array.
         unsigned int size = elements * sizeof(Type);
         Type* allocation = (Type*)malloc( size );
+        printf("Allocator allocated %u.\n", size);
         if (allocation != nullptr) {
             *output = allocation;
             return true;

@@ -21,13 +21,11 @@ namespace JUTIL
 
         // Buffer managing functions.
         void set_string( Type* string, size_t length );
-        const Type* write( const Type* format, ... );
-        const Type* write( const Type* format, va_list args );
         Type* release( void );
         void clear( void );
         
         // Buffer reading functions.
-        const char* get_string( void ) const;
+        const Type* get_string( void ) const;
         size_t get_length( void ) const;
 
     private:
@@ -41,6 +39,119 @@ namespace JUTIL
         ArrayBuilder<Type> builder_;
 
     };
+
+    /*
+     * Default string constructor; empty.
+     */
+    template <class Type>
+    BaseStringBuilder<Type>::BaseStringBuilder( void )
+    {
+        // Nothing.
+    }
+
+    /*
+     * StringBuilder buffer destructor.
+     */
+    template <class Type>
+    BaseStringBuilder<Type>::~BaseStringBuilder( void )
+    {
+        clear();
+    }
+
+    /*
+     * Set string buffer managed by builder.
+     * Assumes previous buffer has been released or cleared, if any.
+     */
+    template <class Type>
+    void BaseStringBuilder<Type>::set_string( Type* string, size_t length )
+    {
+        string_ = string;
+        length_ = length;
+    }
+
+    /*
+     * Release handle to memory for outer source to manage.
+     */
+    template <class Type>
+    Type* BaseStringBuilder<Type>::release( void )
+    {
+        return builder_.release();
+    }
+
+    /*
+     * Clear the string buffer, if not empty.
+     */
+    template <class Type>
+    void BaseStringBuilder<Type>::clear( void )
+    {
+        builder_.clear();
+    }
+
+    /*
+     * Get a pointer to the current string.
+     * Returns nullptr if no string exists yet.
+     */
+    template <class Type>
+    const Type* BaseStringBuilder<Type>::get_string( void ) const
+    {
+        return builder_.get_array();
+    }
+
+    /*
+     * Gets the length of the string, not including the null character.
+     */
+    template <class Type>
+    size_t BaseStringBuilder<Type>::get_length( void ) const
+    {
+        return builder_.get_size();
+    }
+
+    /*
+     * Sets the string contained by the buffer. Buffer is resized if needed.
+     * Returns the new string contained in buffer if successful, nullptr otherwise.
+     */
+    template <class Type>
+    const Type* BaseStringBuilder<Type>::set_string( const Type* string )
+    {
+        size_t length = strlen( string );
+        if (length_ != length) {
+            // Attempt resize.
+            if (!set_length( length )) {
+                return nullptr;
+            }
+        }
+
+        // Copy new string.
+        memcpy( string_, string, length + 1 );
+        return string_;
+    }
+
+    /*
+     * Set new buffer length (excluding null character).
+     * Returns true if resizing succeeded, false otherwise.
+     */
+    template <class Type>
+    bool BaseStringBuilder<Type>::set_length( size_t length )
+    {
+        // Attempt allocation/resize.
+        size_t new_size = length + 1;
+        bool result;
+        if (length_ == 0) {
+            result = BaseAllocator::allocate_array( &string_, new_size );
+        }
+        else {
+            result = BaseAllocator::reallocate_array( &string_, new_size );
+        }
+
+        // Return false if failed to size.
+        if (!result) {
+            return false;
+        }
+
+        // Update and finish.
+        length_ = length;
+        return true;
+    }
 
 }
 
