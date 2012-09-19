@@ -43,19 +43,22 @@ namespace JUTIL
     const wchar_t* WideStringBuilder::write( const wchar_t* format, va_list args )
     {
         // Get needed size.
+        // Keep old args for actual write.
+        va_list new_args = args;
         int length = _vsnwprintf( nullptr, 0, format, args );
-        va_end( args );
 
         // Allocate new string size.
         size_t old_length = builder_.get_size();
-        if ((length < 0) || !builder_.set_size( old_length + length )) {
+        size_t added_length = length + 1;
+        size_t new_length = old_length + added_length;
+        if ((length < 0) || !builder_.set_size( new_length )) {
             return nullptr;
         }
 
         // Write to buffer.
         wchar_t* new_string = builder_.get_array();
-        va_start( args, format );
-        int written = _vsnwprintf( new_string + old_length, length + 1, format, args );
+        int written = _vsnwprintf( new_string + old_length, added_length, format, new_args );
+        va_end( new_args );
         if (written < 0) {
             return nullptr;
         }

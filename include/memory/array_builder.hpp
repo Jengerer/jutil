@@ -105,7 +105,6 @@ namespace JUTIL
         else if (!BaseAllocator::reallocate_array( &new_array, size )) {
             return false;
         }
-        printf("Array allocated %u.\n", size);
         set_array( new_array, size );
         return true;
     }
