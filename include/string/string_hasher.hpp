@@ -16,7 +16,7 @@ namespace JUTIL
     public:
 
 	    // Inspired by the java.lang.String.hashCode() algorithm.
-        static unsigned int hash( const BaseString& input )
+        static unsigned int hash( const ConstantString& input )
         {
             unsigned int result = 0;
             const char* str = input.get_string();

@@ -20,6 +20,7 @@ namespace JUTIL
         ~BaseStringBuilder( void );
 
         // Buffer managing functions.
+        const Type* copy( const Type* string, size_t length );
         void set_string( Type* string, size_t length );
         Type* release( void );
         void clear( void );
@@ -31,7 +32,6 @@ namespace JUTIL
     private:
 
         // Buffer handling.
-        const Type* set_string( const Type* string );
         bool set_length( size_t length );
 
     protected:
@@ -59,14 +59,32 @@ namespace JUTIL
     }
 
     /*
+     * Copy raw string to builder.
+     */
+    template <class Type>
+    const Type* BaseStringBuilder<Type>::copy( const Type* string, size_t length )
+    {
+        // Resize if necessary.
+        size_t size = length + 1;
+        if (builder_.get_size() < length) {
+            if (!builder_.set_size( size )) {
+                return nullptr;
+            }
+        }
+
+        // Copy.
+        memcpy( builder_.get_array(), string, size );
+        return get_string();
+    }
+
+    /*
      * Set string buffer managed by builder.
      * Assumes previous buffer has been released or cleared, if any.
      */
     template <class Type>
     void BaseStringBuilder<Type>::set_string( Type* string, size_t length )
     {
-        string_ = string;
-        length_ = length;
+        builder_.set_array( string, length );
     }
 
     /*
@@ -104,26 +122,6 @@ namespace JUTIL
     size_t BaseStringBuilder<Type>::get_length( void ) const
     {
         return builder_.get_size();
-    }
-
-    /*
-     * Sets the string contained by the buffer. Buffer is resized if needed.
-     * Returns the new string contained in buffer if successful, nullptr otherwise.
-     */
-    template <class Type>
-    const Type* BaseStringBuilder<Type>::set_string( const Type* string )
-    {
-        size_t length = strlen( string );
-        if (length_ != length) {
-            // Attempt resize.
-            if (!set_length( length )) {
-                return nullptr;
-            }
-        }
-
-        // Copy new string.
-        memcpy( array_.get_array(), string, length + 1 );
-        return get_string();
     }
 
     /*

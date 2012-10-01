@@ -39,6 +39,14 @@ namespace JUTIL
     /*
      * Get representation of C string.
      */
+    char* String::get_string( void )
+    {
+        return string_;
+    }
+
+    /*
+     * Get representation of C string.
+     */
     const char* String::get_string( void ) const
     {
         return string_;
