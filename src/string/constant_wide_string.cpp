@@ -1,4 +1,4 @@
-#include "string/constant_string.hpp"
+#include "string/constant_wide_string.hpp"
 #include <string.h>
 
 namespace JUTIL
@@ -7,7 +7,7 @@ namespace JUTIL
     /*
      * Constant string default constructor.
      */
-    ConstantString::ConstantString( void )
+    ConstantWideString::ConstantWideString( void )
     {
         string_ = nullptr;
         set_length( 0 );
@@ -16,7 +16,7 @@ namespace JUTIL
     /*
      * Constant string constructor from null-terminated string.
      */
-    ConstantString::ConstantString( const char* string )
+    ConstantWideString::ConstantWideString( const wchar_t* string )
     {
         set_string( string );
     }
@@ -24,7 +24,7 @@ namespace JUTIL
     /*
      * Constant string constructor from string with length.
      */
-    ConstantString::ConstantString( const char* string, unsigned int length )
+    ConstantWideString::ConstantWideString( const wchar_t* string, unsigned int length )
     {
         set_string( string, length );
     }
@@ -33,7 +33,7 @@ namespace JUTIL
      * Constant string constructor from managed string.
      * Assumes managed string will out-live constant string usage.
      */
-    ConstantString::ConstantString( const BaseString<char>& string )
+    ConstantWideString::ConstantWideString( const BaseString<wchar_t>& string )
     {
         set_string( &string );
     }
@@ -41,7 +41,7 @@ namespace JUTIL
     /*
      * Constant string destructor.
      */
-    ConstantString::~ConstantString( void )
+    ConstantWideString::~ConstantWideString( void )
     {
         // We're not managing string, so don't delete.
     }
@@ -49,7 +49,7 @@ namespace JUTIL
     /*
      * Get constant string pointer.
      */
-    const char* ConstantString::get_string( void ) const
+    const wchar_t* ConstantWideString::get_string( void ) const
     {
         return string_;
     }
@@ -57,7 +57,7 @@ namespace JUTIL
     /*
      * String handle updating by base string.
      */
-    void ConstantString::set_string( const BaseString<char>* other )
+    void ConstantWideString::set_string( const BaseString<wchar_t>* other )
     {
         string_ = other->get_string();
         set_length( other->get_length() );
@@ -66,16 +66,16 @@ namespace JUTIL
     /*
      * String handle updating by null-terminated string.
      */
-    void ConstantString::set_string( const char* string )
+    void ConstantWideString::set_string( const wchar_t* string )
     {
-        unsigned int length = strlen( string );
+        unsigned int length = wcslen( string );
         set_string( string, length );
     }
 
     /*
      * String handle updating by string and length.
      */
-    void ConstantString::set_string( const char* string, unsigned int length )
+    void ConstantWideString::set_string( const wchar_t* string, unsigned int length )
     {
         string_ = string;
         set_length( length );

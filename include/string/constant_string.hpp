@@ -10,7 +10,7 @@ namespace JUTIL
      * String container class that wraps a C-string representation.
      * Does not manage string memory buffer.
      */
-    class __declspec(dllexport) ConstantString : public BaseString
+    class __declspec(dllexport) ConstantString : public BaseString<char>
     {
 
     public:
@@ -18,15 +18,15 @@ namespace JUTIL
         // Constructors from string types.
         ConstantString( void );
         ConstantString( const char* string );
-        ConstantString( const BaseString& string );
         ConstantString( const char* string, size_t length );
+        ConstantString( const BaseString<char>& string );
         virtual ~ConstantString( void );
 
-        // Assignment operator overload.
-        ConstantString& operator=( const BaseString& other );
-
-        // Attribute functions.
+        // String handling.
         virtual const char* get_string( void ) const;
+        void set_string( const BaseString<char>* other );
+        void set_string( const char* string );
+        void set_string( const char* string, unsigned int length );
 
     private:
 

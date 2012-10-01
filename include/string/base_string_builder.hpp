@@ -122,8 +122,8 @@ namespace JUTIL
         }
 
         // Copy new string.
-        memcpy( string_, string, length + 1 );
-        return string_;
+        memcpy( array_.get_array(), string, length + 1 );
+        return get_string();
     }
 
     /*
@@ -135,16 +135,7 @@ namespace JUTIL
     {
         // Attempt allocation/resize.
         size_t new_size = length + 1;
-        bool result;
-        if (length_ == 0) {
-            result = BaseAllocator::allocate_array( &string_, new_size );
-        }
-        else {
-            result = BaseAllocator::reallocate_array( &string_, new_size );
-        }
-
-        // Return false if failed to size.
-        if (!result) {
+        if (!builder_.set_size( new_size )) {
             return false;
         }
 

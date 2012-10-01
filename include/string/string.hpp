@@ -11,21 +11,18 @@ namespace JUTIL
      * String container class that wraps a C-string representation.
      * Assumes string is writable; frees memory on destruction.
      */
-    class __declspec(dllexport) String : public BaseString
+    class __declspec(dllexport) String : public BaseString<char>
     {
 
     public:
 
         String( StringBuilder* string_builder );
-        String( char* str, size_t length );
+        String( char* string, size_t length );
         virtual ~String( void );
 
         // Attribute functions.
         char* get_string( void );
         virtual const char* get_string( void ) const;
-
-        // Character functions.
-        size_t find( char* location );
 
     private:
 

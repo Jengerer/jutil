@@ -7,6 +7,7 @@ namespace JUTIL
     /*
      * Abstract string class.
      */
+    template <class Type>
     class __declspec(dllexport) BaseString
     {
 
@@ -16,7 +17,7 @@ namespace JUTIL
         virtual ~BaseString( void );
 
         // Common string getters.
-        virtual const char* get_string( void ) const = 0;
+        virtual const Type* get_string( void ) const = 0;
         unsigned int get_length( void ) const;
 
     protected:
@@ -27,9 +28,37 @@ namespace JUTIL
     private:
 
         // String length.
-        int length_;
+        unsigned int length_;
 
     };
+
+    /*
+     * Generic string destructor.
+     */
+    template <class Type>
+    BaseString<Type>::~BaseString( void )
+    {
+        // Nothing to clean yet.
+    }
+
+    /*
+     * Get string length.
+     */
+    template <class Type>
+    unsigned int BaseString<Type>::get_length( void ) const
+    {
+        return length_;
+    }
+
+    /*
+     * Set stored string length.
+     */
+    template <class Type>
+    void BaseString<Type>::set_length( unsigned int length )
+    {
+        length_ = length;
+    }
+
 
 }
 

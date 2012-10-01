@@ -10,9 +10,6 @@
     <ClCompile Include="src\string\string.cpp">
       <Filter>src\string</Filter>
     </ClCompile>
-    <ClCompile Include="src\string\base_string.cpp">
-      <Filter>src\string</Filter>
-    </ClCompile>
     <ClCompile Include="src\string\constant_string.cpp">
       <Filter>src\string</Filter>
     </ClCompile>
@@ -20,6 +17,12 @@
       <Filter>src\base</Filter>
     </ClCompile>
     <ClCompile Include="src\string\wide_string_builder.cpp">
+      <Filter>src\string</Filter>
+    </ClCompile>
+    <ClCompile Include="src\string\constant_wide_string.cpp">
+      <Filter>src\string</Filter>
+    </ClCompile>
+    <ClCompile Include="src\string\wide_string.cpp">
       <Filter>src\string</Filter>
     </ClCompile>
   </ItemGroup>
@@ -85,6 +88,12 @@
       <Filter>include\memory</Filter>
     </ClInclude>
     <ClInclude Include="include\string\wide_string_builder.hpp">
+      <Filter>include\string</Filter>
+    </ClInclude>
+    <ClInclude Include="include\string\constant_wide_string.hpp">
+      <Filter>include\string</Filter>
+    </ClInclude>
+    <ClInclude Include="include\string\wide_string.hpp">
       <Filter>include\string</Filter>
     </ClInclude>
   </ItemGroup>
