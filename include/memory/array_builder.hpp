@@ -13,6 +13,7 @@ namespace JUTIL
     public:
 
         ArrayBuilder( void );
+        ArrayBuilder( Type* array, size_t size );
         ~ArrayBuilder( void );
 
         // Array buffer handles.
@@ -41,6 +42,15 @@ namespace JUTIL
     ArrayBuilder<Type>::ArrayBuilder( void )
     {
         set_array( nullptr, 0 );
+    }
+
+    /*
+     * Array builder constructor for existing buffer.
+     */
+    template <class Type>
+    ArrayBuilder<Type>::ArrayBuilder( Type* array, size_t size )
+    {
+        set_array( array, size );
     }
 
     /*

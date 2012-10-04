@@ -1,37 +1,29 @@
 #ifndef CONSTANT_WIDE_STRING_HPP
 #define CONSTANT_WIDE_STRING_HPP
 
-#include "string/base_string.hpp"
+#include "string/base_constant_string.hpp"
 
 namespace JUTIL
 {
 
     /*
-     * String container class that wraps a C-string representation.
-     * Does not manage string memory buffer.
+     * Constant string representation for wide character array.
      */
-    class __declspec(dllexport) ConstantWideString : public BaseString<wchar_t>
+    class __declspec(dllexport) ConstantWideString : public BaseConstantString<wchar_t>
     {
 
     public:
 
-        // Constructors from string types.
+        // Constructors from C-style string types.
         ConstantWideString( void );
         ConstantWideString( const wchar_t* string );
-        ConstantWideString( const BaseString<wchar_t>& string );
         ConstantWideString( const wchar_t* string, size_t length );
+        ConstantWideString( const BaseString<wchar_t>& string );
         virtual ~ConstantWideString( void );
 
-        // String handling.
-        virtual const wchar_t* get_string( void ) const;
-        void set_string( const BaseString<wchar_t>* other );
+        // Additional string handling.
         void set_string( const wchar_t* string );
-        void set_string( const wchar_t* string, unsigned int length );
 
-    private:
-
-        const wchar_t* string_;
-    
     };
 
 }

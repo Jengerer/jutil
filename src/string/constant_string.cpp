@@ -9,8 +9,6 @@ namespace JUTIL
      */
     ConstantString::ConstantString( void )
     {
-        string_ = nullptr;
-        set_length( 0 );
     }
 
     /*
@@ -25,8 +23,8 @@ namespace JUTIL
      * Constant string constructor from string with length.
      */
     ConstantString::ConstantString( const char* string, unsigned int length )
+        : BaseConstantString<char>( string, length )
     {
-        set_string( string, length );
     }
 
     /*
@@ -34,8 +32,8 @@ namespace JUTIL
      * Assumes managed string will out-live constant string usage.
      */
     ConstantString::ConstantString( const BaseString<char>& string )
+        : BaseConstantString<char>( string )
     {
-        set_string( &string );
     }
 
     /*
@@ -43,24 +41,6 @@ namespace JUTIL
      */
     ConstantString::~ConstantString( void )
     {
-        // We're not managing string, so don't delete.
-    }
-
-    /*
-     * Get constant string pointer.
-     */
-    const char* ConstantString::get_string( void ) const
-    {
-        return string_;
-    }
-
-    /*
-     * String handle updating by base string.
-     */
-    void ConstantString::set_string( const BaseString<char>* other )
-    {
-        string_ = other->get_string();
-        set_length( other->get_length() );
     }
 
     /*
@@ -69,16 +49,7 @@ namespace JUTIL
     void ConstantString::set_string( const char* string )
     {
         unsigned int length = strlen( string );
-        set_string( string, length );
-    }
-
-    /*
-     * String handle updating by string and length.
-     */
-    void ConstantString::set_string( const char* string, unsigned int length )
-    {
-        string_ = string;
-        set_length( length );
+        BaseConstantString<char>::set_string( string, length );
     }
 
 }

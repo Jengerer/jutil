@@ -1,8 +1,9 @@
-#ifndef BASE_STRING_BUILDER_HPP
-#define BASE_STRING_BUILDER_HPP
+#ifndef BASE_DYNAMIC_STRING_HPP
+#define BASE_DYNAMIC_STRING_HPP
 
 #include <string.h>
 #include "memory/array_builder.hpp"
+#include "string/base_string.hpp"
 
 namespace JUTIL
 {
@@ -11,23 +12,26 @@ namespace JUTIL
      * Class for handling a generic string buffer.
      */
     template <class Type>
-    class __declspec(dllexport) BaseStringBuilder
+    class __declspec(dllexport) BaseDynamicString : public BaseString<Type>
     {
 
     public:
 
-        BaseStringBuilder( void );
-        ~BaseStringBuilder( void );
+        BaseDynamicString( void );
+        BaseDynamicString( Type* string, size_t length );
+        ~BaseDynamicString( void );
 
         // Buffer managing functions.
-        const Type* copy( const Type* string, size_t length );
+        bool copy( const BaseString<Type>* string );
+        bool copy( const Type* string, size_t length );
         void set_string( Type* string, size_t length );
         Type* release( void );
         void clear( void );
         
         // Buffer reading functions.
-        const Type* get_string( void ) const;
-        size_t get_length( void ) const;
+        Type* get_string( void );
+        virtual const Type* get_string( void ) const;
+        virtual size_t get_length( void ) const;
 
     private:
 
@@ -44,37 +48,51 @@ namespace JUTIL
      * Default string constructor; empty.
      */
     template <class Type>
-    BaseStringBuilder<Type>::BaseStringBuilder( void )
+    BaseDynamicString<Type>::BaseDynamicString( void )
     {
         // Nothing.
+    }
+
+    /*
+     * Constructor from existing buffer.
+     */
+    template <class Type>
+    BaseDynamicString<Type>::BaseDynamicString( Type* string, size_t length )
+    {
+        set_string( string, length );
     }
 
     /*
      * StringBuilder buffer destructor.
      */
     template <class Type>
-    BaseStringBuilder<Type>::~BaseStringBuilder( void )
+    BaseDynamicString<Type>::~BaseDynamicString( void )
     {
         clear();
     }
 
     /*
-     * Copy raw string to builder.
+     * Copy from base string to buffer.
      */
     template <class Type>
-    const Type* BaseStringBuilder<Type>::copy( const Type* string, size_t length )
+    bool BaseDynamicString<Type>::copy( const BaseString<Type>* string )
     {
-        // Resize if necessary.
-        size_t size = length + 1;
-        if (builder_.get_size() < length) {
-            if (!builder_.set_size( size )) {
-                return nullptr;
-            }
-        }
+        copy( string->get_string(), string->get_length() );
+    }
 
-        // Copy.
+    /*
+     * Copy raw string to buffer.
+     */
+    template <class Type>
+    bool BaseDynamicString<Type>::copy( const Type* string, size_t length )
+    {
+        // Copy memory.
+        size_t size = length + 1;
+        if (!builder_.set_size( size )) {
+            return false;
+        }
         memcpy( builder_.get_array(), string, size );
-        return get_string();
+        return true;
     }
 
     /*
@@ -82,7 +100,7 @@ namespace JUTIL
      * Assumes previous buffer has been released or cleared, if any.
      */
     template <class Type>
-    void BaseStringBuilder<Type>::set_string( Type* string, size_t length )
+    void BaseDynamicString<Type>::set_string( Type* string, size_t length )
     {
         builder_.set_array( string, length );
     }
@@ -91,7 +109,7 @@ namespace JUTIL
      * Release handle to memory for outer source to manage.
      */
     template <class Type>
-    Type* BaseStringBuilder<Type>::release( void )
+    Type* BaseDynamicString<Type>::release( void )
     {
         return builder_.release();
     }
@@ -100,9 +118,19 @@ namespace JUTIL
      * Clear the string buffer, if not empty.
      */
     template <class Type>
-    void BaseStringBuilder<Type>::clear( void )
+    void BaseDynamicString<Type>::clear( void )
     {
         builder_.clear();
+    }
+
+    /*
+     * Get a pointer to the string buffer.
+     * Returns nullptr if no string exists yet.
+     */
+    template <class Type>
+    Type* BaseDynamicString<Type>::get_string( void )
+    {
+        return builder_.get_array();
     }
 
     /*
@@ -110,7 +138,7 @@ namespace JUTIL
      * Returns nullptr if no string exists yet.
      */
     template <class Type>
-    const Type* BaseStringBuilder<Type>::get_string( void ) const
+    const Type* BaseDynamicString<Type>::get_string( void ) const
     {
         return builder_.get_array();
     }
@@ -119,7 +147,7 @@ namespace JUTIL
      * Gets the length of the string, not including the null character.
      */
     template <class Type>
-    size_t BaseStringBuilder<Type>::get_length( void ) const
+    size_t BaseDynamicString<Type>::get_length( void ) const
     {
         return builder_.get_size();
     }
@@ -129,19 +157,16 @@ namespace JUTIL
      * Returns true if resizing succeeded, false otherwise.
      */
     template <class Type>
-    bool BaseStringBuilder<Type>::set_length( size_t length )
+    bool BaseDynamicString<Type>::set_length( size_t length )
     {
         // Attempt allocation/resize.
         size_t new_size = length + 1;
         if (!builder_.set_size( new_size )) {
             return false;
         }
-
-        // Update and finish.
-        length_ = length;
         return true;
     }
 
 }
 
-#endif // BASE_STRING_BUILDER_HPP
+#endif // BASE_DYNAMIC_STRING_HPP

@@ -18,25 +18,15 @@ namespace JUTIL
 
         // Common string getters.
         virtual const Type* get_string( void ) const = 0;
-        unsigned int get_length( void ) const;
+        virtual size_t get_length( void ) const = 0;
 
         // String searching.
-        unsigned int find( Type character ) const;
-        unsigned int find( Type character, unsigned int start ) const;
+        size_t find( Type character ) const;
+        size_t find( Type character, size_t start ) const;
 
     public:
 
         static const unsigned int INVALID_INDEX = 0xFFFFFFFF;
-
-    protected:
-
-        // String length modifier.
-        void set_length( unsigned int length );
-
-    private:
-
-        // String length.
-        unsigned int length_;
 
     };
 
@@ -47,15 +37,6 @@ namespace JUTIL
     BaseString<Type>::~BaseString( void )
     {
         // Nothing to clean yet.
-    }
-
-    /*
-     * Get string length.
-     */
-    template <class Type>
-    unsigned int BaseString<Type>::get_length( void ) const
-    {
-        return length_;
     }
 
     /*
@@ -86,16 +67,6 @@ namespace JUTIL
 
         return INVALID_INDEX;
     }
-
-    /*
-     * Set stored string length.
-     */
-    template <class Type>
-    void BaseString<Type>::set_length( unsigned int length )
-    {
-        length_ = length;
-    }
-
 
 }
 

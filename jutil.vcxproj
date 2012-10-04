@@ -25,14 +25,13 @@
     <ClInclude Include="include\memory\array_builder.hpp" />
     <ClInclude Include="include\memory\base_allocator.hpp" />
     <ClInclude Include="include\string\base_string.hpp" />
-    <ClInclude Include="include\string\base_string_builder.hpp" />
+    <ClInclude Include="include\string\base_dynamic_string.hpp" />
+    <ClInclude Include="include\string\base_constant_string.hpp" />
     <ClInclude Include="include\string\constant_string.hpp" />
     <ClInclude Include="include\string\constant_wide_string.hpp" />
     <ClInclude Include="include\string\string.hpp" />
-    <ClInclude Include="include\string\string_builder.hpp" />
     <ClInclude Include="include\string\string_hasher.hpp" />
     <ClInclude Include="include\string\wide_string.hpp" />
-    <ClInclude Include="include\string\wide_string_builder.hpp" />
     <ClInclude Include="include\utils\logger.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -40,9 +39,7 @@
     <ClCompile Include="src\string\constant_string.cpp" />
     <ClCompile Include="src\string\constant_wide_string.cpp" />
     <ClCompile Include="src\string\string.cpp" />
-    <ClCompile Include="src\string\string_builder.cpp" />
     <ClCompile Include="src\string\wide_string.cpp" />
-    <ClCompile Include="src\string\wide_string_builder.cpp" />
     <ClCompile Include="src\utils\logger.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -74,10 +71,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)lib\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)lib\</OutDir>
+    <TargetName>$(ProjectName)_debug</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

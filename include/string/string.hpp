@@ -1,8 +1,7 @@
 #ifndef STRING_HPP
 #define STRING_HPP
 
-#include "string/string_builder.hpp"
-#include "string/base_string.hpp"
+#include "string/base_dynamic_string.hpp"
 
 namespace JUTIL
 {
@@ -11,22 +10,18 @@ namespace JUTIL
      * String container class that wraps a C-string representation.
      * Assumes string is writable; frees memory on destruction.
      */
-    class __declspec(dllexport) String : public BaseString<char>
+    class __declspec(dllexport) String : public BaseDynamicString<char>
     {
 
     public:
 
-        String( StringBuilder* string_builder );
+        String( void );
         String( char* string, size_t length );
         virtual ~String( void );
 
-        // Attribute functions.
-        char* get_string( void );
-        virtual const char* get_string( void ) const;
-
-    private:
-
-        char* string_;
+        // Buffer management.
+        bool write( const char* format, ... );
+        bool write( const char* format, va_list args );
     
     };
 

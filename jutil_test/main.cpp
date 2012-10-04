@@ -1,16 +1,12 @@
 #include <stdio.h>
-#include <string/string_builder.hpp>
-#include <string/string.hpp>
-#include <string/constant_string.hpp>
+#include <string/wide_string.hpp>
+#include <string/constant_wide_string.hpp>
 
 int main( void )
 {
-    JUTIL::StringBuilder builder;
-    builder.write( "I once had %i wins, said %s.\n", 23, L"Okay!" );
-    JUTIL::String string( &builder );
-    JUTIL::ConstantString constr = string;
-    printf( "%s", constr.get_string() );
-    constr.find( 'w' );
+    JUTIL::WideString wide;
+    wide.write( L"I once had %d wins, said %s.\n", 23, L"Jengerer" );
+    wprintf( L"%s", wide.get_string() );
     system( "pause" );
     return 0;
 }
