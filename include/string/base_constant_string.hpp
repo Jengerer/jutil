@@ -16,7 +16,7 @@ namespace JUTIL
 
     public:
 
-        // Constructors from string types.
+		// Constructors from string types.
         BaseConstantString( void );
         BaseConstantString( const Type* string, size_t length );
         BaseConstantString( const BaseString<Type>& string );

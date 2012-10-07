@@ -16,7 +16,8 @@ namespace JUTIL
      */
     ConstantString::ConstantString( const char* string )
     {
-        set_string( string );
+		size_t length = strlen( string );
+        set_string( string, length );
     }
 
     /*
@@ -41,15 +42,6 @@ namespace JUTIL
      */
     ConstantString::~ConstantString( void )
     {
-    }
-
-    /*
-     * String handle updating by null-terminated string.
-     */
-    void ConstantString::set_string( const char* string )
-    {
-        unsigned int length = strlen( string );
-        BaseConstantString<char>::set_string( string, length );
     }
 
 }

@@ -21,9 +21,6 @@ namespace JUTIL
         ConstantString( const BaseString<char>& string );
         virtual ~ConstantString( void );
 
-        // Additional string handling.
-        void set_string( const char* string );
-
     };
 
 }

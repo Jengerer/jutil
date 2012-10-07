@@ -3,6 +3,7 @@
 
 #include "base/jutil_base.hpp"
 #include <stdlib.h>
+#include <new.h>
 
 namespace JUTIL
 {

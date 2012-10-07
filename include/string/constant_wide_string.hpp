@@ -21,9 +21,6 @@ namespace JUTIL
         ConstantWideString( const BaseString<wchar_t>& string );
         virtual ~ConstantWideString( void );
 
-        // Additional string handling.
-        void set_string( const wchar_t* string );
-
     };
 
 }

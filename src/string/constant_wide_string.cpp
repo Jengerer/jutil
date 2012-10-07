@@ -17,7 +17,8 @@ namespace JUTIL
      */
     ConstantWideString::ConstantWideString( const wchar_t* string )
     {
-        set_string( string );
+		size_t length = wcslen( string );
+        set_string( string, length );
     }
 
     /*
@@ -45,15 +46,6 @@ namespace JUTIL
     ConstantWideString::~ConstantWideString( void )
     {
         // We're not managing string, so don't delete.
-    }
-
-    /*
-     * String handle updating by null-terminated string.
-     */
-    void ConstantWideString::set_string( const wchar_t* string )
-    {
-        unsigned int length = wcslen( string );
-        BaseConstantString<wchar_t>::set_string( string, length );
     }
 
 }
