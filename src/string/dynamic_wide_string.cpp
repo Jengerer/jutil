@@ -1,4 +1,4 @@
-#include "string/string.hpp"
+#include "string/dynamic_wide_string.hpp"
 #include "memory/base_allocator.hpp"
 #include <stdio.h>
 #include <stdarg.h>
@@ -10,8 +10,8 @@ namespace JUTIL
      * String constructor from string builder.
      * Releases the buffer from the builder and holds it in the string object.
      */
-    String::String( void )
-        : BaseDynamicString<char>()
+    DynamicWideString::DynamicWideString( void )
+        : BaseDynamicString<wchar_t>()
     {
     }
 
@@ -19,15 +19,15 @@ namespace JUTIL
      * String constructor from string and length.
      * Does not assume string is null-terminated; does not terminate it itself.
      */
-    String::String( char* string, size_t length )
-        : BaseDynamicString<char>( string, length )
+    DynamicWideString::DynamicWideString( wchar_t* string, size_t length )
+        : BaseDynamicString<wchar_t>( string, length )
     {
     }
 
     /*
      * String destructor (already cleared by base dynamic).
      */
-    String::~String( void )
+    DynamicWideString::~DynamicWideString( void )
     {
     }
 
@@ -35,7 +35,7 @@ namespace JUTIL
      * Write formatted string output to the buffer.
      * Returns a pointer to the new string if succeeded, nullptr otherwise.
      */
-    bool String::write( const char* format, ... )
+    bool DynamicWideString::write( const wchar_t* format, ... )
     {
         // Get needed size.
         va_list args;
@@ -52,12 +52,12 @@ namespace JUTIL
      * Returns a pointer to the new string if succeeded, nullptr otherwise.
      * Assumes 'args' list has been started.
      */
-    bool String::write( const char* format, va_list args )
+    bool DynamicWideString::write( const wchar_t* format, va_list args )
     {
         // Get needed size.
         // Keep old args for actual write.
         va_list new_args = args;
-        int length = vsnprintf( nullptr, 0, format, args );
+        int length = _vsnwprintf( nullptr, 0, format, args );
 
         // Allocate new string size.
         size_t old_length = builder_.get_size();
@@ -68,8 +68,8 @@ namespace JUTIL
         }
 
         // Write to buffer.
-        char* new_string = builder_.get_array();
-        int written = vsnprintf( new_string + old_length, added_length, format, new_args );
+        wchar_t* new_string = builder_.get_array();
+        int written = _vsnwprintf( new_string + old_length, added_length, format, new_args );
         va_end( new_args );
         if (written < 0) {
             return false;

@@ -29,17 +29,18 @@
     <ClInclude Include="include\string\base_constant_string.hpp" />
     <ClInclude Include="include\string\constant_string.hpp" />
     <ClInclude Include="include\string\constant_wide_string.hpp" />
+    <ClInclude Include="include\string\dynamic_string.hpp" />
     <ClInclude Include="include\string\string.hpp" />
     <ClInclude Include="include\string\string_hasher.hpp" />
-    <ClInclude Include="include\string\wide_string.hpp" />
+    <ClInclude Include="include\string\dynamic_wide_string.hpp" />
     <ClInclude Include="include\utils\logger.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\base\jutil_base.cpp" />
     <ClCompile Include="src\string\constant_string.cpp" />
     <ClCompile Include="src\string\constant_wide_string.cpp" />
-    <ClCompile Include="src\string\string.cpp" />
-    <ClCompile Include="src\string\wide_string.cpp" />
+    <ClCompile Include="src\string\dynamic_string.cpp" />
+    <ClCompile Include="src\string\dynamic_wide_string.cpp" />
     <ClCompile Include="src\utils\logger.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

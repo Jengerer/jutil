@@ -4,9 +4,6 @@
     <ClCompile Include="src\base\jutil_base.cpp">
       <Filter>src\base</Filter>
     </ClCompile>
-    <ClCompile Include="src\string\string.cpp">
-      <Filter>src\string</Filter>
-    </ClCompile>
     <ClCompile Include="src\string\constant_string.cpp">
       <Filter>src\string</Filter>
     </ClCompile>
@@ -16,7 +13,10 @@
     <ClCompile Include="src\string\constant_wide_string.cpp">
       <Filter>src\string</Filter>
     </ClCompile>
-    <ClCompile Include="src\string\wide_string.cpp">
+    <ClCompile Include="src\string\dynamic_wide_string.cpp">
+      <Filter>src\string</Filter>
+    </ClCompile>
+    <ClCompile Include="src\string\dynamic_string.cpp">
       <Filter>src\string</Filter>
     </ClCompile>
   </ItemGroup>
@@ -45,9 +45,6 @@
     <ClInclude Include="include\base\jutil_base.hpp">
       <Filter>include\base</Filter>
     </ClInclude>
-    <ClInclude Include="include\string\string.hpp">
-      <Filter>include\string</Filter>
-    </ClInclude>
     <ClInclude Include="include\utils\logger.hpp">
       <Filter>include\base</Filter>
     </ClInclude>
@@ -75,9 +72,6 @@
     <ClInclude Include="include\string\constant_wide_string.hpp">
       <Filter>include\string</Filter>
     </ClInclude>
-    <ClInclude Include="include\string\wide_string.hpp">
-      <Filter>include\string</Filter>
-    </ClInclude>
     <ClInclude Include="include\string\base_dynamic_string.hpp">
       <Filter>include\string</Filter>
     </ClInclude>
@@ -85,6 +79,15 @@
       <Filter>include\string</Filter>
     </ClInclude>
     <ClInclude Include="include\string\constant_string.hpp">
+      <Filter>include\string</Filter>
+    </ClInclude>
+    <ClInclude Include="include\string\dynamic_string.hpp">
+      <Filter>include\string</Filter>
+    </ClInclude>
+    <ClInclude Include="include\string\dynamic_wide_string.hpp">
+      <Filter>include\string</Filter>
+    </ClInclude>
+    <ClInclude Include="include\string\string.hpp">
       <Filter>include\string</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include <string/wide_string.hpp>
-#include <string/constant_string.hpp>
+#include <string/string.hpp>
 
 int main( void )
 {
-    JUTIL::ConstantString a( "I am a person." );
-	JUTIL::ConstantString b;
+    JUTIL::ConstantString a( "I am person a person" );
+    JUTIL::ConstantString sub( "person" );
+	printf( "person found at %d\n", a.find( &sub ) );
     system( "pause" );
     return 0;
 }
