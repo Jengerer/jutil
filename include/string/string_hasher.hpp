@@ -16,14 +16,15 @@ namespace JUTIL
     public:
 
 	    // Inspired by the java.lang.String.hashCode() algorithm.
-        static unsigned int hash( const ConstantString& input )
+        static unsigned int hash( const String* input )
         {
             unsigned int result = 0;
-            const char* str = input.get_string();
+            const char* str = input->get_string();
 
             // Hash characters.
-            unsigned int i;
-            for (i = 0; i < input.get_length(); i++) {
+            size_t i;
+            size_t length = input->get_length();
+            for (i = 0; i < length; i++) {
                 result = 31 * result + tolower(str[i]);
 		    }
 

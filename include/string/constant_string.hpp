@@ -18,7 +18,7 @@ namespace JUTIL
         ConstantString( void );
         ConstantString( const char* string );
         ConstantString( const char* string, size_t length );
-        ConstantString( const BaseString<char>& string );
+        ConstantString( const BaseString<char>* string );
         virtual ~ConstantString( void );
 
     };

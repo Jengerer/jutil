@@ -34,7 +34,7 @@ namespace JUTIL
      * Constant string constructor from managed string.
      * Assumes managed string will out-live constant string usage.
      */
-    ConstantWideString::ConstantWideString( const BaseString<wchar_t>& string )
+    ConstantWideString::ConstantWideString( const BaseString<wchar_t>* string )
         : BaseConstantString<wchar_t>( string )
     {
         // Nothing special.

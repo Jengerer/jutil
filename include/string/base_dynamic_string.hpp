@@ -77,7 +77,7 @@ namespace JUTIL
     template <class Type>
     bool BaseDynamicString<Type>::copy( const BaseString<Type>* string )
     {
-        copy( string->get_string(), string->get_length() );
+        return copy( string->get_string(), string->get_length() );
     }
 
     /*

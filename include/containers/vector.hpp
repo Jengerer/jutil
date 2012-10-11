@@ -30,6 +30,7 @@ namespace JUTIL
         const Type& get( size_t i ) const;
         void set( size_t i, const Type& element );
         bool contains( const Type& element ) const;
+        bool erase( size_t i );
         bool remove( const Type& element );
         bool push( const Type& element );
 
@@ -116,6 +117,26 @@ namespace JUTIL
     }
 
     /*
+     * Remove an element from the array by index.
+     * Assumes valid index.
+     */
+    template <class Type>
+    bool Vector<Type>::erase( size_t i )
+    {
+        // Shift left
+        size_t length = get_length();
+        memmove( array_ + i, array_ + i + 1, (length - i - 1) * sizeof(Type) );
+
+        // TODO: If we're shrinking the array, we don't care if it fails; make set_length pass if
+        // failed to realloc when shrinking.
+        if (!set_length( length - 1 )) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /*
      * Remove an element from the array.
      * Returns true if the element was found, false otherwise.
      */
@@ -138,10 +159,7 @@ namespace JUTIL
 
         // Check if found.
         if (i != length) {
-            // Shift left
-            memmove( array_ + i, array_ + i + 1, (length - i - 1) * sizeof(Type) ); 
-            set_length( length - 1 );
-            return true;
+            return erase( i );
         }
 
         return false;

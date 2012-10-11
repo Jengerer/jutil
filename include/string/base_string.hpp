@@ -32,6 +32,7 @@ namespace JUTIL
 
     public:
 
+        // Can't be proper index unless string pointer is nullptr, which is invalid.
         static const unsigned int INVALID_INDEX = 0xFFFFFFFF;
 
     };

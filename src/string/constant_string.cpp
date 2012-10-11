@@ -32,7 +32,7 @@ namespace JUTIL
      * Constant string constructor from managed string.
      * Assumes managed string will out-live constant string usage.
      */
-    ConstantString::ConstantString( const BaseString<char>& string )
+    ConstantString::ConstantString( const BaseString<char>* string )
         : BaseConstantString<char>( string )
     {
     }

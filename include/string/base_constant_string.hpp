@@ -19,7 +19,7 @@ namespace JUTIL
 		// Constructors from string types.
         BaseConstantString( void );
         BaseConstantString( const Type* string, size_t length );
-        BaseConstantString( const BaseString<Type>& string );
+        BaseConstantString( const BaseString<Type>* string );
         virtual ~BaseConstantString( void );
 
         // String handling.
@@ -59,9 +59,9 @@ namespace JUTIL
      * Assumes managed string will out-live constant string usage.
      */
     template <class Type>
-    BaseConstantString<Type>::BaseConstantString( const BaseString<Type>& string )
+    BaseConstantString<Type>::BaseConstantString( const BaseString<Type>* string )
     {
-        set_string( &string );
+        set_string( string );
     }
 
     /*
