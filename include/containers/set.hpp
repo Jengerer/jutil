@@ -39,7 +39,7 @@ namespace JUTIL
         void clear( void );
 
         // Iteration functions.
-        Iterator begin( void );
+        Iterator begin( void ) const;
 
     private:
 
@@ -230,7 +230,7 @@ namespace JUTIL
      * Return iterator for beginning element.
      */
     template <class Type, class Comparator>
-    SetIterator<Type> Set<Type, Comparator>::begin( void )
+    SetIterator<Type> Set<Type, Comparator>::begin( void ) const
     {
         // Get left-most of root.
         SetNode<Type>* start = root_;
