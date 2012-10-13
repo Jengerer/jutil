@@ -106,7 +106,7 @@ namespace JUTIL
     bool ArrayBuilder<Type>::set_size( size_t size )
     {
         // (Re)allocate array.
-        Type* new_array;
+        Type* new_array = array_;
         if (size_ == 0) {
             if (!BaseAllocator::allocate_array( &new_array, size )) {
                 return false;

@@ -234,9 +234,11 @@ namespace JUTIL
     {
         // Get left-most of root.
         SetNode<Type>* start = root_;
-        while (start->left != nullptr) {
-            start = start->left;
-        }
+		if (start != nullptr) {
+			while (start->left != nullptr) {
+				start = start->left;
+			}
+		}
         return Iterator(start);
     }
 
