@@ -28,15 +28,11 @@ namespace JUTIL
         Type* release( void );
         void clear( void );
         
-        // Buffer reading functions.
+        // Buffer management.
+        bool set_length( size_t length );
         Type* get_string( void );
         virtual const Type* get_string( void ) const;
         virtual size_t get_length( void ) const;
-
-    private:
-
-        // Buffer handling.
-        bool set_length( size_t length );
 
     protected:
 
@@ -87,11 +83,10 @@ namespace JUTIL
     bool BaseDynamicString<Type>::copy( const Type* string, size_t length )
     {
         // Copy memory.
-        size_t size = length + 1;
-        if (!builder_.set_size( size )) {
+        if (!set_length( length )) {
             return false;
         }
-        memcpy( builder_.get_array(), string, size );
+        memcpy( get_string(), string, length );
         return true;
     }
 
@@ -102,7 +97,8 @@ namespace JUTIL
     template <class Type>
     void BaseDynamicString<Type>::set_string( Type* string, size_t length )
     {
-        builder_.set_array( string, length );
+        size_t size = length + 1;
+        builder_.set_array( string, size );
     }
 
     /*
@@ -149,7 +145,13 @@ namespace JUTIL
     template <class Type>
     size_t BaseDynamicString<Type>::get_length( void ) const
     {
-        return builder_.get_size();
+        size_t size = builder_.get_size();
+
+        // If non-empty, we don't count null-character in array.
+        if (size != 0) {
+            return size - 1;
+        }
+        return 0;
     }
 
     /*
@@ -164,6 +166,10 @@ namespace JUTIL
         if (!builder_.set_size( new_size )) {
             return false;
         }
+
+        // Write null character.
+        char* string = builder_.get_array();
+        string[length] = '\0';
         return true;
     }
 
