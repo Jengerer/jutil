@@ -39,7 +39,6 @@
   <ItemGroup>
     <ClCompile Include="src\base\jutil_base.cpp" />
     <ClCompile Include="src\memory\allocation_manager.cpp" />
-    <ClCompile Include="src\memory\base_allocator.cpp" />
     <ClCompile Include="src\string\constant_string.cpp" />
     <ClCompile Include="src\string\constant_wide_string.cpp" />
     <ClCompile Include="src\string\dynamic_string.cpp" />
