@@ -60,10 +60,10 @@ namespace JUTIL
         int length = vsnprintf( nullptr, 0, format, args );
 
         // Allocate new string size.
-        size_t old_length = builder_.get_size();
-        size_t added_length = length + 1;
+        size_t old_length = get_length();
+        size_t added_length = length;
         size_t new_length = old_length + added_length;
-        if ((length < 0) || !builder_.set_size( new_length )) {
+        if ((length < 0) || !set_length( new_length )) {
             return false;
         }
 

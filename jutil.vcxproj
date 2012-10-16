@@ -22,6 +22,7 @@
     <ClInclude Include="include\containers\container_common.hpp" />
     <ClInclude Include="include\containers\set.hpp" />
     <ClInclude Include="include\containers\map.hpp" />
+    <ClInclude Include="include\memory\allocation_manager.hpp" />
     <ClInclude Include="include\memory\array_builder.hpp" />
     <ClInclude Include="include\memory\base_allocator.hpp" />
     <ClInclude Include="include\string\base_string.hpp" />
@@ -37,6 +38,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\base\jutil_base.cpp" />
+    <ClCompile Include="src\memory\allocation_manager.cpp" />
+    <ClCompile Include="src\memory\base_allocator.cpp" />
     <ClCompile Include="src\string\constant_string.cpp" />
     <ClCompile Include="src\string\constant_wide_string.cpp" />
     <ClCompile Include="src\string\dynamic_string.cpp" />
@@ -81,13 +84,13 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>Sync</ExceptionHandling>
       <AdditionalIncludeDirectories>./include;</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

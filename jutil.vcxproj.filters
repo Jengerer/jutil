@@ -19,6 +19,12 @@
     <ClCompile Include="src\string\dynamic_string.cpp">
       <Filter>src\string</Filter>
     </ClCompile>
+    <ClCompile Include="src\memory\allocation_manager.cpp">
+      <Filter>src\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\memory\base_allocator.cpp">
+      <Filter>src\memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\containers\map.hpp">
@@ -89,6 +95,9 @@
     </ClInclude>
     <ClInclude Include="include\string\string.hpp">
       <Filter>include\string</Filter>
+    </ClInclude>
+    <ClInclude Include="include\memory\allocation_manager.hpp">
+      <Filter>include\memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

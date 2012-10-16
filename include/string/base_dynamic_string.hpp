@@ -168,8 +168,8 @@ namespace JUTIL
         }
 
         // Write null character.
-        char* string = builder_.get_array();
-        string[length] = '\0';
+        Type* string = builder_.get_array();
+        string[length] = static_cast<Type>(0);
         return true;
     }
 

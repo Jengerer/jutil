@@ -2,6 +2,7 @@
 #define BASE_ALLOCATOR_HPP
 
 #include "base/jutil_base.hpp"
+#include "memory/allocation_manager.hpp"
 #include <stdlib.h>
 #include <new.h>
 
@@ -11,38 +12,19 @@ namespace JUTIL
     /*
      * Generic allocator class for objects & heap memory.
      */
-    class BaseAllocator
+    class __declspec(dllexport) BaseAllocator
     {
 
     public:
 
-        // Single object allocation.
-        template <class Type>
-        static bool allocate( Type** output );
-
-        // Array allocation.
-        template <class Type>
-        static bool allocate_array( Type** output, size_t elements );
-
-        // Array reallocation.
-        template <class Type>
-        static bool reallocate_array( Type** output, size_t elements );
-
-        // Memory freeing functions.
-        template <class Type>
-        static void release( Type* address );
-
-        // Free after checking handle.
-        template <class Type>
-        static void safe_release( Type** memory );
-
-        // Destroying function.
-        template <class Type>
-        static void destroy( Type* address );
-
-        // Destroy after checking handle.
-        template <class Type>
-        static void safe_destroy( Type** memory );
+        // Memory management functions.
+        template <class Type> static bool allocate( Type** output );
+        template <class Type> static bool allocate_array( Type** output, size_t elements );
+        template <class Type> static bool reallocate_array( Type** output, size_t elements );
+        template <class Type> static void release( Type* address );
+        template <class Type> static void safe_release( Type** memory );
+        template <class Type> static void destroy( Type* address );
+        template <class Type> static void safe_destroy( Type** memory );
 
     };
 
@@ -53,13 +35,20 @@ namespace JUTIL
     bool BaseAllocator::allocate( Type** output )
     {
         // Just allocate enough space for one.
-        Type* allocation = (Type*)malloc( sizeof(Type) );
-        if (allocation != nullptr) {
-            *output = allocation;
-            return true;
+        void* allocation = malloc( sizeof(Type) );
+        if (allocation == nullptr) {
+            return false;
         }
-        
-        return false;
+
+#if defined( _DEBUG )
+        AllocationManager* allocation_manager = AllocationManager::get_instance();
+        if (allocation_manager != nullptr) {
+            allocation_manager->on_allocate( allocation, sizeof(Type) );
+        }
+#endif
+
+        *output = static_cast<Type*>(allocation);
+        return true;
     }
 
     /*
@@ -71,12 +60,19 @@ namespace JUTIL
         // Allocate chunk for array.
         unsigned int size = elements * sizeof(Type);
         Type* allocation = (Type*)malloc( size );
-        if (allocation != nullptr) {
-            *output = allocation;
-            return true;
+        if (allocation == nullptr) {
+            return false;
         }
-        
-        return false;
+
+#if defined( _DEBUG )
+        AllocationManager* allocation_manager = AllocationManager::get_instance();
+        if (allocation_manager != nullptr) {
+            allocation_manager->on_allocate( allocation, size );
+        }
+#endif
+
+        *output = allocation;
+        return true;
     }
 
     /*
@@ -88,12 +84,19 @@ namespace JUTIL
         // Allocate chunk for array.
         unsigned int size = elements * sizeof(Type);
         Type* allocation = (Type*)realloc( *output, size );
-        if (allocation != nullptr) {
-            *output = allocation;
-            return true;
+        if (allocation == nullptr) {
+            return false;
         }
-        
-        return false;
+
+#if defined( _DEBUG )
+        AllocationManager* allocation_manager = AllocationManager::get_instance();
+        if (allocation_manager != nullptr) {
+            allocation_manager->on_reallocate( *output, allocation, size );
+        }
+#endif
+
+        *output = allocation;
+        return true;
     }
 
     /*
@@ -103,6 +106,13 @@ namespace JUTIL
     void BaseAllocator::release( Type* address )
     {
         free( address );
+
+#if defined( _DEBUG )
+        AllocationManager* allocation_manager = AllocationManager::get_instance();
+        if (allocation_manager != nullptr) {
+            allocation_manager->on_release( address );
+        }
+#endif
     }
 
     /*
@@ -125,6 +135,13 @@ namespace JUTIL
     void BaseAllocator::destroy( Type* address )
     {
         delete address;
+
+#if defined( _DEBUG )
+        AllocationManager* allocation_manager = AllocationManager::get_instance();
+        if (allocation_manager != nullptr) {
+            allocation_manager->on_release( address );
+        }
+#endif
     }
 
     /*

@@ -241,7 +241,7 @@ namespace JUTIL
         if (length == 0) {
             // Check if already emptied.
             if (buffer_size_ != 0) {
-                free( array_ );
+                JUTIL::BaseAllocator::release( array_ );
                 buffer_size_ = 0;
             }
 

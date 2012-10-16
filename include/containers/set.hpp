@@ -132,6 +132,8 @@ namespace JUTIL
             balance_tree( current->parent );
         }
 
+        size_t length = get_length();
+        set_length( length + 1 );
         return true;
     }
 
@@ -178,8 +180,9 @@ namespace JUTIL
         balance_tree( node->parent );
 
         // Delete node.
-        free( node );
-        set_length( get_length() - 1 );
+        JUTIL::BaseAllocator::release( node );
+        size_t length = get_length();
+        set_length( length - 1 );
     }
 
     /*
@@ -217,7 +220,7 @@ namespace JUTIL
         node = root_;
         while (node != nullptr) {
             SetNode<Type>* temp = node->right;
-            free( node );
+            JUTIL::BaseAllocator::release( node );
             node = temp;
         }
 
