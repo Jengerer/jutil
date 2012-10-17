@@ -22,7 +22,7 @@ namespace JUTIL
         class Value,
         class Hasher,
         class HashComparator = DefaultComparator<Hash> >
-    class HashMap
+    class __declspec(dllexport) HashMap
     {
 
     public:
