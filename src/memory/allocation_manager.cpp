@@ -119,6 +119,7 @@ namespace JUTIL
     {
         // Find allocation.
         struct Allocation* allocation = find_allocation( address );
+		JUTIL::JUTILBase::debug_assert( allocation != nullptr );
         if (allocation == nullptr) {
             return;
         }
@@ -135,6 +136,7 @@ namespace JUTIL
     {
         // Find allocation.
         struct Allocation* allocation = find_allocation( address );
+		JUTIL::JUTILBase::debug_assert( allocation != nullptr );
         if (allocation == nullptr) {
             return;
         }
@@ -164,8 +166,8 @@ namespace JUTIL
         // Create if not created yet.
         if (instance_ == nullptr) {
             instance_ = static_cast<AllocationManager*>(malloc( sizeof(AllocationManager) ));
+			JUTIL::JUTILBase::debug_assert( instance_ != nullptr );
             if (instance_ == nullptr) {
-                JUTIL::JUTILBase::debug_assert( false );
                 return nullptr;
             }
 
