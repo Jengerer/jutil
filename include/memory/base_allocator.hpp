@@ -105,14 +105,14 @@ namespace JUTIL
     template <class Type>
     void BaseAllocator::release( Type* address )
     {
-        free( address );
-
 #if defined( _DEBUG )
         AllocationManager* allocation_manager = AllocationManager::get_instance();
         if (allocation_manager != nullptr) {
             allocation_manager->on_release( address );
         }
 #endif
+
+        free( address );
     }
 
     /*
@@ -134,14 +134,14 @@ namespace JUTIL
     template <class Type>
     void BaseAllocator::destroy( Type* address )
     {
-        delete address;
-
 #if defined( _DEBUG )
         AllocationManager* allocation_manager = AllocationManager::get_instance();
         if (allocation_manager != nullptr) {
             allocation_manager->on_release( address );
         }
 #endif
+
+        delete address;
     }
 
     /*
