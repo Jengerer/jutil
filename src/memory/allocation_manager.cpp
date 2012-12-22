@@ -86,6 +86,9 @@ namespace JUTIL
      */
     void AllocationManager::on_allocate( void* address, size_t size )
     {
+		// Acquire mutex.
+		allocation_mutex_.lock();
+
         // Break on allocation.
         if (allocation_num_ == break_allocation_) {
             JUTIL::JUTILBase::debug_assert( false );
@@ -110,6 +113,9 @@ namespace JUTIL
         }
         root_ = allocation;
         allocation_num_++;
+
+		// Release mutex.
+		allocation_mutex_.unlock();
     }
 
     /*
@@ -117,6 +123,9 @@ namespace JUTIL
      */
     void AllocationManager::on_reallocate( void* address, void* new_address, size_t new_size )
     {
+		// Acquire mutex.
+		allocation_mutex_.lock();
+
         // Find allocation.
         struct Allocation* allocation = find_allocation( address );
         if (allocation == nullptr) {
@@ -126,6 +135,9 @@ namespace JUTIL
         // Update address and size.
         allocation->address = new_address;
         allocation->size = new_size;
+
+		// Release mutex.
+		allocation_mutex_.unlock();
     }
 
     /*
@@ -133,6 +145,9 @@ namespace JUTIL
      */
     void AllocationManager::on_release( void* address )
     {
+		// Acquire mutex.
+		allocation_mutex_.lock();
+
         // Find allocation.
         struct Allocation* allocation = find_allocation( address );
         if (allocation == nullptr) {
@@ -154,6 +169,9 @@ namespace JUTIL
 
         // Delete allocation.
         free( allocation );
+
+		// Release mutex.
+		allocation_mutex_.unlock();
     }
 
     /*

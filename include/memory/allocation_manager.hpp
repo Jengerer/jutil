@@ -2,6 +2,7 @@
 #define ALLOCATION_MANAGER_HPP
 
 #include "base/jutil_base.hpp"
+#include <boost/thread/mutex.hpp>
 
 namespace JUTIL
 {
@@ -24,7 +25,7 @@ namespace JUTIL
     /*
      * Class for tracking allocations, reallocations, and frees on heap.
      */
-    class __declspec(dllexport) AllocationManager
+    class AllocationManager
     {
 
     public:
@@ -62,6 +63,9 @@ namespace JUTIL
         struct Allocation* root_;
         size_t allocation_num_;
         size_t break_allocation_;
+
+		// Allocation logging mutex.
+		boost::mutex allocation_mutex_;
 
     };
 
