@@ -35,19 +35,19 @@ namespace JUTIL
         ~AllocationManager( void );
 
         // Allocation debugging.
-        void set_debug_break( size_t allocation_num );
-        void dump_leaks( const char* filename );
+        void __declspec(dllexport) set_debug_break( size_t allocation_num );
+        void __declspec(dllexport) dump_leaks( const char* filename );
 
         // Allocation tracking.
-        void on_allocate( void* address, size_t size );
-        void on_reallocate( void* address, void* new_address, size_t new_size );
-        void on_release( void* address );
+        void __declspec(dllexport) on_allocate( void* address, size_t size );
+        void __declspec(dllexport) on_reallocate( void* address, void* new_address, size_t new_size );
+        void __declspec(dllexport) on_release( void* address );
 
     public:
 
         // Singleton instance creation.
-        static AllocationManager* get_instance( void );
-        static void shut_down( void );
+        static __declspec(dllexport) AllocationManager* get_instance( void );
+        static __declspec(dllexport) void shut_down( void );
 
     private:
 
