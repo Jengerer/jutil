@@ -6,22 +6,22 @@
 namespace JUTIL
 {
 
-    /*
-     * Constant string representation for C-style character array.
-     */
-    class __declspec(dllexport) ConstantString : public BaseConstantString<char>
-    {
+	/*
+	 * Constant string representation for C-style character array.
+	 */
+	class __declspec(dllexport) ConstantString : public BaseConstantString<char>
+	{
 
-    public:
+	public:
 
-        // Constructors from C-style string types.
-        ConstantString( void );
-        ConstantString( const char* string );
-        ConstantString( const char* string, size_t length );
-        ConstantString( const BaseString<char>* string );
-        virtual ~ConstantString( void );
+		// Constructors from C-style string types.
+		ConstantString( void );
+		ConstantString( const char* string );
+		ConstantString( const char* string, size_t length );
+		ConstantString( const BaseString<char>* string );
+		virtual ~ConstantString( void );
 
-    };
+	};
 
 }
 

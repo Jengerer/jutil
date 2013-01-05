@@ -4,15 +4,15 @@
 namespace JUTIL
 {
 
-    // Default class allocator.
-    HeapAllocator BaseClassServices::allocator_;
+	// Default class allocator.
+	HeapAllocator BaseClassServices::allocator_;
 
-    /*
-     * Get default allocator interface.
-     */
-    AllocatorInterface* BaseClassServices::get_default_allocator( void )
-    {
-        return static_cast<AllocatorInterface*>(&allocator_);
-    }
+	/*
+	 * Get default allocator interface.
+	 */
+	AllocatorInterface* BaseClassServices::get_default_allocator( void )
+	{
+		return static_cast<AllocatorInterface*>(&allocator_);
+	}
 
 }

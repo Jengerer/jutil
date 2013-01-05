@@ -6,22 +6,22 @@
 namespace JUTIL
 {
 
-    /*
-     * Services for objects of base class.
-     */
-    class BaseServices
-    {
+	/*
+	 * Services for objects of base class.
+	 */
+	class BaseServices
+	{
 
-        public:
+		public:
 
-            // Default allocator getter.
-            static AllocatorInterface* get_default_allocator( void );
+			// Default allocator getter.
+			static AllocatorInterface* get_default_allocator( void );
 
-        private:
+		private:
 
-            static HeapAllocator allocator_;
-            
-    };
+			static HeapAllocator allocator_;
+			
+	};
 
 }
 

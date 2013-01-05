@@ -9,18 +9,18 @@
 namespace JUTIL
 {
 
-    /*
-     * Base class for general utilities.
-     */
-    class __declspec(dllexport) JUTILBase
-    {
+	/*
+	 * Base class for general utilities.
+	 */
+	class __declspec(dllexport) JUTILBase
+	{
 
-    public:
+	public:
 
-        // Debugging functions.
-        static void debug_assert( bool condition );
+		// Debugging functions.
+		static void debug_assert( bool condition );
 
-    };
+	};
 
 }
 

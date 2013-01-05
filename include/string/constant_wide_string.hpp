@@ -6,22 +6,22 @@
 namespace JUTIL
 {
 
-    /*
-     * Constant string representation for wide character array.
-     */
-    class __declspec(dllexport) ConstantWideString : public BaseConstantString<wchar_t>
-    {
+	/*
+	 * Constant string representation for wide character array.
+	 */
+	class __declspec(dllexport) ConstantWideString : public BaseConstantString<wchar_t>
+	{
 
-    public:
+	public:
 
-        // Constructors from C-style string types.
-        ConstantWideString( void );
-        ConstantWideString( const wchar_t* string );
-        ConstantWideString( const wchar_t* string, size_t length );
-        ConstantWideString( const BaseString<wchar_t>* string );
-        virtual ~ConstantWideString( void );
+		// Constructors from C-style string types.
+		ConstantWideString( void );
+		ConstantWideString( const wchar_t* string );
+		ConstantWideString( const wchar_t* string, size_t length );
+		ConstantWideString( const BaseString<wchar_t>* string );
+		virtual ~ConstantWideString( void );
 
-    };
+	};
 
 }
 

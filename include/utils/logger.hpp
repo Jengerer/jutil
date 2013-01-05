@@ -7,29 +7,29 @@
 namespace JUTIL
 {
 
-    /*
-     * Class to log text to a file.
-     */
-    class __declspec(dllexport) Logger
-    {
+	/*
+	 * Class to log text to a file.
+	 */
+	class __declspec(dllexport) Logger
+	{
 
-    public:
+	public:
 
-        Logger( void );
-        ~Logger( void );
+		Logger( void );
+		~Logger( void );
 
-        // File handling.
-        bool open( const ConstantString& filename );
-        void close( void );
+		// File handling.
+		bool open( const ConstantString& filename );
+		void close( void );
 
-        // Logging functions.
-        bool write( const char* format, ... );
+		// Logging functions.
+		bool write( const char* format, ... );
 
-    private:
+	private:
 
-        FILE* file_;
+		FILE* file_;
 
-    };
+	};
 
 }
 

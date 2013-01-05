@@ -6,24 +6,24 @@
 namespace JUTIL
 {
 
-    /*
-     * String container class that wraps a C-string representation.
-     * Assumes string is writable; frees memory on destruction.
-     */
-    class __declspec(dllexport) DynamicString : public BaseDynamicString<char>
-    {
+	/*
+	 * String container class that wraps a C-string representation.
+	 * Assumes string is writable; frees memory on destruction.
+	 */
+	class __declspec(dllexport) DynamicString : public BaseDynamicString<char>
+	{
 
-    public:
+	public:
 
-        DynamicString( void );
-        DynamicString( char* string, size_t length );
-        virtual ~DynamicString( void );
+		DynamicString( void );
+		DynamicString( char* string, size_t length );
+		virtual ~DynamicString( void );
 
-        // Buffer management.
-        bool write( const char* format, ... );
-        bool write( const char* format, va_list args );
-    
-    };
+		// Buffer management.
+		bool write( const char* format, ... );
+		bool write( const char* format, va_list args );
+	
+	};
 
 }
 

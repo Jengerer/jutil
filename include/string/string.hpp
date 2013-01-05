@@ -9,9 +9,9 @@
 namespace JUTIL
 {
 
-    // Type definitions for general string usage.
-    typedef BaseString<char> String;
-    typedef BaseString<wchar_t> WideString;
+	// Type definitions for general string usage.
+	typedef BaseString<char> String;
+	typedef BaseString<wchar_t> WideString;
 
 }
 
