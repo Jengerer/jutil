@@ -40,7 +40,7 @@ namespace JUTIL
 		// Get needed size.
 		va_list args;
 		va_start( args, format );
-		if (!write( format, args )) {
+		if (!vwrite( format, args )) {
 			return false;
 		}
 		va_end( args );
@@ -52,12 +52,12 @@ namespace JUTIL
 	 * Returns a pointer to the new string if succeeded, nullptr otherwise.
 	 * Assumes 'args' list has been started.
 	 */
-	bool DynamicString::write( const char* format, va_list args )
+	bool DynamicString::vwrite( const char* format, va_list args )
 	{
 		// Get needed size.
 		// Keep old args for actual write.
 		va_list new_args = args;
-		int length = vsnprintf( nullptr, 0, format, args );
+		int length = _vscprintf( format, args );
 
 		// Allocate new string size.
 		size_t old_length = get_length();

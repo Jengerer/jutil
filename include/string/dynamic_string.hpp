@@ -21,7 +21,7 @@ namespace JUTIL
 
 		// Buffer management.
 		bool write( const char* format, ... );
-		bool write( const char* format, va_list args );
+		bool vwrite( const char* format, va_list args );
 	
 	};
 
