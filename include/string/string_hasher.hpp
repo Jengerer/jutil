@@ -108,6 +108,10 @@ namespace JUTIL
 			BaseAllocator::allocate_array( &msg, new_len + 64 );
 
 			memcpy(msg, initial_msg, initial_len);
+			for(int i = initial_len; i < new_len + 64; ++i){
+				msg[i] = 0;
+			}
+
 			msg[initial_len] = 128; // write the "1" bit
  
 			uint32_t bits_len = 8*initial_len; // note, we append the len
