@@ -96,6 +96,9 @@
     <ClInclude Include="include\memory\allocation_manager.hpp">
       <Filter>include\memory</Filter>
     </ClInclude>
+    <ClInclude Include="include\string\md5.hpp">
+      <Filter>include\string</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">

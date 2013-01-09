@@ -31,6 +31,7 @@
     <ClInclude Include="include\string\constant_string.hpp" />
     <ClInclude Include="include\string\constant_wide_string.hpp" />
     <ClInclude Include="include\string\dynamic_string.hpp" />
+    <ClInclude Include="include\string\md5.hpp" />
     <ClInclude Include="include\string\string.hpp" />
     <ClInclude Include="include\string\string_hasher.hpp" />
     <ClInclude Include="include\string\dynamic_wide_string.hpp" />
