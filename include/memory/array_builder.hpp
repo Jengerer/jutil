@@ -16,6 +16,10 @@ namespace JUTIL
 		ArrayBuilder( Type* array, size_t size );
 		~ArrayBuilder( void );
 
+		// Element functions.
+		inline Type& at( size_t index );
+		inline const Type& at( size_t index ) const;
+
 		// Array buffer handles.
 		void set_array( Type* array, size_t size );
 		Type* get_array( void );
@@ -60,6 +64,24 @@ namespace JUTIL
 	ArrayBuilder<Type>::~ArrayBuilder( void )
 	{
 		clear();
+	}
+
+	/*
+	 * Element getter functions.
+	 */
+	template <class Type>
+	Type& ArrayBuilder<Type>::at( size_t index )
+	{
+		return array_[index];
+	}
+
+	/*
+	 * Constant-reference element getter functions.
+	 */
+	template <class Type>
+	const Type& ArrayBuilder<Type>::at( size_t index ) const
+	{
+		return array_[index];
 	}
 
 	/*
