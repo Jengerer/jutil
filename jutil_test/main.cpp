@@ -1,16 +1,15 @@
 #include <stdio.h>
-#include <containers/vector.hpp>
+#include <string/string.hpp>
 
 int main( void )
 {
-	JUTIL::Vector<int> vector;
-	if (!vector.reserve(20)) {
-		return -1;
-	}
+	JUTIL::DynamicString strang;
+	strang.write("Do %s.\n", "it");
+	printf(strang.get_string());
 
-	for (unsigned int i = 0; i < 20; ++i) {
-		vector.push( i );
-	}
+	JUTIL::DynamicWideString string;
+	string.write(L"Do %s.\n", L"it");
+	wprintf(string.get_string());
 	system( "pause" );
 	return 0;
 }

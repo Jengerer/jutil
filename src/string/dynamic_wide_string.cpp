@@ -57,7 +57,7 @@ namespace JUTIL
 		// Get needed size.
 		// Keep old args for actual write.
 		va_list new_args = args;
-		int length = _vsnwprintf( nullptr, 0, format, args );
+		int length = _vscwprintf( format, args );
 
 		// Allocate new string size.
 		size_t old_length = get_length();
@@ -69,7 +69,7 @@ namespace JUTIL
 
 		// Write to buffer.
 		wchar_t* new_string = builder_.get_array();
-		int written = _vsnwprintf( new_string + old_length, added_length, format, new_args );
+		int written = _vsnwprintf_s( new_string + old_length, added_length + 1, added_length, format, new_args );
 		va_end( new_args );
 		if (written < 0) {
 			return false;
