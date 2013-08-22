@@ -29,7 +29,7 @@ namespace JUTIL
 		inline Type& at( size_t index );
 		inline const Type& at( size_t index ) const;
 		bool contains( const Type& element ) const;
-		bool erase( size_t index );
+		void erase( size_t index );
 		bool remove( const Type& element );
 		bool push( const Type& element );
 		size_t index_of( const Type* element ) const;
@@ -105,20 +105,13 @@ namespace JUTIL
 	 * Assumes valid index.
 	 */
 	template <class Type>
-	bool Vector<Type>::erase( size_t i )
+	void Vector<Type>::erase( size_t i )
 	{
 		// Shift left
 		Type* array = builder_.get_array();
 		size_t length = get_length();
 		memmove( array + i, array + i + 1, (length - i - 1) * sizeof(Type) );
-
-		// TODO: If we're shrinking the array, we don't care if it fails; make set_length pass if
-		// failed to realloc when shrinking.
-		if (!resize( length - 1 )) {
-			return false;
-		}
-
-		return true;
+		resize( length - 1 );
 	}
 
 	/*
@@ -144,7 +137,8 @@ namespace JUTIL
 
 		// Check if found.
 		if (i != length) {
-			return erase( i );
+			erase( i );
+			return true;
 		}
 
 		return false;
