@@ -52,8 +52,6 @@ namespace JUTIL
 	template <class Type>
 	BaseContainer<Type>::~BaseContainer( void )
 	{
-		// Should be empty on removal.
-		JUTILBase::debug_assert( length_ == 0 );
 	}
 
 }

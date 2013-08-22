@@ -61,7 +61,6 @@ namespace JUTIL
 	template <class Type>
 	Vector<Type>::~Vector( void )
 	{
-		clear();
 	}
 
 	/*
@@ -107,11 +106,16 @@ namespace JUTIL
 	template <class Type>
 	void Vector<Type>::erase( size_t i )
 	{
-		// Shift left
-		Type* array = builder_.get_array();
-		size_t length = get_length();
-		memmove( array + i, array + i + 1, (length - i - 1) * sizeof(Type) );
-		resize( length - 1 );
+		// Shift left.
+        size_t new_length = get_length() - 1;
+        if (new_length != 0) {
+		    Type* array = builder_.get_array();
+		    memmove( array + i, array + i + 1, (new_length - i) * sizeof(Type) );
+            resize( new_length );
+        }
+        else {
+            clear();
+        }
 	}
 
 	/*
@@ -214,7 +218,8 @@ namespace JUTIL
 	template <class Type>
 	void Vector<Type>::clear( void )
 	{
-		set_length( 0 );
+        set_length( 0 );
+		builder_.clear();
 	}
 
 	/*
