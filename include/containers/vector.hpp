@@ -185,13 +185,24 @@ namespace JUTIL
 
 	/*
 	 * Set new array size.
-	 * Always matches buffer to length, so is destructive.
+	 * Does not fail if length is less than current length.
 	 */
 	template <class Type>
 	bool Vector<Type>::resize( size_t length )
 	{
-		// Allocate if needed.
-		if (!reserve( length )) {
+		// Check if we have enough reserved size.
+		size_t current_length = get_length();
+		if (length > current_length) {
+			// Don't reallocate if we had enough reserved space.
+			size_t current_size = builder_.get_size();
+			if (current_size >= length) {
+				set_length( length );
+				return true;
+			}
+		}
+
+		// If we're downsizing, don't fail.
+		if (!reserve( length ) && (length > current_length)) {
 			return false;
 		}
 
