@@ -99,6 +99,9 @@
     <ClInclude Include="include\string\md5.hpp">
       <Filter>include\string</Filter>
     </ClInclude>
+    <ClInclude Include="include\jutil_version.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">
