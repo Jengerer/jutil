@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\base\jutil_base.cpp" />
+    <ClCompile Include="src\jutil_version.cpp" />
     <ClCompile Include="src\memory\allocation_manager.cpp" />
     <ClCompile Include="src\string\constant_string.cpp" />
     <ClCompile Include="src\string\constant_wide_string.cpp" />

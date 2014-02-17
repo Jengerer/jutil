@@ -22,6 +22,9 @@
     <ClCompile Include="src\memory\allocation_manager.cpp">
       <Filter>src\memory</Filter>
     </ClCompile>
+    <ClCompile Include="src\jutil_version.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\containers\map.hpp">

@@ -5,7 +5,8 @@
 
 namespace JUTIL
 {
-	const ConstantString JUTIL_VERSION( "0.1" );
+	// Get current JUTIL version string.
+	_declspec(dllexport) const JUTIL::String* get_version_string( void );
 }
 
 #endif // JUTIL_VERSION_HPP
