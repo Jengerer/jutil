@@ -76,9 +76,9 @@ namespace JUTIL
 	 * Set constructor.
 	 */
 	template <class Type, class Comparator>
-	Set<Type, Comparator>::Set( void )
+	Set<Type, Comparator>::Set( void ) :
+		root_( nullptr )
 	{
-		root_ = nullptr;
 	}
 
 	/*

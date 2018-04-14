@@ -47,9 +47,9 @@ namespace JUTIL
 	 * AVL tree map constructor.
 	 */
 	template <class Key, class Value, class KeyComparator>
-	Map<Key, Value, KeyComparator>::Map( void )
+	Map<Key, Value, KeyComparator>::Map( void ) :
+		BaseClass()
 	{
-		// Do nothing.
 	}
 
 
@@ -59,7 +59,6 @@ namespace JUTIL
 	template <class Key, class Value, class KeyComparator>
 	Map<Key, Value, KeyComparator>::~Map( void )
 	{
-		// Do nothing.
 	}
 
 

@@ -7,14 +7,16 @@ namespace JUTIL
 	/*
 	 * Constant string default constructor.
 	 */
-	ConstantString::ConstantString( void )
+	ConstantString::ConstantString( void ) :
+		BaseConstantString<char>()
 	{
 	}
 
 	/*
 	 * Constant string constructor from null-terminated string.
 	 */
-	ConstantString::ConstantString( const char* string )
+	ConstantString::ConstantString( const char* string ) :
+		BaseConstantString<char>()
 	{
 		size_t length = strlen( string );
 		set_string( string, length );
@@ -23,7 +25,7 @@ namespace JUTIL
 	/*
 	 * Constant string constructor from string with length.
 	 */
-	ConstantString::ConstantString( const char* string, unsigned int length )
+	ConstantString::ConstantString( const char* string, size_t length )
 		: BaseConstantString<char>( string, length )
 	{
 	}

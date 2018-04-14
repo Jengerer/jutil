@@ -7,15 +7,16 @@ namespace JUTIL
 	/*
 	 * Constant string default constructor.
 	 */
-	ConstantWideString::ConstantWideString( void )
+	ConstantWideString::ConstantWideString( void ) :
+		BaseConstantString<wchar_t>()
 	{
-		// Nothing special.
 	}
 
 	/*
 	 * Constant string constructor from null-terminated string.
 	 */
-	ConstantWideString::ConstantWideString( const wchar_t* string )
+	ConstantWideString::ConstantWideString( const wchar_t* string ) :
+		BaseConstantString<wchar_t>()
 	{
 		size_t length = wcslen( string );
 		set_string( string, length );
@@ -24,10 +25,9 @@ namespace JUTIL
 	/*
 	 * Constant string constructor from string with length.
 	 */
-	ConstantWideString::ConstantWideString( const wchar_t* string, unsigned int length )
+	ConstantWideString::ConstantWideString( const wchar_t* string, size_t length )
 		: BaseConstantString<wchar_t>( string, length )
 	{
-		// Nothing special.
 	}
 
 	/*
@@ -37,7 +37,6 @@ namespace JUTIL
 	ConstantWideString::ConstantWideString( const BaseString<wchar_t>* string )
 		: BaseConstantString<wchar_t>( string )
 	{
-		// Nothing special.
 	}
 
 	/*

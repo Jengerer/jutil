@@ -51,7 +51,8 @@ namespace JUTIL
 	 * Vector constructor.
 	 */
 	template <class Type>
-	Vector<Type>::Vector( void )
+	Vector<Type>::Vector( void ) :
+		builder_()
 	{
 	}
 

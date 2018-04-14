@@ -44,7 +44,6 @@ namespace JUTIL
 	MapIterator<Key, Value>::MapIterator( void )
 		: set_iterator_( nullptr )
 	{
-		// Do nothing.
 	}
 
 	/*
@@ -54,7 +53,6 @@ namespace JUTIL
 	MapIterator<Key, Value>::MapIterator( const SetIterator< KeyValuePair< Key, Value> >& set_iterator  )
 		: set_iterator_( set_iterator )
 	{
-		// Do nothing.
 	}
 
 	/*
@@ -64,7 +62,6 @@ namespace JUTIL
 	MapIterator<Key, Value>::MapIterator( const MapIterator<Key, Value>& other )
 		: set_iterator_( other.set_iterator_ )
 	{
-		// Do nothing.
 	}
 
 	/*

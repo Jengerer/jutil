@@ -43,9 +43,10 @@ namespace JUTIL
 	 * Array builder constructor for empty array.
 	 */
 	template <class Type>
-	ArrayBuilder<Type>::ArrayBuilder( void )
+	ArrayBuilder<Type>::ArrayBuilder( void ) :
+		array_( nullptr ),
+		size_()
 	{
-		set_array( nullptr, 0 );
 	}
 
 	/*

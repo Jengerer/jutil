@@ -41,9 +41,8 @@ namespace JUTIL
 	 * Base container constructor.
 	 */
 	template <class Type>
-	BaseContainer<Type>::BaseContainer( void )
+	BaseContainer<Type>::BaseContainer( void ) : length_( 0 )
 	{
-		set_length( 0 );
 	}
 
 	/*

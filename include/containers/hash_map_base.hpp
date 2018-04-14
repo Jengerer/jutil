@@ -40,7 +40,6 @@ namespace JUTIL
 	HashMapIterator<Hash, Value>::HashMapIterator( void )
 		: map_iterator_( nullptr )
 	{
-		// Do nothing.
 	}
 
 	/*

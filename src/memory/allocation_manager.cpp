@@ -12,11 +12,13 @@ namespace JUTIL
 	/*
 	 * Allocation manager constructor.
 	 */
-	AllocationManager::AllocationManager( void )
+	AllocationManager::AllocationManager( void ) :
+		root_( nullptr ),
+		allocation_num_( 1 ),
+		break_allocation_( 0 ),
+		allocation_mutex_()
+
 	{
-		root_ = nullptr;
-		allocation_num_ = 1;
-		break_allocation_ = 0;
 	}
 
 	/*

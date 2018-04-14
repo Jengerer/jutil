@@ -45,8 +45,9 @@ namespace JUTIL
 	 */
 	template <class Type>
 	BaseDynamicString<Type>::BaseDynamicString( void )
+		: BaseString<Type>(),
+		builder_()
 	{
-		// Nothing.
 	}
 
 	/*
@@ -54,6 +55,8 @@ namespace JUTIL
 	 */
 	template <class Type>
 	BaseDynamicString<Type>::BaseDynamicString( Type* string, size_t length )
+		: BaseString<Type>(),
+		builder_()
 	{
 		set_string( string, length );
 	}

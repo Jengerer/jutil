@@ -39,19 +39,20 @@ namespace JUTIL
 	 * Constant string default constructor.
 	 */
 	template <class Type>
-	BaseConstantString<Type>::BaseConstantString( void )
+	BaseConstantString<Type>::BaseConstantString( void ) :
+		string_( nullptr ),
+		length_( 0 )
 	{
-		string_ = nullptr;
-		length_ = 0;
 	}
 
 	/*
 	 * Constant string constructor from string with length.
 	 */
 	template <class Type>
-	BaseConstantString<Type>::BaseConstantString( const Type* string, unsigned int length )
+	BaseConstantString<Type>::BaseConstantString( const Type* string, size_t length ) :
+		string_( string ),
+		length_( length )
 	{
-		set_string( string, length );
 	}
 
 	/*
@@ -59,7 +60,9 @@ namespace JUTIL
 	 * Assumes managed string will out-live constant string usage.
 	 */
 	template <class Type>
-	BaseConstantString<Type>::BaseConstantString( const BaseString<Type>* string )
+	BaseConstantString<Type>::BaseConstantString( const BaseString<Type>* string ) :
+		string_( nullptr ),
+		length_( 0 )
 	{
 		set_string( string );
 	}

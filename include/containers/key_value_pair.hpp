@@ -51,9 +51,9 @@ namespace JUTIL
 	 */
 	template <class Key, class Value>
 	KeyValuePair<Key, Value>::KeyValuePair( const Key& key, const Value& value )
+		: key_( key ),
+		value_( value )
 	{
-		key_ = key;
-		value_ = value;
 	}
 
 	/*

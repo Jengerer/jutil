@@ -56,7 +56,6 @@ namespace JUTIL
 	SetIterator<Type>::SetIterator( SetNode<Type>* start_node )
 		: current_(start_node)
 	{
-		// Do nothing.
 	}
 
 	/*
@@ -66,7 +65,6 @@ namespace JUTIL
 	SetIterator<Type>::SetIterator( const SetIterator<Type>& other )
 		: current_( other.current_ )
 	{
-		// Do nothing.
 	}
 
 	/*

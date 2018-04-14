@@ -7,9 +7,9 @@ namespace JUTIL
 	/*
 	 * Logger constructor.
 	 */
-	Logger::Logger( void )
+	Logger::Logger( void ) :
+		file_( nullptr )
 	{
-		// Nothing.
 	}
 
 	/*

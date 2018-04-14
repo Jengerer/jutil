@@ -58,8 +58,8 @@ namespace JUTIL
 	 */
 	template <class Hash, class Key, class Value, class Hasher, class HashComparator>
 	HashMap<Hash, Key, Value, Hasher, HashComparator>::HashMap( void )
+		: map_()
 	{
-		// Nothing.
 	}
 
 
