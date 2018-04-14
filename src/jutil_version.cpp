@@ -3,7 +3,7 @@
 namespace JUTIL
 {
 	// Version string to return.
-	const ConstantString JUTIL_VERSION( "0.1.7" );
+	const ConstantString JUTIL_VERSION( "0.2" );
 
 	/*
 	 * Return the current version string.
