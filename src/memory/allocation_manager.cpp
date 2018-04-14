@@ -55,7 +55,7 @@ namespace JUTIL
 		while (allocation != nullptr) {
 			fprintf( file, "===========\n" );
 			fprintf( file, "ALLOCATION: #%u\n", allocation->num );
-			fprintf( file, "ADDRESS:    &0x%08x\n", allocation->address );
+			fprintf( file, "ADDRESS:    &0x%08p\n", allocation->address );
 			fprintf( file, "SIZE:       %u\n", allocation->size );
 
 			// Dump data.

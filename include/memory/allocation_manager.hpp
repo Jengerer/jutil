@@ -2,7 +2,7 @@
 #define ALLOCATION_MANAGER_HPP
 
 #include "base/jutil_base.hpp"
-#include <boost/thread/mutex.hpp>
+#include <mutex>
 
 namespace JUTIL
 {
@@ -65,7 +65,7 @@ namespace JUTIL
 		size_t break_allocation_;
 
 		// Allocation logging mutex.
-		boost::mutex allocation_mutex_;
+		std::mutex allocation_mutex_;
 
 	};
 

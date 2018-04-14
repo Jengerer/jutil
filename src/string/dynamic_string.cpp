@@ -69,7 +69,7 @@ namespace JUTIL
 
 		// Write to buffer.
 		char* new_string = builder_.get_array();
-		int written = vsnprintf( new_string + old_length, added_length, format, new_args );
+		int written = vsnprintf( new_string + old_length, added_length + 1, format, new_args );
 		va_end( new_args );
 		if (written < 0) {
 			return false;
