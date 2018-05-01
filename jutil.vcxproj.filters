@@ -25,6 +25,9 @@
     <ClCompile Include="src\jutil_version.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="include\string\string_helpers.cpp">
+      <Filter>src\string</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\containers\map.hpp">
@@ -104,6 +107,9 @@
     </ClInclude>
     <ClInclude Include="include\jutil_version.hpp">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\string\string_helpers.hpp">
+      <Filter>include\string</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

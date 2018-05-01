@@ -10,7 +10,7 @@ namespace JUTIL
 	 * String container class that wraps a wide character string representation.
 	 * Assumes string is writable; frees memory on destruction.
 	 */
-	class __declspec(dllexport) DynamicWideString : public BaseDynamicString<wchar_t>
+	class JUTIL_API DynamicWideString : public BaseDynamicString<wchar_t>
 	{
 
 	public:

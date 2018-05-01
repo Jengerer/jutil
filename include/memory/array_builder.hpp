@@ -7,7 +7,7 @@ namespace JUTIL
 {
 
 	template <class Type>
-	class __declspec(dllexport) ArrayBuilder
+	class JUTIL_API ArrayBuilder
 	{
 
 	public:

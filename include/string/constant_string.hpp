@@ -9,7 +9,7 @@ namespace JUTIL
 	/*
 	 * Constant string representation for C-style character array.
 	 */
-	class __declspec(dllexport) ConstantString : public BaseConstantString<char>
+	class JUTIL_API ConstantString : public BaseConstantString<char>
 	{
 
 	public:

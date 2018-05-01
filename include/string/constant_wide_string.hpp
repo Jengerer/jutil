@@ -9,7 +9,7 @@ namespace JUTIL
 	/*
 	 * Constant string representation for wide character array.
 	 */
-	class __declspec(dllexport) ConstantWideString : public BaseConstantString<wchar_t>
+	class JUTIL_API ConstantWideString : public BaseConstantString<wchar_t>
 	{
 
 	public:

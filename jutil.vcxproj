@@ -36,9 +36,11 @@
     <ClInclude Include="include\string\string.hpp" />
     <ClInclude Include="include\string\string_hasher.hpp" />
     <ClInclude Include="include\string\dynamic_wide_string.hpp" />
+    <ClInclude Include="include\string\string_helpers.hpp" />
     <ClInclude Include="include\utils\logger.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\string\string_helpers.cpp" />
     <ClCompile Include="src\base\jutil_base.cpp" />
     <ClCompile Include="src\jutil_version.cpp" />
     <ClCompile Include="src\memory\allocation_manager.cpp" />
@@ -92,7 +94,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>JUTIL_EXPORT;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <AdditionalIncludeDirectories>./include;</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>

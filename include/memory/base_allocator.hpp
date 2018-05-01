@@ -12,7 +12,7 @@ namespace JUTIL
 	/*
 	 * Generic allocator class for objects & heap memory.
 	 */
-	class __declspec(dllexport) BaseAllocator
+	class JUTIL_API BaseAllocator
 	{
 
 	public:

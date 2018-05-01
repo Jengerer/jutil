@@ -10,7 +10,7 @@ namespace JUTIL
 	 * String container class that wraps a C-string representation.
 	 * Assumes string is writable; frees memory on destruction.
 	 */
-	class __declspec(dllexport) DynamicString : public BaseDynamicString<char>
+	class JUTIL_API DynamicString : public BaseDynamicString<char>
 	{
 
 	public:

@@ -1,6 +1,8 @@
 #ifndef BASE_STRING_HPP
 #define BASE_STRING_HPP
 
+#include "base/jutil_base.hpp"
+
 namespace JUTIL
 {
 
@@ -8,7 +10,7 @@ namespace JUTIL
 	 * Abstract string class.
 	 */
 	template <class Type>
-	class __declspec(dllexport) BaseString
+	class JUTIL_API BaseString
 	{
 
 	public:
