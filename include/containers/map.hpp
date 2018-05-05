@@ -11,7 +11,7 @@ namespace JUTIL
 	 * Set of key-value pairs.
 	 */
 	template < class Key, class Value, class KeyComparator = DefaultComparator<Key> >
-	class JUTIL_API Map : public Set< 
+	class Map : public Set< 
 		KeyValuePair< Key, Value >,
 		KeyValueComparator< Key, Value, KeyComparator > >
 	{

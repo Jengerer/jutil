@@ -12,7 +12,7 @@ namespace JUTIL
 	 * Class for handling a generic string buffer.
 	 */
 	template <class Type>
-	class JUTIL_API BaseDynamicString : public BaseString<Type>
+	class BaseDynamicString : public BaseString<Type>
 	{
 
 	public:

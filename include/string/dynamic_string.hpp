@@ -10,18 +10,18 @@ namespace JUTIL
 	 * String container class that wraps a C-string representation.
 	 * Assumes string is writable; frees memory on destruction.
 	 */
-	class JUTIL_API DynamicString : public BaseDynamicString<char>
+	class DynamicString : public BaseDynamicString<char>
 	{
 
 	public:
 
-		DynamicString( void );
-		DynamicString( char* string, size_t length );
-		virtual ~DynamicString( void );
+		JUTIL_API DynamicString( void );
+		JUTIL_API DynamicString( char* string, size_t length );
+		virtual JUTIL_API ~DynamicString( void );
 
 		// Buffer management.
-		bool write( const char* format, ... );
-		bool vwrite( const char* format, va_list args );
+		JUTIL_API bool write( const char* format, ... );
+		JUTIL_API bool vwrite( const char* format, va_list args );
 	
 	};
 

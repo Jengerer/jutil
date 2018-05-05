@@ -10,7 +10,7 @@ namespace JUTIL
 	 * Abstract string class.
 	 */
 	template <class Type>
-	class JUTIL_API BaseString
+	class BaseString
 	{
 
 	public:
@@ -137,12 +137,9 @@ namespace JUTIL
 
 		// Look for first index of first character in substring.
 		size_t i;
-		for (i = 0; i < our_length; ++i) {
-			printf("Checking at %d = %c...\n", i, get_character(i));
-
+		for (i = start; i < our_length; ++i) {
 			// Check if it's possible to fit at this point.
 			size_t characters_left = (our_length - i);
-			printf("Characters left: %d\n", characters_left);
 			if (characters_left < string_length) {
 				break;
 			}
@@ -152,9 +149,7 @@ namespace JUTIL
 			size_t j;
 			for (j = 0; j < string_length; ++j) {
 				// Check matching character.
-				printf("Comparing %c and %c.\n", get_character( i + j ), string->get_character( j ));
 				if (get_character( i + j ) != string->get_character( j )) {
-					printf( "Mismatch.\n" );
 					all_matched = false;
 					break;
 				}

@@ -15,7 +15,7 @@ namespace JUTIL
 	 * Vector class that acts as a resizable array.
 	 */
 	template <class Type>
-	class JUTIL_API Vector : public BaseContainer<Type>
+	class Vector : public BaseContainer<Type>
 	{
 
 		typedef BaseContainer<Type> BaseClass;

@@ -11,7 +11,7 @@ namespace JUTIL
 	 * Does not manage string memory buffer.
 	 */
 	template <class Type>
-	class JUTIL_API BaseConstantString : public BaseString<Type>
+	class BaseConstantString : public BaseString<Type>
 	{
 
 	public:

@@ -7,7 +7,7 @@ namespace JUTIL
 {
 
 	template <class Type>
-	class JUTIL_API ArrayBuilder
+	class ArrayBuilder
 	{
 
 	public:
