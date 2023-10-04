@@ -2,10 +2,14 @@
 #define JUTIL_BASE_HPP
 
 // Set importing when using.
+#if defined(JUTIL_DLL)
 #if defined(JUTIL_EXPORT)
 #define JUTIL_API __declspec(dllexport)
 #else
 #define JUTIL_API __declspec(dllimport)
+#endif
+#else
+#define JUTIL_API
 #endif
 
 namespace JUTIL

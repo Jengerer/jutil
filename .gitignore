@@ -14,3 +14,8 @@
 *.opendb
 *.iobj
 *.ipdb
+*.vsidx
+*.db-shm
+*.db-wal
+*.recipe
+*.recipe
